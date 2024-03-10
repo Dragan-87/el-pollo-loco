@@ -1,6 +1,9 @@
 class Character extends MoveableObject {
-    constructor(objetctPositionX, objetctPositionY, img) {
-        super(objetctPositionX, objetctPositionY, img);
+
+    constructor(img) {
+        super(img);
+        this.objetctPositionX = 50;
+        this.objetctPositionY = 35;
     }
 
     jump() {
@@ -9,4 +12,11 @@ class Character extends MoveableObject {
             this.objetctPositionY += 50;
         }, 500);
     }
+
+    checkPosition() {
+        if (this.objetctPositionX > 290) {
+            this.objetctPositionX = -20;
+        }
+    }
+
 }

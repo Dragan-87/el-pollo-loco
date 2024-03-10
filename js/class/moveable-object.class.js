@@ -10,13 +10,11 @@ class MoveableObject {
         this.img.src = path;
     }
 
-    constructor(objetctPositionX, objetctPositionY, img) {
-        this.objetctPositionX = objetctPositionX;
-        this.objetctPositionY = objetctPositionY;
+    constructor(img) {
         this.loadImage(img);
     }
 
-    moveRight(x, ) {
+    moveRight(x) {
         this.objetctPositionX += x;
     }
 
@@ -25,6 +23,6 @@ class MoveableObject {
     }
 
     moveAnimation() {
-        
+
     }
 }
