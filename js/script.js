@@ -1,11 +1,12 @@
 let canves;
-let character = new Character(20, 20, "img/2_character_pepe/1_idle/idle/I-1.png");
+let world = new World()
 let ctx;
 
 function init() {
     canves = document.getElementById('canves');
     ctx = canves.getContext('2d');
+    world.enemies.push(new Chicken(20, 20, "../../img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"));
     setTimeout(() => {
-        // ctx.drawImage(character.img, character.objetctPositionX, character.objetctPositionY, 150, 100);
+        ctx.drawImage(world.character.img, world.character.objetctPositionX, world.character.objetctPositionY, 100, 150);
     }, 1000)
 }

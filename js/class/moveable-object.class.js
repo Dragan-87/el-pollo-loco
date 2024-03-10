@@ -3,10 +3,15 @@ class MoveableObject {
     objetctPositionY;
     img;
 
+    loadImage(path) {
+        this.img = new Image();
+        this.img.src = path;
+    }
+
     constructor(objetctPositionX, objetctPositionY, img) {
         this.objetctPositionX = objetctPositionX;
         this.objetctPositionY = objetctPositionY;
-        this.img = img;
+        this.loadImage(img);
     }
 
     moveRight(x, y) {
