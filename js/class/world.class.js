@@ -35,5 +35,8 @@ addEventListener("keypress", (event) => {
         case "w":
             world.character.jump();
             break;
+        case "wd":
+            world.character.moveRight(10);
+            break;
     }
 });
