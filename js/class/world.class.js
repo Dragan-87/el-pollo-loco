@@ -1,6 +1,6 @@
 class World {
 
     drea() {
-        
+
     }
 }
