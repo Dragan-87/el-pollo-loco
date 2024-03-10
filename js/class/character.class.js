@@ -5,5 +5,8 @@ class Character extends MoveableObject {
 
     jump() {
         this.objetctPositionY -= 50;
+        setTimeout(() => {
+            this.objetctPositionY += 50;
+        }, 500);
     }
 }

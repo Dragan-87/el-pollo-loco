@@ -3,7 +3,7 @@ class MoveableObject {
     objetctPositionY;
     img;
     height = 80;
-    width = 40;
+    width = 60;
 
     loadImage(path) {
         this.img = new Image();
@@ -16,8 +16,15 @@ class MoveableObject {
         this.loadImage(img);
     }
 
-    moveRight(x, y) {
+    moveRight(x, ) {
         this.objetctPositionX += x;
-        this.objetctPositionY += y;
+    }
+
+    moveLeft(x) {
+        this.objetctPositionX -= x;
+    }
+
+    moveAnimation() {
+        
     }
 }
