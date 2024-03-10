@@ -1,9 +1,9 @@
-class Character extends MoveableObject {
+class Chicken extends MoveableObject {
     constructor(objetctPositionX, objetctPositionY, img) {
         super(objetctPositionX, objetctPositionY, img);
     }
 
-    jump() {
+    eat() {
         this.objetctPositionY -= 50;
     }
 }

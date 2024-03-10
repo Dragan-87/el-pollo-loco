@@ -1,5 +1,5 @@
 let canves;
-let character = new MoveableObject(20, 20, "img/2_character_pepe/1_idle/idle/I-1.png");
+let character = new Character(20, 20, "img/2_character_pepe/1_idle/idle/I-1.png");
 let ctx;
 
 function init() {
