@@ -2,6 +2,8 @@ class MoveableObject {
     objetctPositionX;
     objetctPositionY;
     img;
+    height = 150;
+    width = 100;
 
     loadImage(path) {
         this.img = new Image();
