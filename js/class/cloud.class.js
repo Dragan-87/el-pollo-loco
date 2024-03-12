@@ -3,7 +3,7 @@ class Cloud extends MoveableObject {
         super(img);
         this.objetctPositionX = Math.random() * 100;
         this.objetctPositionY = 0;
-        this.height = 100;
+        this.height = 120;
         this.width = 290;
     }
 }
