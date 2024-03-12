@@ -1,5 +1,4 @@
 class World {
-
     character = new Character("../../img/2_character_pepe/2_walk/W-21.png");
     enemies = [
         new Chicken("../../img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"),
