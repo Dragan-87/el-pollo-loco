@@ -13,8 +13,9 @@ class World {
     canves;
     ctx;
     worldBackgroundLayerOne = [
+        new BackgroundObject("../../img/5_background/layers/3_third_layer/2.png", 0, -50),
+        new BackgroundObject("../../img/5_background/layers/2_second_layer/2.png", 0, -50),
         new BackgroundObject("../../img/5_background/layers/1_first_layer/1.png", 0, -50),
-        new BackgroundObject("../../img/5_background/layers/1_first_layer/2.png"),
     ]
 
     constructor(canves) {
@@ -25,12 +26,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canves.width, this.canves.height);
-        this.addToGameMap(this.character);
         requestAnimationFrame(() => this.draw());
 
-        this.addObjectsToGameMap(this.enemies);
         this.addObjectsToGameMap(this.clouds);
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
+        this.addObjectsToGameMap(this.enemies);
+        this.addToGameMap(this.character);
 
     }
 
