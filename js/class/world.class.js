@@ -13,7 +13,7 @@ class World {
     canves;
     ctx;
     worldBackgroundLayerOne = [
-        new BackgroundObject("../../img/5_background/layers/1_first_layer/1.png"),
+        new BackgroundObject("../../img/5_background/layers/1_first_layer/1.png", 0, -50),
         new BackgroundObject("../../img/5_background/layers/1_first_layer/2.png"),
     ]
 
@@ -31,7 +31,7 @@ class World {
         this.addObjectsToGameMap(this.enemies);
         this.addObjectsToGameMap(this.clouds);
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
-        
+
     }
 
     /**

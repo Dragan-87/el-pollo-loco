@@ -1,6 +1,9 @@
 class BackgroundObject extends MoveableObject {
     objetctPositionX = 0;
     objetctPositionY = 0;
+    height = 200;
+    width = 300;
+
 
     constructor(imagePath, objetctPositionX, objetctPositionY) {
         super(imagePath);

@@ -3,7 +3,7 @@ class Character extends MoveableObject {
     constructor(img) {
         super(img);
         this.objetctPositionX = 50;
-        this.objetctPositionY = 65;
+        this.objetctPositionY = 50;
     }
 
     jump() {
