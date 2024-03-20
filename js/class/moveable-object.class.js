@@ -4,9 +4,9 @@ class MoveableObject {
     img;
     height = 80;
     width = 60;
+    img = new Image();
 
     loadImage(path) {
-        this.img = new Image();
         this.img.src = path;
     }
 
