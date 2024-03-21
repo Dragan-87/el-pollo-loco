@@ -3,7 +3,7 @@ class MoveableObject {
     objetctPositionY;
     img;
     height = 100;
-    width = 80;
+    width = 70;
     img = new Image();
 
     loadImage(path) {
@@ -23,6 +23,6 @@ class MoveableObject {
     }
 
     moveAnimation() {
-        
+
     }
 }
