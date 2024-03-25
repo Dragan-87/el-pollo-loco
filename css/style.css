@@ -9,9 +9,7 @@ body {
     background-color: #f4f4f4;
 }
 
-.gameScreen {
-    height: 726px;
-    width: 1440px;
+canvas {
     background-color: rgb(23, 115, 165);
 }
 

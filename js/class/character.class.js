@@ -2,8 +2,8 @@ class Character extends MoveableObject {
 
     constructor(img) {
         super(img);
+        this.objetctPositionY = 480 - 150;
         this.objetctPositionX = 50;
-        this.objetctPositionY = 50;
     }
 
     jump() {

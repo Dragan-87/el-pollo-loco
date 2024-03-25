@@ -1,14 +1,14 @@
 class BackgroundObject extends MoveableObject {
     objetctPositionX = 0;
     objetctPositionY = 0;
-    height = 200;
-    width = 300;
+    height = 400;
+    width = 720;
 
 
-    constructor(imagePath, objetctPositionX, objetctPositionY) {
+    constructor(imagePath, objetctPositionX) {
         super(imagePath);
         this.objetctPositionX = objetctPositionX;
-        this.objetctPositionY = objetctPositionY;
+        this.objetctPositionY = 480 - this.height;
     }
 
     moveAnimation() {

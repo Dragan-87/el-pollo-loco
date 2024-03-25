@@ -10,7 +10,6 @@ addEventListener("keypress", (event) => {
     switch (event.key) {
         case "d":
             world.character.moveRight(10);
-            world.character.checkPosition();
             break;
         case "a":
             world.character.moveLeft(10);
