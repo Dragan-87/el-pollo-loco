@@ -13,5 +13,5 @@ class Cloud extends MoveableObject {
             this.objetctPositionX -= 0.15;
         }, 1000 / 60);
     }
-
+    
 }
