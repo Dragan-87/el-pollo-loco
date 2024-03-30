@@ -6,6 +6,8 @@ class MoveableObject {
     height = 150;
     width = 75;
     imageCache = {};
+    currentImage = 0;
+
 
     /**
      * Loads an image from the specified path and sets it as the source of the object's image element.
