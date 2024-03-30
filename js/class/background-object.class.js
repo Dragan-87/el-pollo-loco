@@ -1,7 +1,7 @@
 class BackgroundObject extends MoveableObject {
     objetctPositionX = 0;
     objetctPositionY = 0;
-    height = 400;
+    height = 480;
     width = 720;
 
 
