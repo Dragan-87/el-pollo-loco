@@ -1,25 +1,15 @@
 class World {
     character = new Character("./img/2_character_pepe/2_walk/W-21.png");
-    enemies = [
-        new Chicken("./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"),
-        new Chicken("./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"),
-        new Chicken("./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"),
-    ];
-    clouds = [
-        new Cloud("./img/5_background/layers/4_clouds/1.png"),
-    ]
+    level = level1;
+    enemies = level1.enemies;
+    clouds = level1.clouds;
+    worldBackgroundLayerOne = level1.worldBackgroundLayerOne;
+    air = level1.air;
     canves;
     ctx;
-    worldBackgroundLayerOne = [
-        new BackgroundObject("./img/5_background/layers/3_third_layer/1.png", 0),
-        new BackgroundObject("./img/5_background/layers/2_second_layer/1.png", 0),
-        new BackgroundObject("./img/5_background/layers/1_first_layer/1.png", 0),
-    ]
-    air = [
-        new BackgroundObject("img/5_background/layers/air.png", 0),
-    ]
     keyboard;
     camera_x = 0;
+    walkingSound = new Audio("./audio/walking-short.mp3");
 
 
     constructor(canves, keyboard) {

@@ -1,6 +1,6 @@
 class Cloud extends MoveableObject {
-    constructor(img) {
-        super(img);
+    constructor(img, x) {
+        super(img, x);
         this.objetctPositionX = Math.random() * 400;
         this.objetctPositionY = 0;
         this.height = 220;

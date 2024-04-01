@@ -11,7 +11,6 @@ addEventListener("keydown", (event) => {
     switch (event.key) {
         case "d":
         case "ArrowRight":
-            console.log("right");
             keyboard.RIGHT = true;
             break;
         case " ":

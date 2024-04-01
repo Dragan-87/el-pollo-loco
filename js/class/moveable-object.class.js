@@ -10,7 +10,8 @@ class MoveableObject {
     otherDirection = false;
 
 
-    constructor(img) {
+    constructor(img, objetctPositionX) {
+        this.objetctPositionX = objetctPositionX;
         this.loadImage(img);
     }
 

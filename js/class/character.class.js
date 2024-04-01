@@ -1,5 +1,6 @@
 class Character extends MoveableObject {
     world;
+
     WALK_IMAGES = [
         "./img/2_character_pepe/2_walk/W-21.png",
         "./img/2_character_pepe/2_walk/W-22.png",
@@ -12,7 +13,7 @@ class Character extends MoveableObject {
     constructor(img) {
         super(img);
         this.objetctPositionY = 480 - 205;
-        this.objetctPositionX = 100;
+        this.objetctPositionX = 0;
         this.speed = 5;
         this.loadImages(this.WALK_IMAGES);
         this.animate();
@@ -20,20 +21,22 @@ class Character extends MoveableObject {
 
     animate() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.world.walkingSound.pause();
+            if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
+                this.world.walkingSound.play();
                 this.moveRight();
                 this.otherDirection = false;
             }
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.objetctPositionX > 0) {
+                this.world.walkingSound.play();
                 this.moveLeft();
                 this.otherDirection = true;
             }
-            this.world.camera_x = -this.objetctPositionX + 100;
+            this.world.camera_x = -this.objetctPositionX
         }, 1000 / 60);
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-
                 let i = this.currentImage % this.WALK_IMAGES.length;
                 let path = this.WALK_IMAGES[i];
                 this.img = this.imageCache[path];
