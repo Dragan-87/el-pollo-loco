@@ -10,28 +10,21 @@ function init() {
 addEventListener("keydown", (event) => {
     switch (event.key) {
         case "d":
+        case "ArrowRight":
+            console.log("right");
             keyboard.RIGHT = true;
             break;
+        case " ":
+        case "w":
         case "ArrowUp":
             keyboard.JUMP = true;
             break;
         case "ArrowDown":
             keyboard.DOWN = true;
             break;
+        case "a":
         case "ArrowLeft":
             keyboard.LEFT = true;
-            break;
-        case "ArrowRight":
-            keyboard.RIGHT = true;
-            break;
-        case "a":
-            keyboard.LEFT = true;
-            break;
-        case "w":
-            keyboard.JUMP = true;
-            break;
-        case " ":
-            keyboard.JUMP = true;
             break;
         default:
             break;

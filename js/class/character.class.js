@@ -12,7 +12,7 @@ class Character extends MoveableObject {
     constructor(img) {
         super(img);
         this.objetctPositionY = 480 - 205;
-        this.objetctPositionX = 50;
+        this.objetctPositionX = 100;
         this.speed = 5;
         this.loadImages(this.WALK_IMAGES);
         this.animate();
@@ -28,6 +28,7 @@ class Character extends MoveableObject {
                 this.moveLeft();
                 this.otherDirection = true;
             }
+            this.world.camera_x = -this.objetctPositionX + 100;
         }, 1000 / 60);
 
         setInterval(() => {

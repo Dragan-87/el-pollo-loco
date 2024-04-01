@@ -38,12 +38,14 @@ class World {
         canves.height = 480;
         canves.width = 720;
         this.ctx.clearRect(0, 0, this.canves.width, this.canves.height);
+        this.ctx.translate(this.camera_x, 0);
         requestAnimationFrame(() => this.draw());
         this.addObjectsToGameMap(this.air)
         this.addObjectsToGameMap(this.clouds);
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
+        this.ctx.translate(-this.camera_x, 0);
     }
 
     /**
