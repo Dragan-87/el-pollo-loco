@@ -18,11 +18,20 @@ class World {
     air = [
         new BackgroundObject("img/5_background/layers/air.png", 0),
     ]
+    keyboard;
+    camera_x = 0;
 
-    constructor(canves) {
+
+    constructor(canves, keyboard) {
         this.canves = canves;
+        this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');
         this.draw();
+        this.setWorld()
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     draw() {
@@ -58,6 +67,13 @@ class World {
      * @param {number} mvO.height - The height of the moveable object.
      */
     addToGameMap(mvO) {
+        if (mvO.otherDirection) {
+            this.ctx.save();
+            this.ctx.scale(-1, 1);
+            this.ctx.drawImage(mvO.img, -mvO.objetctPositionX - mvO.width, mvO.objetctPositionY, mvO.width, mvO.height);
+            this.ctx.restore();
+            return;
+        }
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
 

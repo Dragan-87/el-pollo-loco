@@ -1,6 +1,4 @@
 class Chicken extends MoveableObject {
-    objetctPositionX
-    objetctPositionY
 
     WALK_IMAGES = [ 
         "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -15,6 +13,7 @@ class Chicken extends MoveableObject {
         this.width = 40;
         this.objetctPositionX = 200 + Math.random() * 500;
         this.objetctPositionY = 420 - this.height;
+        this.speed = 0.25 + Math.random() * 0.2;
         this.animate();
         this.moveLeft();
     }
@@ -25,12 +24,8 @@ class Chicken extends MoveableObject {
             let path = this.WALK_IMAGES[i];
             this.img = this.imageCache[path];
             this.currentImage++
-            this.moveLeft();
-        }, 100);
+        }, 50);
     }
 
-    moveLeft() {
-            this.objetctPositionX -= 2;
-    }
 
 }

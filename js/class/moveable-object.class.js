@@ -1,13 +1,18 @@
 class MoveableObject {
     objetctPositionX;
     objetctPositionY;
-    img;
     img = new Image();
     height = 150;
     width = 75;
+    speed;
     imageCache = {};
     currentImage = 0;
+    otherDirection = false;
 
+
+    constructor(img) {
+        this.loadImage(img);
+    }
 
     /**
      * Loads an image from the specified path and sets it as the source of the object's image element.
@@ -29,22 +34,13 @@ class MoveableObject {
         });
     }
 
-
-    constructor(img) {
-        this.loadImage(img);
-    }
-
     moveRight() {
-        this.objetctPositionX += 5;
+        this.objetctPositionX += this.speed;
     }
 
-
-    moveLeft(array) {
-        this.objetctPositionX -= 5;
-
-    }
-
-    moveAnimation() {
-
+    moveLeft() {
+        setInterval(() => {
+            this.objetctPositionX -= this.speed;
+        }, 1000 / 60);
     }
 }
