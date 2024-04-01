@@ -12,6 +12,7 @@ class World {
     walkingSound = new Audio("./audio/walking-short.mp3");
 
 
+
     constructor(canves, keyboard) {
         this.canves = canves;
         this.keyboard = keyboard;

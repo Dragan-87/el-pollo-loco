@@ -37,10 +37,7 @@ class Character extends MoveableObject {
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                let i = this.currentImage % this.WALK_IMAGES.length;
-                let path = this.WALK_IMAGES[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
+                this.playAnimation(this.WALK_IMAGES);
             }
         }, 100);
     }
@@ -54,12 +51,5 @@ class Character extends MoveableObject {
 
     moveLeft() {
         this.objetctPositionX -= this.speed;
-    }
-
-    animationInterval() {
-        let i = this.currentImage % this.WALK_IMAGES.length;
-        let path = this.WALK_IMAGES[i];
-        this.img = this.imageCache[path];
-        this.currentImage
     }
 }
