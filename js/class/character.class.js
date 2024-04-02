@@ -1,4 +1,7 @@
 class Character extends MoveableObject {
+    speedY = 0;
+    speedX = 0;
+
     world;
 
     WALK_IMAGES = [
@@ -12,7 +15,7 @@ class Character extends MoveableObject {
 
     constructor(img) {
         super(img);
-        this.objetctPositionY = 480 - 205;
+        this.objetctPositionY = 480 - 300; //205
         this.objetctPositionX = 0;
         this.speed = 5;
         this.loadImages(this.WALK_IMAGES);

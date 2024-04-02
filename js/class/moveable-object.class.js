@@ -1,6 +1,7 @@
 class MoveableObject {
     objetctPositionX;
     objetctPositionY;
+    defaultObjetctPositionY;
     img = new Image();
     height = 150;
     width = 75;
@@ -8,6 +9,8 @@ class MoveableObject {
     imageCache = {};
     currentImage = 0;
     otherDirection = false;
+    speedY = 0;
+    acceleration = 1;
 
 
     constructor(img, objetctPositionX) {
@@ -36,7 +39,7 @@ class MoveableObject {
     }
 
     moveRight() {
-        this.objetctPositionX += this.speed;
+            this.objetctPositionX += this.speed;
     }
 
     moveLeft() {
@@ -50,5 +53,13 @@ class MoveableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++
+    }
+
+    applyGravity() {
+        if(this.objetctPositionY > 0)
+        setInterval(() => {
+            this.y += this.speedY;
+            this.speedY -= this.exceleration;
+        }, 1000 / 25);
     }
 }
