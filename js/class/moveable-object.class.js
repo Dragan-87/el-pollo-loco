@@ -15,6 +15,7 @@ class MoveableObject {
 
     constructor(img, objetctPositionX) {
         this.objetctPositionX = objetctPositionX;
+        this.defaultObjetctPositionY = 480 - this.height - 60;
         this.loadImage(img);
     }
 
@@ -39,7 +40,7 @@ class MoveableObject {
     }
 
     moveRight() {
-            this.objetctPositionX += this.speed;
+        this.objetctPositionX += this.speed;
     }
 
     moveLeft() {
@@ -56,10 +57,15 @@ class MoveableObject {
     }
 
     applyGravity() {
-        if(this.objetctPositionY > 0)
         setInterval(() => {
-            this.y += this.speedY;
-            this.speedY -= this.exceleration;
-        }, 1000 / 25);
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.objetctPositionY -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 15);
+    }
+
+    isAboveGround() {
+        return this.objetctPositionY < this.defaultObjetctPositionY;
     }
 }
