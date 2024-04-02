@@ -60,6 +60,3 @@ addEventListener('keyup', (event) => {
             break;
     }
 });
-
-
-console.log(37 % 10);

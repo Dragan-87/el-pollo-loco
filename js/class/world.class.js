@@ -35,7 +35,9 @@ class World {
         this.addObjectsToGameMap(this.clouds);
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
         this.addObjectsToGameMap(this.enemies);
+        this.drwaMultipleCoision(this.enemies);
         this.addToGameMap(this.character);
+        this.drawColision(this.character)
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -68,6 +70,20 @@ class World {
             return;
         }
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
+
     }
 
+    drwaMultipleCoision(objects) {
+        objects.forEach(object => {
+            this.drawColision(object)
+        });
+    }
+
+    drawColision(mvO) {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
+        this.ctx.stroke();
+    };
 }

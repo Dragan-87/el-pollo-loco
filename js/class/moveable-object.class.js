@@ -67,4 +67,12 @@ class MoveableObject {
     isAboveGround() {
         return this.objetctPositionY < this.defaultObjetctPositionY;
     }
+
+    drawColision() {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.rect(this.objetctPositionX, this.objetctPositionY, this.width, this.height);
+        this.ctx.stroke();
+    };
 }
