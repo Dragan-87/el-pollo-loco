@@ -1,5 +1,5 @@
 let canves;
-let world
+let world;
 let keyboard = new Keyboard();
 
 function init() {
@@ -7,22 +7,22 @@ function init() {
     world = new World(canves, keyboard);
 }
 
-addEventListener("keydown", (event) => {
+addEventListener('keydown', (event) => {
     switch (event.key) {
-        case "d":
-        case "ArrowRight":
+        case 'd':
+        case 'ArrowRight':
             keyboard.RIGHT = true;
             break;
-        case " ":
-        case "w":
-        case "ArrowUp":
+        case ' ':
+        case 'w':
+        case 'ArrowUp':
             keyboard.JUMP = true;
             break;
-        case "ArrowDown":
+        case 'ArrowDown':
             keyboard.DOWN = true;
             break;
-        case "a":
-        case "ArrowLeft":
+        case 'a':
+        case 'ArrowLeft':
             keyboard.LEFT = true;
             break;
         default:
@@ -30,33 +30,36 @@ addEventListener("keydown", (event) => {
     }
 });
 
-addEventListener("keyup", (event) => {
+addEventListener('keyup', (event) => {
     switch (event.key) {
-        case "d":
+        case 'd':
             keyboard.RIGHT = false;
             break;
-        case "ArrowUp":
+        case 'ArrowUp':
             keyboard.JUMP = false;
             break;
-        case "ArrowDown":
+        case 'ArrowDown':
             keyboard.DOWN = false;
             break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
             keyboard.LEFT = false;
             break;
-        case "ArrowRight":
+        case 'ArrowRight':
             keyboard.RIGHT = false;
             break;
-        case "a":
+        case 'a':
             keyboard.LEFT = false;
             break;
-        case "w":
+        case 'w':
             keyboard.JUMP = false;
             break;
-        case " ":
+        case ' ':
             keyboard.JUMP = false;
             break;
         default:
             break;
     }
 });
+
+
+console.log(37 % 10);

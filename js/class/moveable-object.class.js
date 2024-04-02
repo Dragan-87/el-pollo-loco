@@ -41,12 +41,11 @@ class MoveableObject {
 
     moveRight() {
         this.objetctPositionX += this.speed;
+        this.otherDirection = false;
     }
 
     moveLeft() {
-        setInterval(() => {
-            this.objetctPositionX -= this.speed;
-        }, 1000 / 60);
+        this.objetctPositionX -= this.speed;
     }
 
     playAnimation(images) {
