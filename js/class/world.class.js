@@ -63,14 +63,10 @@ class World {
      */
     addToGameMap(mvO) {
         if (mvO.otherDirection) {
-            this.ctx.save();
-            this.ctx.scale(-1, 1);
-            this.ctx.drawImage(mvO.img, -mvO.objetctPositionX - mvO.width, mvO.objetctPositionY, mvO.width, mvO.height);
-            this.ctx.restore();
-            return;
+            this.flippingImage(mvO);
+        } else {
+            this.normalImage(mvO);
         }
-        this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
-
     }
 
     drwaMultipleCoision(objects) {
@@ -86,4 +82,17 @@ class World {
         this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
         this.ctx.stroke();
     };
+
+    flippingImage(mvO) {
+        this.ctx.save();
+        this.ctx.scale(-1, 1);
+        this.ctx.drawImage(mvO.img, -mvO.objetctPositionX - mvO.width, mvO.objetctPositionY, mvO.width, mvO.height);
+        this.ctx.restore();
+        return;
+    }
+
+    normalImage(mvO) {
+        this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
+    }
+
 }
