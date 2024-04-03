@@ -19,10 +19,22 @@ class World {
         this.ctx = canves.getContext('2d');
         this.draw();
         this.setWorld()
+        this.checkCollision();
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    checkCollision() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.energy -= 20;
+                    console.log("Game Over", );
+                }
+            });
+        }, 1000 / 60);
     }
 
     draw() {
@@ -35,9 +47,7 @@ class World {
         this.addObjectsToGameMap(this.clouds);
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
         this.addObjectsToGameMap(this.enemies);
-        this.drwaMultipleCoision(this.enemies);
         this.addToGameMap(this.character);
-        this.drawColision(this.character)
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -67,20 +77,20 @@ class World {
         } else {
             this.normalImage(mvO);
         }
+        this.drawColision(mvO);
+
     }
 
-    drwaMultipleCoision(objects) {
-        objects.forEach(object => {
-            this.drawColision(object)
-        });
-    }
 
     drawColision(mvO) {
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '5';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
-        this.ctx.stroke();
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss) {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = '5';
+            this.ctx.strokeStyle = 'red';
+            this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
+            this.ctx.stroke();
+        }
+
     };
 
     flippingImage(mvO) {

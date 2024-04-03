@@ -11,6 +11,7 @@ class MoveableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
+    energy = 100;
 
 
     constructor(img, objetctPositionX) {
@@ -75,4 +76,18 @@ class MoveableObject {
         this.ctx.rect(this.objetctPositionX, this.objetctPositionY, this.width, this.height);
         this.ctx.stroke();
     };
+
+    // isColliding(obj) {
+    //     return (this.objetctPositionX + this.width) >= obj.objetctPositionX && this.X <= (obj.objetctPositionX + obj.width) &&
+    //         (this.objetctPositionY + this.offsetY + this.height) >= obj.objetctPositionY &&
+    //         (this.objetctPositionY + this.offsetY) <= (obj.objetctPositionY + obj.height) &&
+    //         obj.onCollisionCourse; 
+
+    // }
+
+    isColliding(obj) {
+        return this.objetctPositionX + this.width > obj.objetctPositionX &&
+            this.objetctPositionY + this.height > obj.objetctPositionY &&
+            this.objetctPositionX < obj.objetctPositionX && this.objetctPositionY < obj.objetctPositionY + obj.height;
+    }
 }

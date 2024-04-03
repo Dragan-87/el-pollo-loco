@@ -26,7 +26,7 @@ class Character extends MoveableObject {
 
     constructor(img) {
         super(img);
-        this.objetctPositionY = 480 - 205;
+        this.objetctPositionY = 480 - 210;
         this.objetctPositionX = 0;
         this.speed = 5;
         this.loadImages(this.WALK_IMAGES);
@@ -65,6 +65,8 @@ class Character extends MoveableObject {
             }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.WALK_IMAGES);
+            } else {
+                this.img = this.imageCache[this.WALK_IMAGES[0]];
             }
         }, 100);
 
