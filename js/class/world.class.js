@@ -5,12 +5,12 @@ class World {
     clouds = level1.clouds;
     worldBackgroundLayerOne = level1.worldBackgroundLayerOne;
     air = level1.air;
+    gameOverBackGround = level1.gameOverBackGround;
     canves;
     ctx;
     keyboard;
     camera_x = 0;
     walkingSound = new Audio("./audio/walking-short.mp3");
-
 
 
     constructor(canves, keyboard) {
@@ -30,11 +30,13 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    this.character.energy -= 20;
-                    console.log("Game Over", );
+                    this.character.hit(enemy.dealDamage,);
+                    if (this.character.energy <= 0) {
+                        this.character.energy = 0;
+                    }
                 }
             });
-        }, 1000 / 60);
+        }, 1000 / 2);
     }
 
     draw() {
@@ -61,16 +63,6 @@ class World {
         });
     }
 
-    /**
-     * Adds a moveable object to the game map.
-     *
-     * @param {Object} mvO - The moveable object to be added.
-     * @param {Image} mvO.img - The image of the moveable object.
-     * @param {number} mvO.objetctPositionX - The X position of the moveable object.
-     * @param {number} mvO.objetctPositionY - The Y position of the moveable object.
-     * @param {number} mvO.width - The width of the moveable object.
-     * @param {number} mvO.height - The height of the moveable object.
-     */
     addToGameMap(mvO) {
         if (mvO.otherDirection) {
             this.flippingImage(mvO);
@@ -78,9 +70,7 @@ class World {
             this.normalImage(mvO);
         }
         this.drawColision(mvO);
-
     }
-
 
     drawColision(mvO) {
         if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss) {
@@ -90,7 +80,6 @@ class World {
             this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
             this.ctx.stroke();
         }
-
     };
 
     flippingImage(mvO) {
@@ -104,5 +93,7 @@ class World {
     normalImage(mvO) {
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
+
+
 
 }
