@@ -11,6 +11,11 @@ class World {
     keyboard;
     camera_x = 0;
     walkingSound = new Audio("./audio/walking-short.mp3");
+    healthBar = new Satusbar("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10);
+    throwableObjects = [
+        new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", 100),
+
+    ];
 
 
     constructor(canves, keyboard) {
@@ -31,8 +36,10 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit(enemy.dealDamage,);
+                    this.character.statusBarPercentage(this.character.energy);
                     if (this.character.energy <= 0) {
                         this.character.energy = 0;
+                        this.character.statusBarPercentage(this.character.energy);
                     }
                 }
             });
@@ -47,7 +54,14 @@ class World {
         requestAnimationFrame(() => this.draw());
         this.addObjectsToGameMap(this.air)
         this.addObjectsToGameMap(this.clouds);
+
+        this.ctx.translate(-this.camera_x, 0);
+        // Space for fixed objects
+        this.addToGameMap(this.healthBar);
+        this.ctx.translate(this.camera_x, 0);
+
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
+        this.addToGameMap(this.throwableObjects[0])
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
@@ -94,6 +108,5 @@ class World {
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
 
-
-
+    setThrow
 }

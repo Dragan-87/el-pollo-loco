@@ -11,10 +11,12 @@ addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
         case 'ArrowRight':
+        case "D":
             keyboard.RIGHT = true;
             break;
         case ' ':
         case 'w':
+        case "W":
         case 'ArrowUp':
             keyboard.JUMP = true;
             break;
@@ -22,8 +24,13 @@ addEventListener('keydown', (event) => {
             keyboard.DOWN = true;
             break;
         case 'a':
+        case 'A':
         case 'ArrowLeft':
             keyboard.LEFT = true;
+            break;
+        case 'f':
+        case 'F':
+            keyboard.Throw = true;
             break;
         default:
             break;
@@ -33,28 +40,24 @@ addEventListener('keydown', (event) => {
 addEventListener('keyup', (event) => {
     switch (event.key) {
         case 'd':
-            keyboard.RIGHT = false;
-            break;
-        case 'ArrowUp':
-            keyboard.JUMP = false;
-            break;
-        case 'ArrowDown':
-            keyboard.DOWN = false;
-            break;
-        case 'ArrowLeft':
-            keyboard.LEFT = false;
-            break;
+        case 'D':
         case 'ArrowRight':
             keyboard.RIGHT = false;
             break;
+        case 'ArrowUp':
+        case ' ':
+        case 'w':
+        case 'W':
+            keyboard.JUMP = false;
+            break;
+        case 'ArrowLeft':
         case 'a':
+        case 'A':
             keyboard.LEFT = false;
             break;
-        case 'w':
-            keyboard.JUMP = false;
-            break;
-        case ' ':
-            keyboard.JUMP = false;
+        case 'f':
+        case 'F':
+            keyboard.Throw = false;
             break;
         default:
             break;

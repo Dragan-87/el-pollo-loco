@@ -1,5 +1,4 @@
 class Character extends MoveableObject {
-    speedX = 0;
     world;
     WALK_IMAGES = [
         './img/2_character_pepe/2_walk/W-21.png',
@@ -41,7 +40,7 @@ class Character extends MoveableObject {
     constructor(img) {
         super(img);
         this.objetctPositionY = 480 - 210;
-        this.objetctPositionX = 0;
+        this.objetctPositionX = 10;
         this.speed = 5;
         this.energy = 100;
         this.loadImages(this.WALK_IMAGES);
@@ -58,6 +57,7 @@ class Character extends MoveableObject {
             if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
                 this.world.walkingSound.play();
                 this.moveRight();
+
             }
             if (this.world.keyboard.LEFT && this.objetctPositionX > 0) {
                 this.world.walkingSound.play();
@@ -75,7 +75,8 @@ class Character extends MoveableObject {
         setInterval(() => {
 
             if (this.isDead()) {
-                this.playAnimation(this.DEAD_IMAGES);
+                this.playAnimation(this.DEAD_IMAGES)
+
                 return;
             } else if (this.isHurt()) {
                 this.playAnimation(this.HURT_IMAGES);
@@ -97,5 +98,6 @@ class Character extends MoveableObject {
     jump() {
         this.speedY = 15;
     }
+
 
 }

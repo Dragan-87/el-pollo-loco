@@ -1,5 +1,5 @@
 class Endboss extends MoveableObject {
-    
+
     ANGRY_IMAGES = [
         "./img/4_enemie_boss_chicken/2_alert/G5.png",
         "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -17,6 +17,7 @@ class Endboss extends MoveableObject {
         this.objetctPositionX = 720 - this.width;
         this.objetctPositionY = 420 - this.height;
         this.width = 100;
+        this.dealDamage = 40;
         this.animate();
     }
 
