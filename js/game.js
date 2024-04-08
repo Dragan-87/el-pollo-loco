@@ -28,8 +28,8 @@ addEventListener('keydown', (event) => {
         case 'ArrowLeft':
             keyboard.LEFT = true;
             break;
-        case 'f':
-        case 'F':
+        case 'q':
+        case 'Q':
             keyboard.Throw = true;
             break;
         default:

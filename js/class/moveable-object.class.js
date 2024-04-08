@@ -41,7 +41,11 @@ class MoveableObject extends DrawableObject{
     }
 
     isAboveGround() {
-        return this.objetctPositionY < this.defaultObjetctPositionY;
+        if(this instanceof ThrowableObject){
+            return true;
+        } else {
+            return this.objetctPositionY < this.defaultObjetctPositionY;
+        }
     }
 
     drawColision() {
