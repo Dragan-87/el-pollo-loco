@@ -11,11 +11,10 @@ class Satusbar extends DrawableObject{
 
     percentage = 100;
 
-    constructor(img, objetctPositionX) {
+    constructor(img, objetctPositionX, objetctPositionY) {
         super(img, objetctPositionX);
         this.loadImages(this.IMAGES);
-        this.objetctPositionX = 10;
-        this.objetctPositionY = 10;
+        this.objetctPositionY = objetctPositionY;
         this.width = 150;
         this.height = 40;
     }

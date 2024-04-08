@@ -11,7 +11,9 @@ class World {
     keyboard;
     camera_x = 0;
     walkingSound = new Audio("./audio/walking-short.mp3");
-    healthBar = new Satusbar("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10);
+    healthBar = new Satusbar("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10, 10);
+    bottleBar = new Satusbar("img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png", 10, 50);
+    coinBar = new Satusbar("img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png", 10, 90);
     throwableObjects = [
         new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", 100),
 
@@ -24,26 +26,31 @@ class World {
         this.ctx = canves.getContext('2d');
         this.draw();
         this.setWorld()
-        this.checkCollision();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    checkCollision() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit(enemy.dealDamage,);
+            this.checkCollision();
+            this.checkThrowObjects();
+        }, 200);
+    }
+
+    checkCollision() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit(enemy.dealDamage,);
+                this.character.statusBarPercentage(this.character.energy);
+                if (this.character.energy <= 0) {
+                    this.character.energy = 0;
                     this.character.statusBarPercentage(this.character.energy);
-                    if (this.character.energy <= 0) {
-                        this.character.energy = 0;
-                        this.character.statusBarPercentage(this.character.energy);
-                    }
                 }
-            });
-        }, 1000 / 2);
+            }
+        });
     }
 
     draw() {
@@ -58,12 +65,14 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // Space for fixed objects
         this.addToGameMap(this.healthBar);
+        this.addToGameMap(this.bottleBar);
+        this.addToGameMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
-        this.addToGameMap(this.throwableObjects[0])
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
+        this.addObjectsToGameMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -87,7 +96,7 @@ class World {
     }
 
     drawColision(mvO) {
-        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss) {
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
             this.ctx.beginPath();
             this.ctx.lineWidth = '5';
             this.ctx.strokeStyle = 'red';
@@ -108,5 +117,11 @@ class World {
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
 
-    setThrow
+    checkThrowObjects() {
+        if (this.keyboard.THROW) {
+            console.log("Throwing",this.keyboard.THROW);
+            let bottle = new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            this.throwableObjects.push(bottle);
+        }
+    }
 }

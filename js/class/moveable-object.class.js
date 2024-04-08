@@ -44,8 +44,9 @@ class MoveableObject extends DrawableObject{
         if(this instanceof ThrowableObject){
             return true;
         } else {
-            return this.objetctPositionY < this.defaultObjetctPositionY;
+            return this.objetctPositionY < this.defaultObjetctPositionY;d
         }
+
     }
 
     drawColision() {

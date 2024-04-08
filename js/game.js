@@ -30,7 +30,7 @@ addEventListener('keydown', (event) => {
             break;
         case 'q':
         case 'Q':
-            keyboard.Throw = true;
+            keyboard.THROW = true;
             break;
         default:
             break;
@@ -55,9 +55,9 @@ addEventListener('keyup', (event) => {
         case 'A':
             keyboard.LEFT = false;
             break;
-        case 'f':
-        case 'F':
-            keyboard.Throw = false;
+        case 'q':
+        case 'Q':
+            keyboard.THROW = false;
             break;
         default:
             break;
