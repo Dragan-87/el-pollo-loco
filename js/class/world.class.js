@@ -10,7 +10,6 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    walkingSound = new Audio("./audio/walking-short.mp3");
     healthBar = new Satusbar("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10, 10);
     bottleBar = new Satusbar("img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png", 10, 50);
     coinBar = new Satusbar("img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png", 10, 90);
@@ -49,6 +48,15 @@ class World {
                     this.character.energy = 0;
                     this.character.statusBarPercentage(this.character.energy);
                 }
+            }
+        });
+    }
+
+    checkCollection() {
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                this.character.collectCoin(coin.value);
+                this.coinBar.setPercentage(this.character.coins);
             }
         });
     }

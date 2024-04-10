@@ -63,6 +63,10 @@ class Character extends MoveableObject {
         "img/2_character_pepe/4_hurt/H-42.png",
         "img/2_character_pepe/4_hurt/H-43.png",
     ]
+    getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
+    jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
+    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
+    walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
     constructor(img) {
         super(img);
@@ -96,7 +100,7 @@ class Character extends MoveableObject {
 
     playWalkingSound() {
         if(!this.isAboveGround()){
-            this.world.walkingSound.play();
+            this.walkingSound.play();
         }
     }
 
@@ -109,7 +113,7 @@ class Character extends MoveableObject {
     }
 
     canCharacterMove() {
-        this.world.walkingSound.pause();
+        this.walkingSound.pause();
         if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
             this.playWalkingSound();
             this.moveRight();
@@ -122,6 +126,7 @@ class Character extends MoveableObject {
         }
 
         if (this.world.keyboard.JUMP && !this.isAboveGround()) {
+            this.jumpingSound.play();
             this.jump();
         }
         this.world.camera_x = -this.objetctPositionX
@@ -133,6 +138,7 @@ class Character extends MoveableObject {
             return;
         } else if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
+
             return;
         }
         if (this.isAboveGround()) {
@@ -153,6 +159,7 @@ class Character extends MoveableObject {
     resetWatingTime() {
         this.waitingTime = null;
         this.currentTime = null;
+        this.sleepSound.pause();
     }
 
     /**
@@ -175,6 +182,7 @@ class Character extends MoveableObject {
         }
         if (this.isWaitingLong()) {
             this.playAnimation(this.LONG_IDLE_IMAGES);
+            this.sleepSound.play();
         }
         if (this.isKeyPushed()) {
             this.resetWatingTime();
