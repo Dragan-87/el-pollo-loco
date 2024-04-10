@@ -65,7 +65,7 @@ class Character extends MoveableObject {
     ]
     getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
     jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
-    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
+    sleepSound = new Audio(); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
     walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
     constructor(img) {
@@ -138,6 +138,7 @@ class Character extends MoveableObject {
             return;
         } else if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
+            this.getHitSound.play();
 
             return;
         }

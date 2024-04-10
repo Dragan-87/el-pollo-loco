@@ -15,8 +15,9 @@ class World {
     coinBar = new Satusbar("img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png", 10, 90);
     throwableObjects = [
         new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", 100),
-
     ];
+
+    coin = [];
 
 
     constructor(canves, keyboard) {
@@ -26,6 +27,7 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
+        this.generateCoins();
     }
 
     setWorld() {
@@ -79,8 +81,10 @@ class World {
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
         this.addObjectsToGameMap(this.enemies);
+        this.addObjectsToGameMap(this.coin);
         this.addToGameMap(this.character);
         this.addObjectsToGameMap(this.throwableObjects)
+
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -129,6 +133,26 @@ class World {
         if (this.keyboard.THROW) {
             let bottle = new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
             this.throwableObjects.push(bottle);
+        }
+    }
+
+
+    generateCoins() {
+        let x = 50;
+        let y = 280;
+        const numSets = 3;
+        const coinsPerSet = 5;
+        const spacingX = 50;
+        const spacingY = 40;
+        for (let set = 0; set < numSets; set++) {
+            for (let i = 0; i < coinsPerSet; i++) {
+                let coin = new Coin(x, y);
+                this.coin.push(coin);
+                x += spacingX;
+                y -= Math.floor(Math.random() * spacingY) + 1;
+            }
+            x += spacingX * (coinsPerSet + Math.floor(Math.random() * 3));
+            y = 280; 
         }
     }
 }
