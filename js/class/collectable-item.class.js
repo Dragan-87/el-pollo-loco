@@ -1,10 +1,7 @@
-class CollectableItem extends DrawableObject {
+class CollectableItem extends MoveableObject {
 
 
-    constructor(img, objetctPositionX, objetctPositionY) {
-        super();
-        this.objetctPositionX = 1000;
-        this.objetctPositionY = 480 - 210;
-        this.loadImage('img/7_collectable_items/heart.png');
+    constructor(img, objetctPositionX) {
+        super(img, objetctPositionX);
     }
 }
