@@ -1,6 +1,7 @@
 class Character extends MoveableObject {
     world;
-
+    currentTime;
+    waitingTime;
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -74,67 +75,23 @@ class Character extends MoveableObject {
         this.loadImages(this.DEAD_IMAGES);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.IDLE_IMAGES);
+        this.loadImages(this.LONG_IDLE_IMAGES)
         this.applyGravity();
         this.animate();
     }
 
     animate() {
-        setInterval(() => {
+        setInterval(() => this.canCharacterMove(), 1000 / 60);
 
-            this.world.walkingSound.pause();
-            if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
-                this.playWalkingSound();
-                this.moveRight();
-
-            }
-            if (this.world.keyboard.LEFT && this.objetctPositionX > 0) {
-                this.playWalkingSound();
-                this.moveLeft();
-                this.otherDirection = true;
-            }
-
-            if (this.world.keyboard.JUMP && !this.isAboveGround()) {
-                this.jump();
-            }
-
-
-            this.world.camera_x = -this.objetctPositionX
-        }, 1000 / 60);
-
-
-        setInterval(() => {
-
-
-            if (this.isDead()) {
-                this.playAnimation(this.DEAD_IMAGES)
-                return;
-            } else if (this.isHurt()) {
-                this.playAnimation(this.HURT_IMAGES);
-                return;
-            }
-            if (this.isAboveGround()) {
-                this.playAnimation(this.JUMP_IMAGES);
-            }
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.WALK_IMAGES);
-            } else {
-                this.img = this.imageCache[this.WALK_IMAGES[0]];
-            }
-            if (this.characterWait()) {
-                this.playAnimation(this.IDLE_IMAGES);
-            }
-
-        }, 100);
+        setInterval(() => this.playCharaterAnimation(), 100);
     }
 
     jump() {
         this.speedY = 15;
     }
 
-    characterWait() {
-        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.isAboveGround()) {
-            return true;
-        }
+    isWaitingShort() {
+        return !this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.isAboveGround()
     }
 
     playWalkingSound() {
@@ -142,5 +99,87 @@ class Character extends MoveableObject {
             this.world.walkingSound.play();
         }
     }
+
+    canCharacterMove() {
+        this.world.walkingSound.pause();
+        if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
+            this.playWalkingSound();
+            this.moveRight();
+        }
+
+        if (this.world.keyboard.LEFT && this.objetctPositionX > 0) {
+            this.playWalkingSound();
+            this.moveLeft();
+            this.otherDirection = true;
+        }
+
+        if (this.world.keyboard.JUMP && !this.isAboveGround()) {
+            this.jump();
+        }
+        this.world.camera_x = -this.objetctPositionX
+    }
+
+    playCharaterAnimation() {
+        if (this.isDead()) {
+            this.playAnimation(this.DEAD_IMAGES)
+            return;
+        } else if (this.isHurt()) {
+            this.playAnimation(this.HURT_IMAGES);
+            return;
+        }
+        if (this.isAboveGround()) {
+            this.playAnimation(this.JUMP_IMAGES);
+        }
+        else if (this.isWalking()) {
+            this.playAnimation(this.WALK_IMAGES);
+        } else {
+            this.img = this.imageCache[this.WALK_IMAGES[0]];
+        }
+        this.playIdleAnimation();
+    }
+
+    isWalking() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
+    }
+
+    isWaitingLong() {
+        return (this.currentTime >= this.waitingTime + 5 * 1000)
+    }
+
+    isKeyPushed() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.JUMP || this.world.keyboard.THROW;
+    }
+
+    resetWatingTime() {
+        this.waitingTime = null;
+        this.currentTime = null;
+    }
+
+    /**
+     * Plays the idle animation for the Short character.
+     */
+    playShortIdleAnimation() {
+        this.playAnimation(this.IDLE_IMAGES);
+        this.currentTime = new Date().getTime();
+        if (!this.waitingTime) {
+            this.waitingTime = this.currentTime;
+        }
+    }
+
+    /**
+     * Plays the idle animation based on the character's waiting time and key push status.
+     */
+    playIdleAnimation() {
+        if (this.isWaitingShort()) {
+            this.playShortIdleAnimation();
+        }
+        if (this.isWaitingLong()) {
+            this.playAnimation(this.LONG_IDLE_IMAGES);
+        }
+        if (this.isKeyPushed()) {
+            this.resetWatingTime();
+        }
+    }
+
 
 }
