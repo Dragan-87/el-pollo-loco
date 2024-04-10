@@ -19,6 +19,7 @@ class ThrowableObject extends MoveableObject {
     constructor(img, objetctPositionX, objecktPositionY) {
         super(img, (objetctPositionX + 50));
         this.loadImages(this.THROW_BOTTLE_IMAGES)
+        this.loadImages(this.BROKEN_BOTTLE_IMAGES)
         this.speed = 30;
         this.objetctPositionY = objecktPositionY + 50;
         this.height = 50;
@@ -32,8 +33,8 @@ class ThrowableObject extends MoveableObject {
         setInterval(() => {
             this.objetctPositionX += 5;
             this.playAnimation(this.THROW_BOTTLE_IMAGES);
-            if (this.objetctPositionY < 450) {
-
+            if (this.objetctPositionY > 380) {
+                this.playAnimation(this.BROKEN_BOTTLE_IMAGES);
             }
         }, 50);
     }

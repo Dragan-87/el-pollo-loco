@@ -100,6 +100,14 @@ class Character extends MoveableObject {
         }
     }
 
+    isWalking() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
+    }
+
+    isWaitingLong() {
+        return (this.currentTime >= this.waitingTime + 5 * 1000)
+    }
+
     canCharacterMove() {
         this.world.walkingSound.pause();
         if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
@@ -136,14 +144,6 @@ class Character extends MoveableObject {
             this.img = this.imageCache[this.WALK_IMAGES[0]];
         }
         this.playIdleAnimation();
-    }
-
-    isWalking() {
-        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
-    }
-
-    isWaitingLong() {
-        return (this.currentTime >= this.waitingTime + 5 * 1000)
     }
 
     isKeyPushed() {
