@@ -119,7 +119,6 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.THROW) {
-            console.log("Throwing",this.keyboard.THROW);
             let bottle = new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
             this.throwableObjects.push(bottle);
         }

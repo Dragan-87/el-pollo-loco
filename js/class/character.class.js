@@ -73,20 +73,22 @@ class Character extends MoveableObject {
         this.loadImages(this.JUMP_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
         this.loadImages(this.HURT_IMAGES);
+        this.loadImages(this.IDLE_IMAGES);
         this.applyGravity();
         this.animate();
     }
 
     animate() {
         setInterval(() => {
+
             this.world.walkingSound.pause();
             if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
-                this.world.walkingSound.play();
+                this.playWalkingSound();
                 this.moveRight();
 
             }
             if (this.world.keyboard.LEFT && this.objetctPositionX > 0) {
-                this.world.walkingSound.play();
+                this.playWalkingSound();
                 this.moveLeft();
                 this.otherDirection = true;
             }
@@ -95,20 +97,21 @@ class Character extends MoveableObject {
                 this.jump();
             }
 
+
             this.world.camera_x = -this.objetctPositionX
         }, 1000 / 60);
 
+
         setInterval(() => {
+
 
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES)
-
                 return;
             } else if (this.isHurt()) {
                 this.playAnimation(this.HURT_IMAGES);
                 return;
             }
-
             if (this.isAboveGround()) {
                 this.playAnimation(this.JUMP_IMAGES);
             }
@@ -116,6 +119,9 @@ class Character extends MoveableObject {
                 this.playAnimation(this.WALK_IMAGES);
             } else {
                 this.img = this.imageCache[this.WALK_IMAGES[0]];
+            }
+            if (this.characterWait()) {
+                this.playAnimation(this.IDLE_IMAGES);
             }
 
         }, 100);
@@ -125,5 +131,16 @@ class Character extends MoveableObject {
         this.speedY = 15;
     }
 
+    characterWait() {
+        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.isAboveGround()) {
+            return true;
+        }
+    }
+
+    playWalkingSound() {
+        if(!this.isAboveGround()){
+            this.world.walkingSound.play();
+        }
+    }
 
 }
