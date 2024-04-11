@@ -24,6 +24,10 @@ class ThrowableObject extends MoveableObject {
         this.objetctPositionY = objecktPositionY + 50;
         this.height = 50;
         this.width = 50;
+        this.offSet.left = 10;
+        this.offSet.right = 10;
+        this.offSet.top = 10;
+        this.offSet.bottom = 10;
         this.throw();
     }
 
@@ -33,8 +37,9 @@ class ThrowableObject extends MoveableObject {
         setInterval(() => {
             this.objetctPositionX += 5;
             this.playAnimation(this.THROW_BOTTLE_IMAGES);
-            if (this.objetctPositionY > 380) {
+            if (this.objetctPositionY > 390) {
                 this.playAnimation(this.BROKEN_BOTTLE_IMAGES);
+                
             }
         }, 50);
     }

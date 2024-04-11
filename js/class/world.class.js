@@ -28,20 +28,32 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
-        this.generateCoins();
+        // this.generateCoins();
     }
 
+    /**
+     * Sets the world for the character.
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * Runs the game loop.
+     * Executes the checkCollision and checkThrowObjects methods repeatedly at a fixed interval.
+     */
     run() {
         setInterval(() => {
             this.checkCollision();
             this.checkThrowObjects();
+            this.checkCollection(this.coin);
+            this.checkCollection(this.salsaBottles);
         }, 200);
     }
 
+    /**
+     * Checks for collision between the character and enemies, and performs necessary actions.
+     */
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -55,15 +67,28 @@ class World {
         });
     }
 
+    /**
+     * Checks if the character is colliding with any collectables and collects them if so.
+     * @param {Array} obj - The array of collectables to check.
+     */
     checkCollection(obj) {
         obj.forEach((collectable) => {
             if (this.character.isColliding(collectable)) {
-                this.character.collect(collectable);
+                if (collectable instanceof Coin) {
+                    console.log("coin");
+                    this.coinBar.setPercentage(this.character.coins);
+                } else if (collectable instanceof Bottle) {
+                    console.log("bottle");
+                    this.bottleBar.setPercentage(this.character.bottles);
+                }
             }
 
         })
     }
 
+    /**
+     * Draws the game world on the canvas.
+     */
     draw() {
         canves.height = 480;
         canves.width = 720;
@@ -106,7 +131,7 @@ class World {
         } else {
             this.normalImage(mvO);
         }
-        this.drawColision(mvO);
+        // this.drawColision(mvO);
         this.drawColisionOffSet(mvO);
     }
 
@@ -115,7 +140,7 @@ class World {
      * @param {MovableObject} mvO - The movable object to draw the collision rectangle for.
      */
     drawColision(mvO) {
-        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject || mvO instanceof CollectableItem) {
             this.ctx.beginPath();
             this.ctx.lineWidth = '5';
             this.ctx.strokeStyle = 'blue';
@@ -129,11 +154,16 @@ class World {
      * @param {MovableObject} mvO - The movable object to draw the collision offset for.
      */
     drawColisionOffSet(mvO) {
-        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject || mvO instanceof CollectableItem) {
             this.ctx.beginPath();
             this.ctx.lineWidth = '5';
             this.ctx.strokeStyle = 'red';
-            this.ctx.rect(mvO.objetctPositionX + mvO.offSet.left, mvO.objetctPositionY + mvO.offSet.bottom, mvO.width - mvO.offSet.left - mvO.offSet.right, mvO.height - mvO.offSet.top - mvO.offSet.bottom);
+            this.ctx.rect(
+                (mvO.objetctPositionX + mvO.offSet.left),
+                (mvO.objetctPositionY + mvO.offSet.bottom),
+                (mvO.width - mvO.offSet.left - mvO.offSet.right),
+                (mvO.height - mvO.offSet.top - mvO.offSet.bottom)
+            );
             this.ctx.stroke();
         }
     };
@@ -169,7 +199,11 @@ class World {
      */
     checkThrowObjects() {
         if (this.keyboard.THROW) {
-            let bottle = new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            let bottle = new ThrowableObject(
+                "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+                this.character.objetctPositionX,
+                this.character.objetctPositionY
+            );
             this.throwableObjects.push(bottle);
         }
     }

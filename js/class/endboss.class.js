@@ -18,6 +18,8 @@ class Endboss extends MoveableObject {
         this.objetctPositionY = 420 - this.height;
         this.width = 100;
         this.dealDamage = 40;
+        this.offSet.top = 10;
+        this.offSet.bottom = 30;
         this.animate();
     }
 

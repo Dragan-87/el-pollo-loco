@@ -5,6 +5,10 @@ class Bottle extends CollectableItem {
 
     constructor(objetctPositionX) {
         super("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"
-            ,objetctPositionX);
+            , objetctPositionX);
+        this.offSet.left = 20;
+        this.offSet.right = 10;
+        this.offSet.top = 10;
+        this.offSet.bottom = 10;
     }
 }
