@@ -12,5 +12,12 @@ class Coin extends MoveableObject {
         super("img/8_coin/coin_1.png", objetctPositionX);
         this.objetctPositionY = objektPositionY || this.objetctPositionY;
         this.loadImages(this.COIN_IMAGES);
+        this.animate();
+    }
+
+    animate() {
+        setInterval(() => {
+            this.playAnimation(this.COIN_IMAGES);
+        }, 200);
     }
 }

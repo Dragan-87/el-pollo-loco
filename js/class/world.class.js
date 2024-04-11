@@ -54,13 +54,13 @@ class World {
         });
     }
 
-    checkCollection() {
-        this.level.coins.forEach((coin) => {
-            if (this.character.isColliding(coin)) {
-                this.character.collectCoin(coin.value);
-                this.coinBar.setPercentage(this.character.coins);
+    checkCollection(obj) {
+        obj.forEach((collectable) => {
+            if (this.character.isColliding(collectable)) {
+                this.character.collect(collectable);
             }
-        });
+
+        })
     }
 
     draw() {
@@ -80,8 +80,8 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
-        this.addObjectsToGameMap(this.enemies);
         this.addObjectsToGameMap(this.coin);
+        this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
         this.addObjectsToGameMap(this.throwableObjects)
 
@@ -136,7 +136,6 @@ class World {
         }
     }
 
-
     generateCoins() {
         let x = 50;
         let y = 280;
@@ -152,7 +151,7 @@ class World {
                 y -= Math.floor(Math.random() * spacingY) + 1;
             }
             x += spacingX * (coinsPerSet + Math.floor(Math.random() * 3));
-            y = 280; 
+            y = 280;
         }
     }
 }

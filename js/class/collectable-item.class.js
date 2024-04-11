@@ -8,7 +8,7 @@ class CollectableItem extends MoveableObject {
 
     collectItem(obj) {
         obj.forEach((item, index) => {
-            if (this.isColliding(item && item instanceof CollectableItem)) {
+            if (this.isColliding(item) && item instanceof CollectableItem) {
                 this.COLLECTED_ITEM.push(item);
                 obj.splice(index, 1);
             }
