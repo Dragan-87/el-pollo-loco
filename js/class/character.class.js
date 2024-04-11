@@ -2,6 +2,8 @@ class Character extends MoveableObject {
     world;
     currentTime;
     waitingTime;
+    coins = 0;
+    bottles = 0;
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",

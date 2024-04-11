@@ -1,6 +1,6 @@
 class Healthbar extends Statusbar {
 
-    Health_IMGS = [
+    IAMGES = [
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png",
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png",
@@ -10,10 +10,8 @@ class Healthbar extends Statusbar {
     ]
 
     constructor() {
-        super(this.Health_IMGS[0], 10, 10);
-        this.loadImages(this.Health_IMGS);
-        this.loadImages = this.Health_IMGS;
-        this.width = 150;
-        this.height = 40;
+        super("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10, 10);
+        this.loadImages(this.IAMGES);
+        this.percentage = 100;
     }
 }

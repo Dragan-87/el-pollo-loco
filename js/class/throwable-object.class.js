@@ -16,6 +16,8 @@ class ThrowableObject extends MoveableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
+    collectet_bottles = []
+
     constructor(img, objetctPositionX, objecktPositionY) {
         super(img, (objetctPositionX + 50));
         this.loadImages(this.THROW_BOTTLE_IMAGES)
@@ -39,7 +41,7 @@ class ThrowableObject extends MoveableObject {
             this.playAnimation(this.THROW_BOTTLE_IMAGES);
             if (this.objetctPositionY > 390) {
                 this.playAnimation(this.BROKEN_BOTTLE_IMAGES);
-                
+
             }
         }, 50);
     }

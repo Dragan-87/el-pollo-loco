@@ -10,9 +10,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    healthBar = new Satusbar("img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png", 10, 10);
-    bottleBar = new Satusbar("img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png", 10, 50);
-    coinBar = new Satusbar("img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png", 10, 90);
+    healthBar = new Healthbar();
+    salsabar = new Salsabar();
+    coinBar = new Coinbar();
     throwableObjects = [
         new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", 100),
     ];
@@ -28,7 +28,7 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
-        // this.generateCoins();
+        this.generateCoins();
     }
 
     /**
@@ -58,10 +58,10 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit(enemy.dealDamage,);
-                this.character.statusBarPercentage(this.character.energy);
+                this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 if (this.character.energy <= 0) {
                     this.character.energy = 0;
-                    this.character.statusBarPercentage(this.character.energy);
+                    this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 }
             }
         });
@@ -74,12 +74,20 @@ class World {
     checkCollection(obj) {
         obj.forEach((collectable) => {
             if (this.character.isColliding(collectable)) {
-                if (collectable instanceof Coin) {
-                    console.log("coin");
-                    this.coinBar.setPercentage(this.character.coins);
-                } else if (collectable instanceof Bottle) {
+                if (collectable instanceof Coin && this.character.coins < 100) {
+                    this.colletCoins(collectable);
+                } else if (collectable instanceof Bottle && this.character.bottles < 100) {
                     console.log("bottle");
-                    this.bottleBar.setPercentage(this.character.bottles);
+                    this.character.bottles += 20;
+                    this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
+                    this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
+                    this.throwableObjects.push(
+                        new ThrowableObject(
+                            "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+                            100
+                        )
+                    );
+
                 }
             }
 
@@ -101,7 +109,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // Space for fixed objects
         this.addToGameMap(this.healthBar);
-        this.addToGameMap(this.bottleBar);
+        this.addToGameMap(this.salsabar);
         this.addToGameMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
 
@@ -198,13 +206,8 @@ class World {
      * Checks if the throw key is pressed and creates a new throwable object if it is.
      */
     checkThrowObjects() {
-        if (this.keyboard.THROW) {
-            let bottle = new ThrowableObject(
-                "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
-                this.character.objetctPositionX,
-                this.character.objetctPositionY
-            );
-            this.throwableObjects.push(bottle);
+        if (this.keyboard.THROW && this.throwableObjects) {
+            this.throwableObjects.pop();
         }
     }
 
@@ -228,5 +231,11 @@ class World {
             x += spacingX * (coinsPerSet + Math.floor(Math.random() * 3));
             y = 280;
         }
+    }
+
+    colletCoins(obj) {
+        this.character.coins += 20;
+        this.coinBar.statusBarPercentage(this.coinBar, this.character.coins);
+        this.coin.splice(this.coin.indexOf(obj), 1);
     }
 }

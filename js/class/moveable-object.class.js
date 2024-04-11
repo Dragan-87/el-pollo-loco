@@ -96,7 +96,4 @@ class MoveableObject extends DrawableObject{
         return timepassed < 1;
     }
 
-    statusBarPercentage() {
-        this.world.healthBar.setPercentage(this.energy);
-    }
 }
