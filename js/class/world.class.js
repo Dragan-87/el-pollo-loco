@@ -18,6 +18,7 @@ class World {
     ];
 
     coin = [];
+    salsaBottles = [new Bottle(100),];
 
 
     constructor(canves, keyboard) {
@@ -81,6 +82,7 @@ class World {
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
         this.addObjectsToGameMap(this.coin);
+        this.addObjectsToGameMap(this.salsaBottles);
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
         this.addObjectsToGameMap(this.throwableObjects)
@@ -105,18 +107,41 @@ class World {
             this.normalImage(mvO);
         }
         this.drawColision(mvO);
+        this.drawColisionOffSet(mvO);
     }
 
+    /**
+     * Draws the collision rectangle for the given movable object.
+     * @param {MovableObject} mvO - The movable object to draw the collision rectangle for.
+     */
     drawColision(mvO) {
         if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
             this.ctx.beginPath();
             this.ctx.lineWidth = '5';
-            this.ctx.strokeStyle = 'red';
+            this.ctx.strokeStyle = 'blue';
             this.ctx.rect(mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
             this.ctx.stroke();
         }
     };
 
+    /**
+     * Draws the collision offset of a movable object.
+     * @param {MovableObject} mvO - The movable object to draw the collision offset for.
+     */
+    drawColisionOffSet(mvO) {
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = '5';
+            this.ctx.strokeStyle = 'red';
+            this.ctx.rect(mvO.objetctPositionX + mvO.offSet.left, mvO.objetctPositionY + mvO.offSet.bottom, mvO.width - mvO.offSet.left - mvO.offSet.right, mvO.height - mvO.offSet.top - mvO.offSet.bottom);
+            this.ctx.stroke();
+        }
+    };
+
+    /**
+     * Flips and draws an image on the canvas.
+     * @param {Object} mvO - The image object containing properties like img, objectPositionX, width, height, etc.
+     */
     flippingImage(mvO) {
         this.ctx.save();
         this.ctx.scale(-1, 1);
@@ -125,10 +150,23 @@ class World {
         return;
     }
 
+    /**
+     * Draws the image on the canvas using the provided parameters.
+     *
+     * @param {Object} mvO - The object containing the image and its position.
+     * @param {HTMLImageElement} mvO.img - The image to be drawn.
+     * @param {number} mvO.objetctPositionX - The x-coordinate of the image's position.
+     * @param {number} mvO.objetctPositionY - The y-coordinate of the image's position.
+     * @param {number} mvO.width - The width of the image.
+     * @param {number} mvO.height - The height of the image.
+     */
     normalImage(mvO) {
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
 
+    /**
+     * Checks if the throw key is pressed and creates a new throwable object if it is.
+     */
     checkThrowObjects() {
         if (this.keyboard.THROW) {
             let bottle = new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
@@ -136,6 +174,9 @@ class World {
         }
     }
 
+    /**
+     * Generates coins in the game world.
+     */
     generateCoins() {
         let x = 50;
         let y = 280;

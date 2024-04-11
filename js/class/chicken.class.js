@@ -17,6 +17,10 @@ class Chicken extends MoveableObject {
         this.dealDamage = 20;
         this.animate();
         this.moveLeft();
+        this.offSet.left = 5;
+        this.offSet.right = 5
+        this.offSet.top = 5;
+        this.offSet.bottom = 5;
     }
 
     animate() {

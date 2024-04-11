@@ -8,6 +8,13 @@ class MoveableObject extends DrawableObject{
     energy;
     lastHitTaken;
 
+    offSet = {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
+    }
+
     constructor(img, objetctPositionX) {
         super(img, objetctPositionX);
         this.defaultObjetctPositionY = 480 - this.height - 60;
@@ -49,26 +56,25 @@ class MoveableObject extends DrawableObject{
 
     }
 
-    drawColision() {
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '5';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.rect(this.objetctPositionX, this.objetctPositionY, this.width, this.height);
-        this.ctx.stroke();
-    };
+    // isColliding(obj) {
+    //     return (this.objetctPositionX + this.width) >= obj.objetctPositionX && this.objetctPositionX <= (obj.objetctPositionX + obj.width) &&
+    //         (this.objetctPositionY + this.offSetY + this.height) >= obj.objetctPositionY &&
+    //         (this.objetctPositionY + this.offSetY) <= (obj.objetctPositionY + obj.height) &&
+    //         obj.onCollisionCourse;
+    // }
 
     // isColliding(obj) {
-    //     return (this.objetctPositionX + this.width) >= obj.objetctPositionX && this.X <= (obj.objetctPositionX + obj.width) &&
-    //         (this.objetctPositionY + this.offsetY + this.height) >= obj.objetctPositionY &&
-    //         (this.objetctPositionY + this.offsetY) <= (obj.objetctPositionY + obj.height) &&
-    //         obj.onCollisionCourse;
-
+    //     return this.objetctPositionX + this.width > obj.objetctPositionX &&
+    //         this.objetctPositionY + this.height > obj.objetctPositionY &&
+    //         this.objetctPositionX < obj.objetctPositionX &&
+    //         this.objetctPositionY < obj.objetctPositionY + obj.height;
     // }
 
     isColliding(obj) {
-        return this.objetctPositionX + this.width > obj.objetctPositionX &&
-            this.objetctPositionY + this.height > obj.objetctPositionY &&
-            this.objetctPositionX < obj.objetctPositionX && this.objetctPositionY < obj.objetctPositionY + obj.height;
+        return (this.objetctPositionX + this.width) > (obj.objetctPositionX + obj.offSet.left) &&
+            (this.objetctPositionY + this.height) > (obj.objetctPositionY + obj.offSet.top) &&
+            (this.objetctPositionX + this.offSet.left) < (obj.objetctPositionX + obj.width - obj.offSet.right) &&
+            (this.objetctPositionY + this.offSet.top) < (obj.objetctPositionY + obj.height - obj.offSet.bottom);
     }
 
     hit(dmg) {

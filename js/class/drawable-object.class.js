@@ -38,8 +38,4 @@ class DrawableObject {
         this.ctx.drawImage(this.img, this.objetctPositionX, this.objetctPositionY, this.width, this.height);
     }
 
-    get height() {
-        return this.height;
-    }
-
 }

@@ -74,6 +74,10 @@ class Character extends MoveableObject {
         this.objetctPositionX = 10;
         this.speed = 5;
         this.energy = 100;
+        this.offSet.left = 10;
+        this.offSet.right = 15;
+        this.offSet.top = 10;
+        this.offSet.bottom = 60;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.JUMP_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
