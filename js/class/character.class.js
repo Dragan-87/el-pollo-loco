@@ -160,7 +160,15 @@ class Character extends MoveableObject {
     resetWatingTime() {
         this.waitingTime = null;
         this.currentTime = null;
+        this.stopSleepingSound();
+    }
+
+    stopSleepingSound() {
         this.sleepSound.pause();
+    }
+
+    playSleepSound() {
+        this.sleepSound.play();
     }
 
     /**
@@ -183,7 +191,7 @@ class Character extends MoveableObject {
         }
         if (this.isWaitingLong()) {
             this.playAnimation(this.LONG_IDLE_IMAGES);
-            this.sleepSound.play();
+            this.playSleepSound();
         }
         if (this.isKeyPushed()) {
             this.resetWatingTime();
