@@ -33,6 +33,7 @@ class World {
         this.setWorld()
         this.run();
         this.generateCoins();
+        this.deleteDeadEnemy();
     }
 
     /**
@@ -63,7 +64,7 @@ class World {
      */
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && enemy.energy > 0) {
                 this.character.hit(enemy.dealDamage,);
                 this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 if (this.character.energy <= 0) {
@@ -249,20 +250,30 @@ class World {
         this.coin.splice(this.coin.indexOf(obj), 1);
     }
 
+    /**
+     * Handles the collision between a throwing object and enemies.
+     * Reduces the energy of enemies if a collision occurs.
+     * @param {ThrowingObject} throwingObject - The throwing object that collided with enemies.
+     */
     throwingObjectHitEnemy(throwingObject) {
         setInterval(() => {
             this.enemies.forEach(enemy => {
                 if (throwingObject.isColliding(enemy)) {
                     console.log(enemy.energy - throwingObject.damage );
                     enemy.energy -= throwingObject.damage;
+                }
+            })
+        }, 100);
+    }
 
-                    if (enemy.isDead()) {
-                        enemy.die();
-                        enemy.playAnimation(enemy.DEAD_IMAGES);
-                        setTimeout(() => {
-                            this.enemies.splice(this.enemies.indexOf(enemy), 1);
-                        }, 2000);
-                    }
+    /**
+     * Deletes dead enemies from the enemies array at regular intervals.
+     */
+    deleteDeadEnemy() {
+        setInterval(() => {
+            this.enemies.forEach(enemy => {
+                if (enemy.isSpliceable) {
+                    this.enemies.splice(this.enemies.indexOf(enemy), 1);
                 }
             })
         }, 100);
