@@ -46,5 +46,14 @@ class ThrowableObject extends MoveableObject {
         }, 50);
     }
 
+    // throwingObjectHitEnemy(array) {
+    //     setInterval(() => {
+    //         array.forEach(enemy => {
+    //             if (this.isColliding(enemy)) {
+    //                 console.log("hit");
+    //             }
+    //         })
+    //     }, 100);
+    // }
 
 }

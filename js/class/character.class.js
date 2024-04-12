@@ -70,8 +70,8 @@ class Character extends MoveableObject {
     sleepSound = new Audio(); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
     walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
-    constructor(img) {
-        super(img);
+    constructor() {
+        super("img/2_character_pepe/1_idle/idle/I-1.png");
         this.objetctPositionY = 480 - 210;
         this.objetctPositionX = 10;
         this.speed = 5;

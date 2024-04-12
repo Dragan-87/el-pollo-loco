@@ -6,11 +6,14 @@ class Chicken extends MoveableObject {
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ]
 
-    health = 20;
+    DEAD_IMAGES = [
+        "img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+    ]
 
     constructor(objetctPositionX, objetctPositionY, img) {
         super(objetctPositionX, objetctPositionY, img);
         this.loadImages(this.WALK_IMAGES);
+        this.loadImages(this.DEAD_IMAGES);
         this.height = 40;
         this.width = 40;
         this.objetctPositionX = 200 + Math.random() * 500;
@@ -23,18 +26,22 @@ class Chicken extends MoveableObject {
         this.offSet.right = 5
         this.offSet.top = 5;
         this.offSet.bottom = 5;
+        this.energy = 20;
     }
 
     animate() {
-        setInterval(() => {
+        this.moveInterval = setInterval(() => {
             this.moveLeft();
-
         }, 1000 / 55);
 
-        setInterval(() => {
+        this.animationInterval = setInterval(() => {
             this.playAnimation(this.WALK_IMAGES);
         }, 50);
     }
 
-
+    die() {
+        clearInterval(this.moveInterval);
+        clearInterval(this.animationInterval);
+        this.playAnimation(this.DEAD_IMAGES);
+    }
 }

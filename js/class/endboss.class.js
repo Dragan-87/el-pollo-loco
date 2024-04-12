@@ -11,6 +11,8 @@ class Endboss extends MoveableObject {
         "./img/4_enemie_boss_chicken/2_alert/G12.png",
     ];
 
+    
+
     constructor(img) {
         super(img, 720);
         this.loadImages(this.ANGRY_IMAGES);

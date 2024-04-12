@@ -8,6 +8,8 @@ class MoveableObject extends DrawableObject{
     energy;
     lastHitTaken;
 
+    DEAD_IMAGES = [];
+
     offSet = {
         left: 0,
         right: 0,
@@ -87,13 +89,17 @@ class MoveableObject extends DrawableObject{
     }
 
     isDead() {
-        return this.energy === 0;
+        return this.energy <= 0;
     }
 
     isHurt() {
         let timepassed = Date.now() - this.lastHitTaken;
         timepassed = timepassed / 1000;
         return timepassed < 1;
+    }
+
+    statusBarPercentage(obj, statusbarValue) {
+        obj.setPercentage(statusbarValue, obj);
     }
 
 }

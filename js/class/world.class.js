@@ -84,7 +84,6 @@ class World {
                 if (collectable instanceof Coin && this.character.coins < 100) {
                     this.colletCoins(collectable);
                 } else if (collectable instanceof Bottle && this.character.bottles < 100) {
-                    console.log("bottle");
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
                     this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
@@ -215,6 +214,7 @@ class World {
             let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
             this.throwableObjects.push(bottle);
             this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
+            this.throwingObjectHitEnemy(bottle);
             setTimeout(() => {
                 this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
             }, 3000);
@@ -247,5 +247,24 @@ class World {
         this.character.coins += 20;
         this.coinBar.statusBarPercentage(this.coinBar, this.character.coins);
         this.coin.splice(this.coin.indexOf(obj), 1);
+    }
+
+    throwingObjectHitEnemy(throwingObject) {
+        setInterval(() => {
+            this.enemies.forEach(enemy => {
+                if (throwingObject.isColliding(enemy)) {
+                    console.log(enemy.energy - throwingObject.damage );
+                    enemy.energy -= throwingObject.damage;
+
+                    if (enemy.isDead()) {
+                        enemy.die();
+                        enemy.playAnimation(enemy.DEAD_IMAGES);
+                        setTimeout(() => {
+                            this.enemies.splice(this.enemies.indexOf(enemy), 1);
+                        }, 2000);
+                    }
+                }
+            })
+        }, 100);
     }
 }
