@@ -6,6 +6,8 @@ class Chicken extends MoveableObject {
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ]
 
+    health = 20;
+
     constructor(objetctPositionX, objetctPositionY, img) {
         super(objetctPositionX, objetctPositionY, img);
         this.loadImages(this.WALK_IMAGES);

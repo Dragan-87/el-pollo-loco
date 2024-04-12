@@ -49,10 +49,13 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollision();
-            this.checkThrowObjects();
             this.checkCollection(this.coin);
             this.checkCollection(this.salsaBottles);
         }, 200);
+
+        setInterval(() => {
+            this.checkThrowObjects();
+        }, 100);
     }
 
     /**
@@ -200,8 +203,11 @@ class World {
         this.ctx.drawImage(mvO.img, mvO.objetctPositionX, mvO.objetctPositionY, mvO.width, mvO.height);
     }
 
+
     /**
-     * Checks if the throw key is pressed and creates a new throwable object if it is.
+     * Checks if the throw key is pressed and the character has bottles to throw.
+     * If conditions are met, reduces the number of bottles, creates a new throwable object,
+     * adds it to the list of throwable objects, updates the status bar, and removes the object after 3 seconds.
      */
     checkThrowObjects() {
         if (this.keyboard.THROW && this.character.bottles > 0) {

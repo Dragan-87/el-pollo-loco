@@ -16,7 +16,7 @@ class ThrowableObject extends MoveableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
-    collectet_bottles = []
+    damage = 20;
 
     constructor(img, objetctPositionX, objecktPositionY) {
         super(img, (objetctPositionX + 50));
