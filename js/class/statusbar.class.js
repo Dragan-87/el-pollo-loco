@@ -29,6 +29,8 @@ class Statusbar extends DrawableObject{
                 return 4;
             case 0:
                 return 5;
+            default:
+                return 0;
         }
     }
 

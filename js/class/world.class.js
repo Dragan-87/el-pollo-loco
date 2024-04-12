@@ -13,14 +13,18 @@ class World {
     healthBar = new Healthbar();
     salsabar = new Salsabar();
     coinBar = new Coinbar();
-    throwableObjects = [
-        new ThrowableObject("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", 100),
-    ];
+    throwableObjects = [];
 
     coin = [];
     salsaBottles = [new Bottle(100),];
 
 
+    /**
+     * Represents a World object.
+     * @constructor
+     * @param {HTMLCanvasElement} canves - The canvas element.
+     * @param {Keyboard} keyboard - The keyboard object.
+     */
     constructor(canves, keyboard) {
         this.canves = canves;
         this.keyboard = keyboard;
@@ -84,7 +88,8 @@ class World {
                     this.throwableObjects.push(
                         new ThrowableObject(
                             "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
-                            100
+                            100,
+                            this.character.objetctPositionY
                         )
                     );
 
@@ -118,8 +123,6 @@ class World {
         this.addObjectsToGameMap(this.salsaBottles);
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
-        this.addObjectsToGameMap(this.throwableObjects)
-
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -206,8 +209,12 @@ class World {
      * Checks if the throw key is pressed and creates a new throwable object if it is.
      */
     checkThrowObjects() {
-        if (this.keyboard.THROW && this.throwableObjects) {
-            this.throwableObjects.pop();
+        if (this.keyboard.THROW && this.character.bottles > 0) {
+            this.character.bottles -= 20;
+            this.throwableObjects[0].throw();
+            this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
+            this.addObjectsToGameMap(this.throwableObjects)
+            // this.throwableObjects.pop();
         }
     }
 
