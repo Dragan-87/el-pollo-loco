@@ -30,7 +30,7 @@ class ThrowableObject extends MoveableObject {
         this.offSet.right = 10;
         this.offSet.top = 10;
         this.offSet.bottom = 10;
-
+        this.throw()
     }
 
     throw() {

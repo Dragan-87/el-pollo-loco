@@ -16,7 +16,7 @@ class World {
     throwableObjects = [];
 
     coin = [];
-    salsaBottles = [new Bottle(100),];
+    salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400),];
 
 
     /**
@@ -85,13 +85,6 @@ class World {
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
                     this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
-                    this.throwableObjects.push(
-                        new ThrowableObject(
-                            "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
-                            100,
-                            this.character.objetctPositionY
-                        )
-                    );
 
                 }
             }
@@ -123,6 +116,8 @@ class World {
         this.addObjectsToGameMap(this.salsaBottles);
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
+        this.addObjectsToGameMap(this.throwableObjects)
+
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -211,10 +206,12 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.THROW && this.character.bottles > 0) {
             this.character.bottles -= 20;
-            this.throwableObjects[0].throw();
+            let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            this.throwableObjects.push(bottle);
             this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
-            this.addObjectsToGameMap(this.throwableObjects)
-            // this.throwableObjects.pop();
+            setTimeout(() => {
+                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
+            }, 3000);
         }
     }
 
