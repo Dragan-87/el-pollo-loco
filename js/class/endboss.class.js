@@ -1,4 +1,4 @@
-class Endboss extends MoveableObject {
+class Endboss extends Chicken {
 
     ANGRY_IMAGES = [
         "./img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -44,15 +44,19 @@ class Endboss extends MoveableObject {
         this.offSet.bottom = 30;
         this.energy = 100;
         this.loadImages(this.ANGRY_IMAGES);
-        this.animate();
+        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.HURT_IMAGES);
+        this.loadImages(this.ATTACK_IMAGES);
     }
 
     animate() {
         setInterval(() => {
             this.playAnimation(this.ANGRY_IMAGES);
 
-
-
+            if (this.isDead()) {
+                this.dealDamage = 0;
+                this.die();
+            }
         }, 300);
     }
 }

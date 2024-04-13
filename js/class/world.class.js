@@ -16,7 +16,7 @@ class World {
     throwableObjects = [];
 
     coin = [];
-    salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400),];
+    salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400), new Bottle(500)];
 
 
     /**
@@ -258,6 +258,7 @@ class World {
     throwingObjectHitEnemy(throwingObject) {
         setInterval(() => {
             this.enemies.forEach(enemy => {
+                console.log(enemy.energy);
                 if (throwingObject.isColliding(enemy)) {
                     throwingObject.throwableObjectHitsEnemy(enemy);
                 }

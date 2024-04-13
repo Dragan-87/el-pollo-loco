@@ -1,35 +1,15 @@
 class Chicken extends MoveableObject {
-
     isSpliceable = false;
-
-    WALK_IMAGES = [
-        'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
-        'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
-        'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
-    ]
-
-    DEAD_IMAGES = [
-        "img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-    ]
+    WALK_IMAGES = []
+    DEAD_IMAGES = []
+    ANGRY_IMAGES = []
+    HURT_IMAGES = []
+    ATTACK_IMAGES = []
 
     constructor(objetctPositionX, objetctPositionY, img) {
         super(objetctPositionX, objetctPositionY, img);
-        this.loadImages(this.WALK_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
-        this.height = 40;
-        this.width = 40;
-        this.objetctPositionX = 200 + Math.random() * 500;
         this.objetctPositionY = 420 - this.height;
-        this.speed = 0.25 + Math.random() * 0.2;
-        this.dealDamage = 20;
         this.animate();
-        this.moveLeft();
-        this.offSet.left = 5;
-        this.offSet.right = 5
-        this.offSet.top = 5;
-        this.offSet.bottom = 5;
-        this.energy = 20;
-
     }
 
     animate() {
@@ -38,7 +18,6 @@ class Chicken extends MoveableObject {
         }, 1000 / 55);
 
         this.animationInterval = setInterval(() => {
-            this.playAnimation(this.WALK_IMAGES);
 
             if (this.isDead()) {
                 this.dealDamage = 0;
@@ -56,6 +35,7 @@ class Chicken extends MoveableObject {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);
         this.playAnimation(this.DEAD_IMAGES);
+
     }
 
 

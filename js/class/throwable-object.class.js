@@ -1,7 +1,7 @@
 class ThrowableObject extends MoveableObject {
     spiningBottle;
     brokenBottle;
-    damage = 20;
+    damage = 30;
     hitIndicator = false;
 
     THROW_BOTTLE_IMAGES = [
