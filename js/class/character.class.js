@@ -65,6 +65,7 @@ class Character extends MoveableObject {
         "img/2_character_pepe/4_hurt/H-42.png",
         "img/2_character_pepe/4_hurt/H-43.png",
     ]
+
     getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
     jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
     sleepSound = new Audio(); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
@@ -80,6 +81,8 @@ class Character extends MoveableObject {
         this.offSet.right = 15;
         this.offSet.top = 10;
         this.offSet.bottom = 60;
+        this.speedY = 10;
+        this.acceleration = 1;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.JUMP_IMAGES);
         this.loadImages(this.DEAD_IMAGES);

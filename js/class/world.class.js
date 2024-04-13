@@ -32,7 +32,7 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
-        this.generateCoins();
+        this.coinFactory();
         this.deleteDeadEnemy();
     }
 
@@ -225,7 +225,7 @@ class World {
     /**
      * Generates coins in the game world.
      */
-    generateCoins() {
+    coinFactory() {
         let x = 50;
         let y = 280;
         const numSets = 3;
@@ -259,8 +259,7 @@ class World {
         setInterval(() => {
             this.enemies.forEach(enemy => {
                 if (throwingObject.isColliding(enemy)) {
-                    console.log(enemy.energy - throwingObject.damage );
-                    enemy.energy -= throwingObject.damage;
+                    throwingObject.throwableObjectHitsEnemy(enemy);
                 }
             })
         }, 100);

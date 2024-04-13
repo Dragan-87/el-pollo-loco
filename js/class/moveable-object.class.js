@@ -32,6 +32,11 @@ class MoveableObject extends DrawableObject{
         this.objetctPositionX -= this.speed;
     }
 
+    /**
+     * Plays the animation for the movable object.
+     *
+     * @param {string[]} images - An array of image paths for the animation.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -39,6 +44,25 @@ class MoveableObject extends DrawableObject{
         this.currentImage++
     }
 
+    /**
+     * Plays the animation one time using the provided images.
+     * @param {string[]} images - An array of image paths.
+     */
+    playAnimationOneTime(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++
+        if (i == images.length - 1) {
+            this.currentImage = 0;
+        }
+    }
+
+    /**
+     * Applies gravity to the movable object.
+     * The object's position is updated based on its speed and acceleration.
+     * This method is called repeatedly at a fixed interval.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -72,6 +96,11 @@ class MoveableObject extends DrawableObject{
     //         this.objetctPositionY < obj.objetctPositionY + obj.height;
     // }
 
+    /**
+     * Checks if the current object is colliding with another object.
+     * @param {Object} obj - The object to check collision with.
+     * @returns {boolean} - True if collision occurs, false otherwise.
+     */
     isColliding(obj) {
         return (this.objetctPositionX + this.width) > (obj.objetctPositionX + obj.offSet.left) &&
             (this.objetctPositionY + this.height) > (obj.objetctPositionY + obj.offSet.top) &&
@@ -79,19 +108,28 @@ class MoveableObject extends DrawableObject{
             (this.objetctPositionY + this.offSet.top) < (obj.objetctPositionY + obj.height - obj.offSet.bottom);
     }
 
+    /**
+     * Reduces the energy of the object by the specified amount.
+     * If the energy reaches 0 or below, it is set to 0.
+     * Updates the timestamp of the last hit taken.
+     * @param {number} dmg - The amount of damage to be inflicted.
+     */
     hit(dmg) {
         this.energy -= dmg;
         if (this.energy <= 0) {
             this.energy = 0;
-        } else {
-            this.lastHitTaken = Date.now();
         }
+        this.lastHitTaken = Date.now();
     }
 
     isDead() {
         return this.energy <= 0;
     }
 
+    /**
+     * Checks if the object is currently in a hurt state.
+     * @returns {boolean} True if the object is hurt, false otherwise.
+     */
     isHurt() {
         let timepassed = Date.now() - this.lastHitTaken;
         timepassed = timepassed / 1000;
