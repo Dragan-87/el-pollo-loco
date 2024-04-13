@@ -59,4 +59,8 @@ class Endboss extends Chicken {
             }
         }, 300);
     }
+
+    bossAttack() {
+        
+    }
 }

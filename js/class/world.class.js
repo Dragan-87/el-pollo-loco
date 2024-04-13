@@ -258,7 +258,6 @@ class World {
     throwingObjectHitEnemy(throwingObject) {
         setInterval(() => {
             this.enemies.forEach(enemy => {
-                console.log(enemy.energy);
                 if (throwingObject.isColliding(enemy)) {
                     throwingObject.throwableObjectHitsEnemy(enemy);
                 }

@@ -23,6 +23,10 @@ class MoveableObject extends DrawableObject{
 
     }
 
+    jump() {
+        this.speedY = 15;
+    }
+
     moveRight() {
         this.objetctPositionX += this.speed;
         this.otherDirection = false;

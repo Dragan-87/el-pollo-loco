@@ -1,6 +1,7 @@
 const level1 = new Level(
     [
-        // new NormalChicken(),
+        new NormalChicken(),
+        new SmallChicken(),
         new Endboss('./img/4_enemie_boss_chicken/1_walk/G1.png')
     ],
     [

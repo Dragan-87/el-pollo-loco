@@ -81,7 +81,6 @@ class Character extends MoveableObject {
         this.offSet.right = 15;
         this.offSet.top = 10;
         this.offSet.bottom = 60;
-        
         this.acceleration = 1;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.JUMP_IMAGES);
@@ -97,10 +96,6 @@ class Character extends MoveableObject {
         setInterval(() => this.canCharacterMove(), 1000 / 60);
 
         setInterval(() => this.playCharaterAnimation(), 100);
-    }
-
-    jump() {
-        this.speedY = 15;
     }
 
     isWaitingShort() {
