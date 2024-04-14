@@ -24,7 +24,7 @@ class SmallChicken extends Chicken {
         this.offSet.bottom = 5;
         this.energy = 20;
         this.acceleration = 1;
-        this.objetctPositionY = 420 - this.height;
+        this.objetctPositionY = 480 - this.height - 60;
         this.defaultObjetctPositionY = 420 - this.height;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
@@ -34,8 +34,8 @@ class SmallChicken extends Chicken {
 
     chickenJump() {
         setInterval(() => {
-            if (!this.isAboveGround()) {
-                this.jump();
+            if (!this.isAboveGround() && !this.isDead()) {
+                    this.jump();
             }
         }, 2000);
     }

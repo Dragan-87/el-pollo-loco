@@ -73,15 +73,16 @@ class Character extends MoveableObject {
 
     constructor() {
         super("img/2_character_pepe/1_idle/idle/I-1.png");
-        this.objetctPositionY = 480 - 210;
+        this.objetctPositionY = 480 - this.height - 50;
         this.objetctPositionX = 10;
         this.speed = 5;
+        this.speedY = 20;
         this.energy = 100;
         this.offSet.left = 10;
         this.offSet.right = 15;
         this.offSet.top = 10;
         this.offSet.bottom = 60;
-        this.acceleration = 1;
+        this.acceleration = 2;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.JUMP_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
@@ -114,6 +115,12 @@ class Character extends MoveableObject {
 
     isWaitingLong() {
         return (this.currentTime >= this.waitingTime + 5 * 1000)
+    }
+
+    isJumpingOnHead(obj) {
+        return this.objetctPositionY + this.height - this.offSet.top <= obj.objetctPositionY + obj.height &&
+            this.objetctPositionY + this.height - this.offSet.bottom < obj.objetctPositionY + obj.height - obj.offSet.bottom &&
+            this.objetctPositionX + this.width - this.offSet.left > obj.objetctPositionX + obj.width -obj.offSet.right
     }
 
     canCharacterMove() {
@@ -202,5 +209,12 @@ class Character extends MoveableObject {
         }
     }
 
+    jumpNormalChickenOnHead(obj) {
+        return this.isJumpingOnHead(obj) && obj instanceof NormalChicken && obj.energy > 0
+    }
+
+    jumpSmallChickenOnHead(obj) {
+        return this.isJumpingOnHead(obj) && obj instanceof SmallChicken && obj.energy > 0
+    }
 
 }

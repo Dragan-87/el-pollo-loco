@@ -109,8 +109,14 @@ class MoveableObject extends DrawableObject{
         return (this.objetctPositionX + this.width) > (obj.objetctPositionX + obj.offSet.left) &&
             (this.objetctPositionY + this.height) > (obj.objetctPositionY + obj.offSet.top) &&
             (this.objetctPositionX + this.offSet.left) < (obj.objetctPositionX + obj.width - obj.offSet.right) &&
-            (this.objetctPositionY + this.offSet.top) < (obj.objetctPositionY + obj.height - obj.offSet.bottom);
+            (this.objetctPositionY + this.offSet.bottom) < (obj.objetctPositionY + obj.height - obj.offSet.top);
     }
+
+    // isJumpingOnHead(obj) {
+    //     return this.objetctPositionY + this.height - this.offSet.top> obj.objetctPositionY + obj.offSet.bottom
+    // }
+
+
 
     /**
      * Reduces the energy of the object by the specified amount.

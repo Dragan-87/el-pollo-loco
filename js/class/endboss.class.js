@@ -36,12 +36,13 @@ class Endboss extends Chicken {
 
     constructor(img) {
         super(img, 720);
-        this.objetctPositionX = 720 - this.width;
-        this.objetctPositionY = 420 - this.height;
-        this.width = 100;
+        this.objetctPositionX = 720*2 - this.width;
+        this.objetctPositionY = this.height
+        this.height = 300;
+        this.width = 150;
         this.dealDamage = 40;
         this.offSet.top = 10;
-        this.offSet.bottom = 30;
+        this.offSet.bottom = 50;
         this.energy = 100;
         this.loadImages(this.ANGRY_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
@@ -57,10 +58,10 @@ class Endboss extends Chicken {
                 this.dealDamage = 0;
                 this.die();
             }
-        }, 300);
+        }, 200);
     }
 
     bossAttack() {
-        
+
     }
 }

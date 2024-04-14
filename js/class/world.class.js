@@ -49,6 +49,7 @@ class World {
      */
     run() {
         setInterval(() => {
+            this.checkJumpOnHead();
             this.checkCollision();
             this.checkCollection(this.coin);
             this.checkCollection(this.salsaBottles);
@@ -74,6 +75,21 @@ class World {
             }
         });
     }
+
+    checkJumpOnHead() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.jumpNormalChickenOnHead(enemy)) {
+                enemy.dealDamage = 0;
+                enemy.energy = 0;
+                this.character.speedY = 20;
+            } else if (this.character.jumpSmallChickenOnHead(enemy)) {
+                enemy.dealDamage = 0;
+                enemy.energy = 0;
+            }
+        });
+    }
+
+
 
     /**
      * Checks if the character is colliding with any collectables and collects them if so.
@@ -141,7 +157,7 @@ class World {
             this.normalImage(mvO);
         }
         // this.drawColision(mvO);
-        this.drawColisionOffSet(mvO);
+        // this.drawColisionOffSet(mvO);
     }
 
     /**
@@ -149,7 +165,7 @@ class World {
      * @param {MovableObject} mvO - The movable object to draw the collision rectangle for.
      */
     drawColision(mvO) {
-        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject || mvO instanceof CollectableItem) {
+        if (mvO instanceof Character || mvO instanceof Chicken || mvO instanceof Endboss || mvO instanceof ThrowableObject) {
             this.ctx.beginPath();
             this.ctx.lineWidth = '5';
             this.ctx.strokeStyle = 'blue';
@@ -231,7 +247,7 @@ class World {
         const numSets = 3;
         const coinsPerSet = 5;
         const spacingX = 50;
-        const spacingY = 40;
+        const spacingY = 30;
         for (let set = 0; set < numSets; set++) {
             for (let i = 0; i < coinsPerSet; i++) {
                 let coin = new Coin(x, y);
@@ -244,6 +260,10 @@ class World {
         }
     }
 
+    /**
+     * Collects coins and updates the character's coin count.
+     * @param {Object} obj - The coin object to be collected.
+     */
     colletCoins(obj) {
         this.character.coins += 20;
         this.coinBar.statusBarPercentage(this.coinBar, this.character.coins);

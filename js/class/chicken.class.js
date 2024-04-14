@@ -8,7 +8,7 @@ class Chicken extends MoveableObject {
 
     constructor(objetctPositionX, objetctPositionY, img) {
         super(objetctPositionX, objetctPositionY, img);
-        this.objetctPositionY = 420 - this.height;
+        this.objetctPositionY = 480 - this.height;
         this.animate();
     }
 
