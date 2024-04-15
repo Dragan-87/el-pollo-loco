@@ -8,6 +8,7 @@ class Level {
     coin = [];
     clouds = [];
     enemies = [];
+    bottles = [];
 
     constructor(worldBackgroundLayerOne, air, gameOverBackground) {
         this.worldBackgroundLayerOne = worldBackgroundLayerOne;
@@ -16,6 +17,7 @@ class Level {
         this.coinFactory();
         this.cloudFactory();
         this.chickenFactory();
+        this.bottleFactory();
     }
 
     /**
@@ -72,4 +74,14 @@ class Level {
         }
     }
 
+    bottleFactory() {
+        let x = 700;
+        const numBottles = 10;
+        const spacingX = Math.floor(Math.random() * 420) + 100;
+        for (let i = 0; i < numBottles; i++) {
+            let bottle = new Bottle(x);
+            this.bottles.push(bottle);
+            x = spacingX * i;
+        }
+    }
 }

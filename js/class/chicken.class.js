@@ -1,6 +1,5 @@
 class Chicken extends MoveableObject {
     isSpliceable = false;
-    deadChicken = false;
     WALK_IMAGES = []
     DEAD_IMAGES = []
     ANGRY_IMAGES = []

@@ -10,13 +10,14 @@ class World {
     canves;
     ctx;
     keyboard;
+    salsaBottle = new Bottle(150);
     camera_x = 0;
     healthBar = new Healthbar();
     salsabar = new Salsabar();
     coinBar = new Coinbar();
     throwableObjects = [];
-    salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400), new Bottle(500)];
-    backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
+    salsaBottles = level1.bottles;
+    // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
     /**
@@ -26,7 +27,7 @@ class World {
      * @param {Keyboard} keyboard - The keyboard object.
      */
     constructor(canves, keyboard) {
-        this.backgroundMusic.play();
+        // this.backgroundMusic.play();
         this.canves = canves;
         this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');
@@ -100,6 +101,7 @@ class World {
                 } else if (collectable instanceof Bottle && this.character.bottles < 100) {
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
+                    this.salsaBottle.getBottleSound.play();
                     this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
 
                 }
