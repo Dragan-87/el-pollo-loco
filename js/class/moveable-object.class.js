@@ -83,22 +83,7 @@ class MoveableObject extends DrawableObject{
         } else {
             return this.objetctPositionY < this.defaultObjetctPositionY;d
         }
-
     }
-
-    // isColliding(obj) {
-    //     return (this.objetctPositionX + this.width) >= obj.objetctPositionX && this.objetctPositionX <= (obj.objetctPositionX + obj.width) &&
-    //         (this.objetctPositionY + this.offSetY + this.height) >= obj.objetctPositionY &&
-    //         (this.objetctPositionY + this.offSetY) <= (obj.objetctPositionY + obj.height) &&
-    //         obj.onCollisionCourse;
-    // }
-
-    // isColliding(obj) {
-    //     return this.objetctPositionX + this.width > obj.objetctPositionX &&
-    //         this.objetctPositionY + this.height > obj.objetctPositionY &&
-    //         this.objetctPositionX < obj.objetctPositionX &&
-    //         this.objetctPositionY < obj.objetctPositionY + obj.height;
-    // }
 
     /**
      * Checks if the current object is colliding with another object.
@@ -144,10 +129,22 @@ class MoveableObject extends DrawableObject{
         return timepassed < 1;
     }
 
+    /**
+     * Sets the percentage value of a status bar for a given object.
+     *
+     * @param {Object} obj - The object for which the status bar percentage needs to be set.
+     * @param {number} statusbarValue - The percentage value to set for the status bar.
+     * @returns {void}
+     */
     statusBarPercentage(obj, statusbarValue) {
         obj.setPercentage(statusbarValue, obj);
     }
 
+    /**
+     * Checks if the current object is jumping on the head of another object.
+     * @param {Object} obj - The object to check for collision with.
+     * @returns {boolean} - Returns true if the current object is colliding with the given object, is not spliceable, and is above the ground; otherwise, returns false.
+     */
     isJumpingOnHead(obj) {
         return this.isColliding(obj) && !obj.isSpliceable && this.isAboveGround()
     }

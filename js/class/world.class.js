@@ -16,6 +16,7 @@ class World {
     coinBar = new Coinbar();
     throwableObjects = [];
     salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400), new Bottle(500)];
+    backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
     /**
@@ -25,6 +26,7 @@ class World {
      * @param {Keyboard} keyboard - The keyboard object.
      */
     constructor(canves, keyboard) {
+        this.backgroundMusic.play();
         this.canves = canves;
         this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');
@@ -32,6 +34,7 @@ class World {
         this.setWorld()
         this.run();
         this.deleteDeadEnemy();
+
     }
 
     /**
@@ -76,16 +79,13 @@ class World {
 
     checkJumpOnHead() {
         this.enemies.forEach((enemy) => {
-            if (this.character.isJumpingOnHead(enemy) && enemy.energy < 100) {
-                console.log('jumped on head');
+            if (this.character.isJumpingOnHead(enemy) && !(enemy instanceof Endboss)) {
                     enemy.energy -= 20;
                     this.character.jump();
                     this.character.jumpingSound.play();
             }
         });
     }
-
-
 
     /**
      * Checks if the character is colliding with any collectables and collects them if so.
@@ -96,6 +96,7 @@ class World {
             if (this.character.isColliding(collectable)) {
                 if (collectable instanceof Coin && this.character.coins < 100) {
                     this.colletCoins(collectable);
+                    collectable.coinSound.play();
                 } else if (collectable instanceof Bottle && this.character.bottles < 100) {
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);

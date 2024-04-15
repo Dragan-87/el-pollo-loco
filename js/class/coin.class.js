@@ -2,6 +2,7 @@ class Coin extends CollectableItem {
     heigth = 25;
     width = 100;
     objetctPositionY = 480 - 150 - 60;
+    coinSound = new Audio("./audio/coin/coin-sound.mp3");
 
     COIN_IMAGES = [
         "img/8_coin/coin_1.png",

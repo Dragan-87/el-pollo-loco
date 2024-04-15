@@ -32,11 +32,15 @@ class SmallChicken extends Chicken {
         this.chickenJump();
     }
 
+    /**
+     * Makes the chicken jump at random intervals if it is not above the ground and not dead.
+     */
     chickenJump() {
+        let intervalTimer = Math.floor(Math.random() * 3000) + 1000;
         setInterval(() => {
             if (!this.isAboveGround() && !this.isDead()) {
                     this.jump();
             }
-        }, 2000);
+        }, intervalTimer);
     }
 }
