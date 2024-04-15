@@ -1,5 +1,4 @@
 class Level {
-    enemies;
     clouds;
     worldBackgroundLayerOne;
     air;
@@ -8,14 +7,15 @@ class Level {
     coins;
     coin = [];
     clouds = [];
+    enemies = [];
 
-    constructor(enemies, worldBackgroundLayerOne, air, gameOverBackground) {
-        this.enemies = enemies;
+    constructor(worldBackgroundLayerOne, air, gameOverBackground) {
         this.worldBackgroundLayerOne = worldBackgroundLayerOne;
         this.air = air;
         this.gameOverBackground = gameOverBackground;
         this.coinFactory();
         this.cloudFactory();
+        this.chickenFactory();
     }
 
     /**
@@ -56,5 +56,20 @@ class Level {
         }
     }
 
-    
+    /**
+     * Generates NormalChicken enemies and adds them to the enemies array.
+     */
+    chickenFactory() {
+        const numChickens = 5;
+        for (let i = 0; i < numChickens; i++) {
+            let chicken = new NormalChicken();
+            let smallChicken = new SmallChicken();
+            this.enemies.push(chicken);
+            this.enemies.push(smallChicken);
+            if (i == numChickens - 1) {
+                this.enemies.push(new Endboss('./img/4_enemie_boss_chicken/1_walk/G1.png'))
+            }
+        }
+    }
+
 }

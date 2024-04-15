@@ -32,12 +32,11 @@ class Chicken extends MoveableObject {
 
     }
 
-
     die() {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);
         this.playAnimation(this.DEAD_IMAGES);
-
+        this.isSpliceable = true;
     }
 
 

@@ -149,6 +149,6 @@ class MoveableObject extends DrawableObject{
     }
 
     isJumpingOnHead(obj) {
-        return this.isColliding(obj) && !obj.isSpliceable && this.isAboveGround();
+        return this.isColliding(obj) && !obj.isSpliceable && this.isAboveGround()
     }
 }

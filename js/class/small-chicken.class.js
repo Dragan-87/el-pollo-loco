@@ -11,7 +11,7 @@ class SmallChicken extends Chicken {
 
 
     constructor() {
-        super("img/3_enemies_chicken/chicken_small/1_walk/1_w.png", 200 + Math.random() * 500);
+        super("img/3_enemies_chicken/chicken_small/1_walk/1_w.png", 200 + Math.random() * (500*3));
         this.speed = 1;
         this.health = 1;
         this.height = 40;

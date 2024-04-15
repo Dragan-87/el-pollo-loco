@@ -76,11 +76,11 @@ class World {
 
     checkJumpOnHead() {
         this.enemies.forEach((enemy) => {
-            if (this.character.isJumpingOnHead(enemy)) {
-                enemy.energy -= 20;
-                enemy.isSpliceable = true;
-                this.character.jump();
-                this.character.jumpingSound.play();
+            if (this.character.isJumpingOnHead(enemy) && enemy.energy < 100) {
+                console.log('jumped on head');
+                    enemy.energy -= 20;
+                    this.character.jump();
+                    this.character.jumpingSound.play();
             }
         });
     }
