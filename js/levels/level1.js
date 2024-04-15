@@ -5,11 +5,6 @@ const level1 = new Level(
         new Endboss('./img/4_enemie_boss_chicken/1_walk/G1.png')
     ],
     [
-        new Cloud('./img/5_background/layers/4_clouds/1.png', 0),
-        new Cloud('./img/5_background/layers/4_clouds/1.png', 720),
-        new Cloud('./img/5_background/layers/4_clouds/1.png', 1440),
-    ],
-    [
         new BackgroundObject('./img/5_background/layers/3_third_layer/1.png', 0),
         new BackgroundObject('./img/5_background/layers/2_second_layer/1.png', 0),
         new BackgroundObject('./img/5_background/layers/1_first_layer/1.png', 0),

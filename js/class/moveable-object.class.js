@@ -112,24 +112,8 @@ class MoveableObject extends DrawableObject{
             (this.objetctPositionY + this.offSet.bottom) < (obj.objetctPositionY + obj.height - obj.offSet.top);
     }
 
-    // isJumpingOnHead(obj) {
-    //     return this.objetctPositionY + this.height - this.offSet.top> obj.objetctPositionY + obj.offSet.bottom
-    // }
-
-
-
-    /**
-     * Reduces the energy of the object by the specified amount.
-     * If the energy reaches 0 or below, it is set to 0.
-     * Updates the timestamp of the last hit taken.
-     * @param {number} dmg - The amount of damage to be inflicted.
-     */
-    hit(dmg) {
-        this.energy -= dmg;
-        if (this.energy <= 0) {
-            this.energy = 0;
-        }
-        this.lastHitTaken = Date.now();
+    isJumpingOnHead(obj) {
+        return this.objetctPositionY + this.height - this.offSet.top> obj.objetctPositionY + obj.offSet.bottom
     }
 
     isDead() {
@@ -137,11 +121,25 @@ class MoveableObject extends DrawableObject{
     }
 
     /**
+ * Reduces the energy of the object by the specified amount.
+ * If the energy reaches 0 or below, it is set to 0.
+ * Updates the timestamp of the last hit taken.
+ * @param {number} dmg - The amount of damage to be inflicted.
+ */
+    hit(dmg) {
+        this.energy -= dmg;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        }
+        this.lastHitTaken = new Date().getTime();
+    }
+
+    /**
      * Checks if the object is currently in a hurt state.
      * @returns {boolean} True if the object is hurt, false otherwise.
      */
     isHurt() {
-        let timepassed = Date.now() - this.lastHitTaken;
+        let timepassed = new Date().getTime() - this.lastHitTaken;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
@@ -150,4 +148,7 @@ class MoveableObject extends DrawableObject{
         obj.setPercentage(statusbarValue, obj);
     }
 
+    isJumpingOnHead(obj) {
+        return this.isColliding(obj) && !obj.isSpliceable && this.isAboveGround();
+    }
 }

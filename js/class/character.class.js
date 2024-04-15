@@ -4,6 +4,7 @@ class Character extends MoveableObject {
     waitingTime;
     coins = 0;
     bottles = 0;
+    characterKilledEnemy = false;
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -104,7 +105,7 @@ class Character extends MoveableObject {
     }
 
     playWalkingSound() {
-        if(!this.isAboveGround()){
+        if (!this.isAboveGround()) {
             this.walkingSound.play();
         }
     }
@@ -117,11 +118,11 @@ class Character extends MoveableObject {
         return (this.currentTime >= this.waitingTime + 5 * 1000)
     }
 
-    isJumpingOnHead(obj) {
-        return this.objetctPositionY + this.height - this.offSet.top <= obj.objetctPositionY + obj.height &&
-            this.objetctPositionY + this.height - this.offSet.bottom < obj.objetctPositionY + obj.height - obj.offSet.bottom &&
-            this.objetctPositionX + this.width - this.offSet.left > obj.objetctPositionX + obj.width -obj.offSet.right
-    }
+    // isJumpingOnHead(obj) {
+    //     return this.objetctPositionY + this.height - this.offSet.top <= obj.objetctPositionY + obj.height &&
+    //         this.objetctPositionY + this.height - this.offSet.bottom < obj.objetctPositionY + obj.height - obj.offSet.bottom &&
+    //         this.objetctPositionX + this.width - this.offSet.left > obj.objetctPositionX + obj.width -obj.offSet.right
+    // }
 
     canCharacterMove() {
         this.walkingSound.pause();
@@ -147,10 +148,9 @@ class Character extends MoveableObject {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
             return;
-        } else if (this.isHurt()) {
+        } else if (this.isHurt() && !this.characterKilledEnemy) {
             this.playAnimation(this.HURT_IMAGES);
             this.getHitSound.play();
-
             return;
         }
         if (this.isAboveGround()) {
@@ -207,14 +207,6 @@ class Character extends MoveableObject {
         if (this.isKeyPushed()) {
             this.resetWatingTime();
         }
-    }
-
-    jumpNormalChickenOnHead(obj) {
-        return this.isJumpingOnHead(obj) && obj instanceof NormalChicken && obj.energy > 0
-    }
-
-    jumpSmallChickenOnHead(obj) {
-        return this.isJumpingOnHead(obj) && obj instanceof SmallChicken && obj.energy > 0
     }
 
 }

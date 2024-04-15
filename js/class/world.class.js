@@ -1,7 +1,8 @@
 class World {
     character = new Character("./img/2_character_pepe/2_walk/W-21.png");
     level = level1;
-    enemies = level1.enemies;
+    enemies = level1.enemies
+    coin = level1.coin;
     clouds = level1.clouds;
     worldBackgroundLayerOne = level1.worldBackgroundLayerOne;
     air = level1.air;
@@ -14,8 +15,6 @@ class World {
     salsabar = new Salsabar();
     coinBar = new Coinbar();
     throwableObjects = [];
-
-    coin = [];
     salsaBottles = [new Bottle(100), new Bottle(200), new Bottle(300), new Bottle(400), new Bottle(500)];
 
 
@@ -32,7 +31,6 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
-        this.coinFactory();
         this.deleteDeadEnemy();
     }
 
@@ -66,7 +64,7 @@ class World {
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy > 0) {
-                this.character.hit(enemy.dealDamage,);
+                this.character.hit(enemy.dealDamage);
                 this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 if (this.character.energy <= 0) {
                     this.character.energy = 0;
@@ -77,14 +75,12 @@ class World {
     }
 
     checkJumpOnHead() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.jumpNormalChickenOnHead(enemy)) {
-                enemy.dealDamage = 0;
-                enemy.energy = 0;
-                this.character.speedY = 20;
-            } else if (this.character.jumpSmallChickenOnHead(enemy)) {
-                enemy.dealDamage = 0;
-                enemy.energy = 0;
+        this.enemies.forEach((enemy) => {
+            if (this.character.isJumpingOnHead(enemy)) {
+                enemy.energy -= 20;
+                enemy.isSpliceable = true;
+                this.character.jump();
+                this.character.jumpingSound.play();
             }
         });
     }
@@ -239,28 +235,6 @@ class World {
     }
 
     /**
-     * Generates coins in the game world.
-     */
-    coinFactory() {
-        let x = 50;
-        let y = 280;
-        const numSets = 3;
-        const coinsPerSet = 5;
-        const spacingX = 50;
-        const spacingY = 30;
-        for (let set = 0; set < numSets; set++) {
-            for (let i = 0; i < coinsPerSet; i++) {
-                let coin = new Coin(x, y);
-                this.coin.push(coin);
-                x += spacingX;
-                y -= Math.floor(Math.random() * spacingY) + 1;
-            }
-            x += spacingX * (coinsPerSet + Math.floor(Math.random() * 3));
-            y = 280;
-        }
-    }
-
-    /**
      * Collects coins and updates the character's coin count.
      * @param {Object} obj - The coin object to be collected.
      */
@@ -295,6 +269,6 @@ class World {
                     this.enemies.splice(this.enemies.indexOf(enemy), 1);
                 }
             })
-        }, 100);
+        }, 1000);
     }
 }

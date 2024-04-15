@@ -1,5 +1,5 @@
 class Coin extends CollectableItem {
-    heigth = 100;
+    heigth = 25;
     width = 100;
     objetctPositionY = 480 - 150 - 60;
 
