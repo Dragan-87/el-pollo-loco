@@ -17,7 +17,7 @@ class World {
     coinBar = new Coinbar();
     throwableObjects = [];
     salsaBottles = level1.bottles;
-    backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
+    // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
     /**
@@ -27,8 +27,8 @@ class World {
      * @param {Keyboard} keyboard - The keyboard object.
      */
     constructor(canves, keyboard) {
-        this.backgroundMusic.volume = 0.1;
-        this.backgroundMusic.play();
+        // this.backgroundMusic.volume = 0.1;
+        // this.backgroundMusic.play();
         this.canves = canves;
         this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');

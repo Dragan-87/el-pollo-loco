@@ -54,7 +54,6 @@ class Level {
             let cloud = new Cloud(`./img/5_background/layers/4_clouds/${random}.png`, x);
             this.clouds.push(cloud);
             x = spacingX * i;
-            console.log(x);
         }
     }
 

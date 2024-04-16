@@ -68,7 +68,7 @@ class Character extends MoveableObject {
 
     getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
     jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
-    sleepSound = new Audio(); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
+    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3"); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
     walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
     constructor() {
@@ -175,9 +175,6 @@ class Character extends MoveableObject {
         this.sleepSound.pause();
     }
 
-    playSleepSound() {
-        this.sleepSound.play();
-    }
 
     /**
      * Plays the idle animation for the Short character.
@@ -199,7 +196,7 @@ class Character extends MoveableObject {
         }
         if (this.isWaitingLong()) {
             this.playAnimation(this.LONG_IDLE_IMAGES);
-            this.playSleepSound();
+            this.sleepSound.play();
         }
         if (this.isKeyPushed()) {
             this.resetWatingTime();
