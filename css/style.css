@@ -2,16 +2,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Akatab", sans-serif;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-
-
 }
 
-canvas {
-    background-color: black;
+.intro-img {
+    width: 720px;
+    height: 480px;
+    z-index: 1;
+}
+
+.dnone {
+    display: none;
 }
 
 .container {
@@ -19,8 +24,48 @@ canvas {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../img/game_background_theme/desert-5058612_1280.jpg");
+    background-image: url("../img/game_background_theme/bg_el_pollo_locco_1.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: black;
+}
+
+.play-button {
+    position: absolute;
+    top: 30px;
+    left: 40%;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 800;
+    background-color: #FFDA00;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.play-button::before {
+    width: 0;
+    height: 0;
+    background-color: #FFB700;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid black;
+}
+
+.start-container {
+    position: relative;
 }

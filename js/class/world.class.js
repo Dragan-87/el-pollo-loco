@@ -19,6 +19,7 @@ class World {
     salsaBottles = level1.bottles;
     endbossHealthbar = new EndbossHealthbar();
     isBossFightStarting = false;
+
     // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
@@ -117,8 +118,6 @@ class World {
      * Draws the game world on the canvas.
      */
     draw() {
-        canves.height = 480;
-        canves.width = 720;
         this.ctx.clearRect(0, 0, this.canves.width, this.canves.height);
         this.ctx.translate(this.camera_x, 0);
         requestAnimationFrame(() => this.draw());

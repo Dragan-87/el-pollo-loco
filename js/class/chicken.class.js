@@ -33,7 +33,16 @@ class Chicken extends MoveableObject {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);
         this.playAnimation(this.DEAD_IMAGES);
-        this.isSpliceable = true;
+        if(this instanceof Endboss) {
+            setTimeout(() => {
+                this.isSpliceable = true;
+                setTimeout(() => {
+                    window.location.href = "./end-screen.html";
+                }, 500);
+            }, 1000);
+        } else {
+                this.isSpliceable = true;
+        }
     }
 
 
