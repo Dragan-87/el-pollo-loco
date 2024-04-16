@@ -62,7 +62,7 @@ class Level {
      * Generates NormalChicken enemies and adds them to the enemies array.
      */
     chickenFactory() {
-        const numChickens = 5;
+        const numChickens = 3;
         for (let i = 0; i < numChickens; i++) {
             let chicken = new NormalChicken();
             let smallChicken = new SmallChicken();

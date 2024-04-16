@@ -6,7 +6,7 @@ class MoveableObject extends DrawableObject{
     acceleration = 1;
     dealDamage;
     energy;
-    lastHitTaken;
+    lastHitTaken = 0;
 
     DEAD_IMAGES = [];
 
@@ -106,17 +106,20 @@ class MoveableObject extends DrawableObject{
     }
 
     /**
- * Reduces the energy of the object by the specified amount.
- * If the energy reaches 0 or below, it is set to 0.
- * Updates the timestamp of the last hit taken.
- * @param {number} dmg - The amount of damage to be inflicted.
- */
+     * Reduces the energy of the object by the specified amount.
+     * If the energy reaches 0 or below, it is set to 0.
+     * Updates the timestamp of the last hit taken.
+     * @param {number} dmg - The amount of damage to be inflicted.
+     */
     hit(dmg) {
-        this.energy -= dmg;
-        if (this.energy <= 0) {
-            this.energy = 0;
+        if (!this.isHurt() && (this instanceof Character)){
+            this.energy -= dmg;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHitTaken = new Date().getTime();
+            }
         }
-        this.lastHitTaken = new Date().getTime();
     }
 
     /**
@@ -126,6 +129,7 @@ class MoveableObject extends DrawableObject{
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHitTaken;
         timepassed = timepassed / 1000;
+        console.log(timepassed);
         return timepassed < 1;
     }
 

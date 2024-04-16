@@ -6,6 +6,10 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-image: url("./img/game_background_theme/desert-5058612_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 canvas {

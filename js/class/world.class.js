@@ -17,7 +17,7 @@ class World {
     coinBar = new Coinbar();
     throwableObjects = [];
     salsaBottles = level1.bottles;
-    // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
+    backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
     /**
@@ -27,7 +27,8 @@ class World {
      * @param {Keyboard} keyboard - The keyboard object.
      */
     constructor(canves, keyboard) {
-        // this.backgroundMusic.play();
+        this.backgroundMusic.volume = 0.1;
+        this.backgroundMusic.play();
         this.canves = canves;
         this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');
@@ -68,8 +69,8 @@ class World {
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy > 0) {
-                this.character.hit(enemy.dealDamage);
-                this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
+                    this.character.hit(enemy.dealDamage);
+                    this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 if (this.character.energy <= 0) {
                     this.character.energy = 0;
                     this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
@@ -97,16 +98,15 @@ class World {
             if (this.character.isColliding(collectable)) {
                 if (collectable instanceof Coin && this.character.coins < 100) {
                     this.colletCoins(collectable);
+                    collectable.coinSound.volume = 0.3;
                     collectable.coinSound.play();
                 } else if (collectable instanceof Bottle && this.character.bottles < 100) {
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
                     this.salsaBottle.getBottleSound.play();
                     this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
-
                 }
             }
-
         })
     }
 
@@ -155,8 +155,6 @@ class World {
         } else {
             this.normalImage(mvO);
         }
-        // this.drawColision(mvO);
-        // this.drawColisionOffSet(mvO);
     }
 
     /**

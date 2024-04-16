@@ -4,7 +4,6 @@ class Character extends MoveableObject {
     waitingTime;
     coins = 0;
     bottles = 0;
-    characterKilledEnemy = false;
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -148,15 +147,13 @@ class Character extends MoveableObject {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
             return;
-        } else if (this.isHurt() && !this.characterKilledEnemy) {
+        } else if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
             this.getHitSound.play();
             return;
-        }
-        if (this.isAboveGround()) {
+        }else if (this.isAboveGround()) {
             this.playAnimation(this.JUMP_IMAGES);
-        }
-        else if (this.isWalking()) {
+        } else if (this.isWalking()) {
             this.playAnimation(this.WALK_IMAGES);
         } else {
             this.img = this.imageCache[this.WALK_IMAGES[0]];
