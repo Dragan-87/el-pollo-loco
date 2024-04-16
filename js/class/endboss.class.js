@@ -41,6 +41,8 @@ class Endboss extends Chicken {
         "img/4_enemie_boss_chicken/3_attack/G20.png",
     ]
     isFightable = false;
+    charachterPositionX;
+
     constructor(img) {
         super(img, 720);
         this.objetctPositionX = 720*2 - this.width;
@@ -65,17 +67,23 @@ class Endboss extends Chicken {
                 this.die();
             } else if(this.isHurt()) {
                 this.playAnimation(this.HURT_IMAGES);
+            } else if (this.attack()) {
+                this.playAnimation(this.ATTACK_IMAGES);
             } else if (this.isFightable) {
                 this.speed = 5;
                 this.moveLeft();
                 this.playAnimation(this.WALK_IMAGES);
-            } else {
-
             }
         }, 200);
     }
 
-
+    attack() {
+        if(this.charachterPositionX > this.objetctPositionX - 60) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     startBossAttack() {
         this.isFightable = true;

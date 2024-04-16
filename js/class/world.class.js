@@ -283,9 +283,13 @@ class World {
     checkCharacterAndBossPosition() {
         this.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
+                enemy.charachterPositionX = this.character.objetctPositionX;
                 if (this.character.objetctPositionX > enemy.objetctPositionX - 600) {
                     this.endbossHealthbar.objetctPositionY = 10;
-                    enemy.startBossAttack();
+                    if (!this.isBossFightStarting){
+                        enemy.startBossAttack();
+                        this.isBossFightStarting = true;
+                    }
                 } else {
 
                 }
