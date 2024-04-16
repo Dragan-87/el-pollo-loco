@@ -49,7 +49,7 @@ class Endboss extends Chicken {
         this.objetctPositionY = this.height
         this.height = 300;
         this.width = 150;
-        this.dealDamage = 40;
+        this.dealDamage = 20;
         this.offSet.top = 10;
         this.offSet.bottom = 50;
         this.energy = 100;
@@ -78,7 +78,7 @@ class Endboss extends Chicken {
     }
 
     attack() {
-        if(this.charachterPositionX > this.objetctPositionX - 60) {
+        if(this.charachterPositionX > this.objetctPositionX - 70) {
             return true;
         } else {
             return false;
