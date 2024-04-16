@@ -83,6 +83,7 @@ class Character extends MoveableObject {
         this.offSet.top = 10;
         this.offSet.bottom = 60;
         this.acceleration = 2;
+        this.dealDamage = 20;
         this.loadImages(this.WALK_IMAGES);
         this.loadImages(this.JUMP_IMAGES);
         this.loadImages(this.DEAD_IMAGES);

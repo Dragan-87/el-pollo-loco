@@ -1,7 +1,6 @@
 class ThrowableObject extends MoveableObject {
     spiningBottle;
     brokenBottle;
-    damage = 30;
     hitIndicator = false;
 
     THROW_BOTTLE_IMAGES = [
@@ -32,6 +31,7 @@ class ThrowableObject extends MoveableObject {
         this.offSet.right = 10;
         this.offSet.top = 10;
         this.offSet.bottom = 10;
+        this.dealDamage = 20;
         this.throw()
         this.animate();
     }
@@ -50,11 +50,11 @@ class ThrowableObject extends MoveableObject {
 
     /**
      * Hits an enemy with the throwable object.
-     * @param {Array} enemies - The array of enemies to hit.
+     * @param {Enemy} enemy - The enemy to hit.
      */
-    throwableObjectHitsEnemy(enemies) {
+    throwableObjectHitsEnemy(enemy) {
         if (!this.hitIndicator) {
-            enemies.energy -= this.damage;
+            enemy.hit(this.dealDamage);
             this.hitIndicator = true;
         }
     }

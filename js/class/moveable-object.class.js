@@ -112,13 +112,10 @@ class MoveableObject extends DrawableObject{
      * @param {number} dmg - The amount of damage to be inflicted.
      */
     hit(dmg) {
-        if (!this.isHurt() && (this instanceof Character)){
-            this.energy -= dmg;
-            if (this.energy < 0) {
-                this.energy = 0;
-            } else {
-                this.lastHitTaken = new Date().getTime();
-            }
+        if (!(this instanceof Character)) {
+            this.moveableObjectTakeDamage(dmg);
+        }else if (!this.isHurt() && (this instanceof Character)){
+            this.moveableObjectTakeDamage(dmg);
         }
     }
 
@@ -130,6 +127,15 @@ class MoveableObject extends DrawableObject{
         let timepassed = new Date().getTime() - this.lastHitTaken;
         timepassed = timepassed / 1000;
         return timepassed < 1;
+    }
+
+    moveableObjectTakeDamage(dmg) {
+        this.energy -= dmg;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHitTaken = new Date().getTime();
+        }
     }
 
     /**

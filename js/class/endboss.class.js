@@ -1,5 +1,12 @@
 class Endboss extends Chicken {
 
+    WALK_IMAGES = [
+        "./img/4_enemie_boss_chicken/1_walk/G1.png",
+        "./img/4_enemie_boss_chicken/1_walk/G2.png",
+        "./img/4_enemie_boss_chicken/1_walk/G3.png",
+        "./img/4_enemie_boss_chicken/1_walk/G4.png",
+    ];
+
     ANGRY_IMAGES = [
         "./img/4_enemie_boss_chicken/2_alert/G5.png",
         "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -33,7 +40,7 @@ class Endboss extends Chicken {
         "img/4_enemie_boss_chicken/3_attack/G19.png",
         "img/4_enemie_boss_chicken/3_attack/G20.png",
     ]
-
+    isFightable = false;
     constructor(img) {
         super(img, 720);
         this.objetctPositionX = 720*2 - this.width;
@@ -48,20 +55,29 @@ class Endboss extends Chicken {
         this.loadImages(this.DEAD_IMAGES);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.ATTACK_IMAGES);
+        this.loadImages(this.WALK_IMAGES);
     }
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.ANGRY_IMAGES);
-
             if (this.isDead()) {
                 this.dealDamage = 0;
                 this.die();
+            } else if(this.isHurt()) {
+                this.playAnimation(this.HURT_IMAGES);
+            } else if (this.isFightable) {
+                this.speed = 5;
+                this.moveLeft();
+                this.playAnimation(this.WALK_IMAGES);
+            } else {
+
             }
         }, 200);
     }
 
-    bossAttack() {
 
+
+    startBossAttack() {
+        this.isFightable = true;
     }
 }

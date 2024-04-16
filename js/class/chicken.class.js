@@ -19,7 +19,6 @@ class Chicken extends MoveableObject {
         }, 1000 / 30);
 
         this.animationInterval = setInterval(() => {
-
             if (this.isDead()) {
                 this.dealDamage = 0;
                 this.die();
@@ -28,7 +27,6 @@ class Chicken extends MoveableObject {
                 }, 1000);
             }
         }, 50);
-
     }
 
     die() {

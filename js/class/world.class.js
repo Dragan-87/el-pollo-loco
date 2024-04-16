@@ -17,6 +17,8 @@ class World {
     coinBar = new Coinbar();
     throwableObjects = [];
     salsaBottles = level1.bottles;
+    endbossHealthbar = new EndbossHealthbar();
+    isBossFightStarting = false;
     // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
 
@@ -56,6 +58,7 @@ class World {
             this.checkCollision();
             this.checkCollection(this.coin);
             this.checkCollection(this.salsaBottles);
+            this.checkCharacterAndBossPosition();
         }, 200);
 
         setInterval(() => {
@@ -82,7 +85,7 @@ class World {
     checkJumpOnHead() {
         this.enemies.forEach((enemy) => {
             if (this.character.isJumpingOnHead(enemy) && !(enemy instanceof Endboss)) {
-                    enemy.energy -= 20;
+                    enemy.hit(this.character.dealDamage);
                     this.character.jump();
                     this.character.jumpingSound.play();
             }
@@ -127,6 +130,7 @@ class World {
         this.addToGameMap(this.healthBar);
         this.addToGameMap(this.salsabar);
         this.addToGameMap(this.coinBar);
+        this.addToGameMap(this.endbossHealthbar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
@@ -255,6 +259,9 @@ class World {
             this.enemies.forEach(enemy => {
                 if (throwingObject.isColliding(enemy)) {
                     throwingObject.throwableObjectHitsEnemy(enemy);
+                    if(enemy instanceof Endboss){
+                        this.endbossHealthbar.statusBarPercentage(this.endbossHealthbar, enemy.energy);
+                    }
                 }
             })
         }, 100);
@@ -272,4 +279,17 @@ class World {
             })
         }, 1000);
     }
+
+    checkCharacterAndBossPosition() {
+        this.enemies.forEach(enemy => {
+            if (enemy instanceof Endboss) {
+                if (this.character.objetctPositionX > enemy.objetctPositionX - 600) {
+                    this.endbossHealthbar.objetctPositionY = 10;
+                    enemy.startBossAttack();
+                } else {
+
+                }
+            }
+        })
+    };
 }
