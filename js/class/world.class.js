@@ -10,8 +10,9 @@ class World {
     canves;
     ctx;
     keyboard;
-    salsaBottle = new Bottle(150);
     camera_x = 0;
+    gameOverScreen = new EndScreen();
+    salsaBottle = new Bottle(150);
     healthBar = new Healthbar();
     salsabar = new Salsabar();
     coinBar = new Coinbar();
@@ -19,6 +20,9 @@ class World {
     salsaBottles = level1.bottles;
     endbossHealthbar = new EndbossHealthbar();
     isBossFightStarting = false;
+    runInterval1 = null;
+    runInterval2 = null;
+    enemiesInterval = null;
 
     // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
@@ -54,15 +58,16 @@ class World {
      * Executes the checkCollision and checkThrowObjects methods repeatedly at a fixed interval.
      */
     run() {
-        setInterval(() => {
+        this.runInterval1 = setInterval(() => {
             this.checkJumpOnHead();
             this.checkCollision();
             this.checkCollection(this.coin);
             this.checkCollection(this.salsaBottles);
             this.checkCharacterAndBossPosition();
+            this.gameOver();
         }, 200);
 
-        setInterval(() => {
+        this.runInterval2 = setInterval(() => {
             this.checkThrowObjects();
         }, 100);
     }
@@ -296,10 +301,4 @@ class World {
         })
     };
 
-    clearAllIntercals() {
-        clearInterval(this.moveInterval);
-        clearInterval(this.animationInterval);
-        clearInterval(this.throwInterval);
-        clearInterval(this.bossAttackInterval);
-    }
 }

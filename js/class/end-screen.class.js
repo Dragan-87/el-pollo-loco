@@ -7,7 +7,7 @@ class EndScreen extends DrawableObject {
     ];
 
     constructor() {
-        super();
+        super("img/9_intro_outro_screens/game_over/game over!.png", 0);
         this.loadImages(this.END_IMAGES);
         this.x = 0;
         this.y = 0;

@@ -1,5 +1,6 @@
 class Character extends MoveableObject {
     world;
+    deadFall = false;
     currentTime;
     waitingTime;
     coins = 0;
@@ -147,12 +148,16 @@ class Character extends MoveableObject {
     playCharaterAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
+            if(!this.deadFall){
+                this.deadFall = true;
+                this.jump();
+            }
             return;
         } else if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
             this.getHitSound.play();
             return;
-        }else if (this.isAboveGround()) {
+        }else if (this.isAboveGround() && !this.isDead()){
             this.playAnimation(this.JUMP_IMAGES);
         } else if (this.isWalking()) {
             this.playAnimation(this.WALK_IMAGES);
