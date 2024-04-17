@@ -37,7 +37,7 @@ class Chicken extends MoveableObject {
             setTimeout(() => {
                 this.isSpliceable = true;
                 setTimeout(() => {
-                    window.location.href = "./end-screen.html";
+                    showEndScreen();
                 }, 500);
             }, 1000);
         } else {

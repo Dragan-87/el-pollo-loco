@@ -15,11 +15,12 @@ body {
     z-index: 1;
 }
 
-.dnone {
+.d-none {
     display: none;
 }
 
 .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,6 +35,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 3px solid #FFDA00;
+
 }
 
 canvas {
@@ -68,4 +71,19 @@ canvas {
 
 .start-container {
     position: relative;
+}
+
+.start-game-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFDA00;
+    padding: 20px;
+    border-radius: 16px;
+    z-index: 2;
 }

@@ -73,6 +73,9 @@ class Level {
         }
     }
 
+    /**
+     * Creates multiple bottles and adds them to the `bottles` array.
+     */
     bottleFactory() {
         let x = 700;
         const numBottles = 10;

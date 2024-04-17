@@ -295,4 +295,11 @@ class World {
             }
         })
     };
+
+    clearAllIntercals() {
+        clearInterval(this.moveInterval);
+        clearInterval(this.animationInterval);
+        clearInterval(this.throwInterval);
+        clearInterval(this.bossAttackInterval);
+    }
 }

@@ -1,10 +1,10 @@
 let canves;
 let world;
 let keyboard = new Keyboard();
+let startScreen = docID("start-game-section");
 
 function init() {
-    canves = document.getElementById('canves');
-    world = new World(canves, keyboard);
+
 }
 
 addEventListener('keydown', (event) => {
@@ -64,6 +64,52 @@ addEventListener('keyup', (event) => {
     }
 });
 
-function startGame() {
-    window.location.href = "./index.html";
+function docID(id) {
+    return document.getElementById(id);
 }
+
+function startGame() {
+    canves = docID('canvas');
+    world = new World(canves, keyboard);
+    canves.classList.remove('d-none');
+    startScreen.classList.remove('start-game-section');
+    startScreen.classList.add('d-none');
+}
+
+function showEndScreen() {
+    window.location.reload();
+
+}
+
+/**
+ * checks the orientation
+ * @returns true if orientation is in landscape, false if not
+ */
+function checkOrientation() {
+    return (window.innerWidth > window.innerHeight);
+}
+
+// /**
+//  * eventlistener to tell the user to switch to landscape mode
+//  */
+// window.addEventListener("resize", function () {
+//     let orientationInfo = document.getElementById('landscape');
+//     if (checkOrientation()) {
+//         orientationInfo.classList.add('d-none');
+//     } else if (!checkOrientation() && window.innerWidth < 900) {
+//         orientationInfo.classList.remove('d-none');
+//     }
+// }, false);
+
+
+// /**
+//  * eventlistener to tell the user to switch to landscape mode
+//  */
+// window.addEventListener("load", function () {
+//     let orientationInfo = document.getElementById('landscape');
+//     if (checkOrientation()) {
+//         orientationInfo.classList.add('d-none');
+//     } else if (!checkOrientation() && window.innerWidth < 900) {
+//         orientationInfo.classList.remove('d-none');
+//     }
+// }, false);
