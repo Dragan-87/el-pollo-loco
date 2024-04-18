@@ -1,5 +1,5 @@
 let canves;
-let world;
+let world = false;
 let keyboard = new Keyboard();
 let startScreen = docID("start-game-section");
 
@@ -64,6 +64,14 @@ addEventListener('keyup', (event) => {
     }
 });
 
+// setInterval(() => {
+//     setTimeout(() => {
+//         gameOver()
+//         console.log("game over");
+//     }
+//     , 1000);
+// }, 200);
+
 function docID(id) {
     return document.getElementById(id);
 }
@@ -74,11 +82,11 @@ function startGame() {
     canves.classList.remove('d-none');
     startScreen.classList.remove('start-game-section');
     startScreen.classList.add('d-none');
+    docID('game-over').classList.add('d-none');
 }
 
 function showEndScreen() {
     window.location.reload();
-
 }
 
 /**
@@ -113,3 +121,17 @@ function checkOrientation() {
 //         orientationInfo.classList.remove('d-none');
 //     }
 // }, false);
+
+
+function clearAllIntervals() {
+    for (let i = 1; i < 1000; i++) window.clearInterval(i);
+}
+
+function showGameOverScreen() {
+    let gameOverScreen = docID('game-over');
+    gameOverScreen.classList.remove('d-none');
+}
+
+function restartGame() {
+    window.location.reload();
+}

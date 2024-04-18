@@ -20,9 +20,6 @@ class World {
     salsaBottles = level1.bottles;
     endbossHealthbar = new EndbossHealthbar();
     isBossFightStarting = false;
-    runInterval1 = null;
-    runInterval2 = null;
-    enemiesInterval = null;
 
     // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
 
@@ -42,7 +39,6 @@ class World {
         this.draw();
         this.setWorld()
         this.run();
-        this.deleteDeadEnemy();
 
     }
 
@@ -58,17 +54,21 @@ class World {
      * Executes the checkCollision and checkThrowObjects methods repeatedly at a fixed interval.
      */
     run() {
-        this.runInterval1 = setInterval(() => {
+        setInterval(() => {
             this.checkJumpOnHead();
             this.checkCollision();
             this.checkCollection(this.coin);
             this.checkCollection(this.salsaBottles);
-            this.checkCharacterAndBossPosition();
-            this.gameOver();
+            this.checkCharacterAndBossPosition()
+            if (this.character.isDead()) {
+                showGameOverScreen();
+                clearAllIntervals();
+            }
         }, 200);
 
-        this.runInterval2 = setInterval(() => {
+        setInterval(() => {
             this.checkThrowObjects();
+            this.deleteDeadEnemy();
         }, 100);
     }
 
@@ -78,8 +78,8 @@ class World {
     checkCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy > 0) {
-                    this.character.hit(enemy.dealDamage);
-                    this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
+                this.character.hit(enemy.dealDamage);
+                this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
                 if (this.character.energy <= 0) {
                     this.character.energy = 0;
                     this.healthBar.statusBarPercentage(this.healthBar, this.character.energy);
@@ -91,9 +91,9 @@ class World {
     checkJumpOnHead() {
         this.enemies.forEach((enemy) => {
             if (this.character.isJumpingOnHead(enemy) && !(enemy instanceof Endboss)) {
-                    enemy.hit(this.character.dealDamage);
-                    this.character.jump();
-                    this.character.jumpingSound.play();
+                enemy.hit(this.character.dealDamage);
+                this.character.jump();
+                this.character.jumpingSound.play();
             }
         });
     }
@@ -263,25 +263,24 @@ class World {
             this.enemies.forEach(enemy => {
                 if (throwingObject.isColliding(enemy)) {
                     throwingObject.throwableObjectHitsEnemy(enemy);
-                    if(enemy instanceof Endboss){
+                    if (enemy instanceof Endboss) {
                         this.endbossHealthbar.statusBarPercentage(this.endbossHealthbar, enemy.energy);
                     }
                 }
             })
         }, 100);
+
     }
 
     /**
      * Deletes dead enemies from the enemies array at regular intervals.
      */
     deleteDeadEnemy() {
-        setInterval(() => {
-            this.enemies.forEach(enemy => {
-                if (enemy.isSpliceable) {
-                    this.enemies.splice(this.enemies.indexOf(enemy), 1);
-                }
-            })
-        }, 1000);
+        this.enemies.forEach(enemy => {
+            if (enemy.isSpliceable) {
+                this.enemies.splice(this.enemies.indexOf(enemy), 1);
+            }
+        })
     }
 
     checkCharacterAndBossPosition() {
@@ -290,7 +289,7 @@ class World {
                 enemy.charachterPositionX = this.character.objetctPositionX;
                 if (this.character.objetctPositionX > enemy.objetctPositionX - 600) {
                     this.endbossHealthbar.objetctPositionY = 10;
-                    if (!this.isBossFightStarting){
+                    if (!this.isBossFightStarting) {
                         enemy.startBossAttack();
                         this.isBossFightStarting = true;
                     }
@@ -300,5 +299,11 @@ class World {
             }
         })
     };
+
+    gameOver() {
+        if (this.character.isDead()) {
+            clearAllIntervals();
+        }
+    }
 
 }

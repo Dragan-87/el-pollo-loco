@@ -25,7 +25,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../img/game_background_theme/bg_el_pollo_locco_1.png");
+    background-image: url(../img/game_background_theme/bg_el_pollo_locco_1.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -86,4 +86,14 @@ canvas {
     padding: 20px;
     border-radius: 16px;
     z-index: 2;
+}
+
+.game-over {
+    position: absolute;
+}
+
+.game-over-img {
+    width: 720px;
+    height: 480px;
+
 }
