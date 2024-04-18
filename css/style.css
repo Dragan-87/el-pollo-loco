@@ -11,10 +11,16 @@ body {
     background-size: cover;
     overflow: hidden;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+}
+
+canvas {
+    width: inherit;
+    height: inherit;
 }
 
 .pointer {
@@ -22,13 +28,9 @@ body {
 }
 
 .intro-img {
-    width: 720px;
-    height: 480px;
+    width: inherit;
+    height: inherit;
     z-index: 1;
-}
-
-.d-none {
-    display: none;
 }
 
 .container {
@@ -101,63 +103,67 @@ canvas {
 
 .buttons-mobile {
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 16px;
     width: inherit;
     height: inherit;
 }
 
 .buttons-mobile img {
-    position: absolute;
     cursor: pointer;
     width: 30px;
     height: 30px;
     z-index: 2;
 }
 
-#full-screen {
-    left: calc(100% - 30px);
+.controls {
+    display: flex;
+    gap: 24px;
+    padding: 16px;
 }
 
-#left-button {
-    top: calc(100% - 40px);
-    left: 10px;
+@media (max-width: 932px) {
+    .canvas-container,
+    .buttons-mobile,
+    .game-over-img,
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-over-img {
+        aspect-ratio: 1/2;
+    }
 }
 
-#right-button {
-    top: calc(100% - 40px);
-    left: 50px;
+@media (max-width: 748px) {
+    .canvas-container,
+    .buttons-mobile,
+    .game-over-img,
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-over-img {
+        aspect-ratio: 1/2;
+    }
 }
 
-#jump-button {
-    top: calc(100% - 40px);
-    left: calc(100% - 100px);
+.landscape {
+    position: absolute;
+    background-color: #FFDA00;
+    display: flex;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
-#throw-button {
-    width: 40px;
-    height: 40px;
-    top: calc(100% - 50px);
-    left: calc(100% - 50px);
-}
-
-/* .desktop {
+.d-none {
     display: none;
 }
 
-@media (max-width: 768px) {
-    .desktop {
-        display: unset;
-    }
-    .start-game-section
-    .canvas-container,
-    .buttons-mobile,
-    canvas {
-        height: 100%;
-        width: 100%;
-    }
-}
-
-@media (max-width: 1026px) {
-    #full-screen {
-        display: none;
-    }
-} */

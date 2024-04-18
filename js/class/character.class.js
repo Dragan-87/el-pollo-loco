@@ -148,7 +148,7 @@ class Character extends MoveableObject {
     playCharaterAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
-            if(!this.deadFall){
+            if (!this.deadFall) {
                 this.deadFall = true;
                 this.jump();
             }
@@ -158,7 +158,7 @@ class Character extends MoveableObject {
             this.playAnimation(this.HURT_IMAGES);
             this.getHitSound.play();
             return;
-        }else if (this.isAboveGround() && !this.isDead()){
+        } else if (this.isAboveGround() && !this.isDead()) {
             this.playAnimation(this.JUMP_IMAGES);
         } else if (this.isWalking()) {
             this.playAnimation(this.WALK_IMAGES);
@@ -202,11 +202,13 @@ class Character extends MoveableObject {
             this.playShortIdleAnimation();
         }
         if (this.isWaitingLong()) {
-            this.playAnimation(this.LONG_IDLE_IMAGES);
-            this.sleepSound.play();
-        }
-        if (this.isKeyPushed()) {
-            this.resetWatingTime();
+            if (this.isHurt()) {
+                this.playAnimation(this.LONG_IDLE_IMAGES);
+                this.sleepSound.play();
+            }
+            if (this.isKeyPushed()) {
+                this.resetWatingTime();
+            }
         }
     }
 

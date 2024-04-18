@@ -3,10 +3,6 @@ let world = false;
 let keyboard = new Keyboard();
 let startScreen = docID("start-game-section");
 
-function init() {
-
-}
-
 addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'ArrowRight':
@@ -52,13 +48,6 @@ addEventListener('keyup', (event) => {
     }
 });
 
-// setInterval(() => {
-//     setTimeout(() => {
-//         gameOver()
-//         console.log("game over");
-//     }
-//     , 1000);
-// }, 200);
 
 function docID(id) {
     return document.getElementById(id);
@@ -85,32 +74,6 @@ function showEndScreen() {
 function checkOrientation() {
     return (window.innerWidth > window.innerHeight);
 }
-
-// /**
-//  * eventlistener to tell the user to switch to landscape mode
-//  */
-// window.addEventListener("resize", function () {
-//     let orientationInfo = document.getElementById('landscape');
-//     if (checkOrientation()) {
-//         orientationInfo.classList.add('d-none');
-//     } else if (!checkOrientation() && window.innerWidth < 900) {
-//         orientationInfo.classList.remove('d-none');
-//     }
-// }, false);
-
-
-// /**
-//  * eventlistener to tell the user to switch to landscape mode
-//  */
-// window.addEventListener("load", function () {
-//     let orientationInfo = document.getElementById('landscape');
-//     if (checkOrientation()) {
-//         orientationInfo.classList.add('d-none');
-//     } else if (!checkOrientation() && window.innerWidth < 900) {
-//         orientationInfo.classList.remove('d-none');
-//     }
-// }, false);
-
 
 function clearAllIntervals() {
     for (let i = 1; i < 1000; i++) window.clearInterval(i);
@@ -168,3 +131,35 @@ function touchControlRightHand() {
         keyboard.THROW = false;
     });
 }
+
+/**
+ * checks the orientation
+ * @returns true if orientation is in landscape, false if not
+ */
+function checkOrientation() {
+    return (window.innerWidth > window.innerHeight);
+}
+
+/**
+ * eventlistener to tell the user to switch to landscape mode
+ */
+window.addEventListener("load", function () {
+    let orientationInfo = document.getElementById('landscape');
+    if (checkOrientation()) {
+        orientationInfo.classList.add('d-none');
+    } else if (!checkOrientation() && window.innerWidth < 900) {
+        orientationInfo.classList.remove('d-none');
+    }
+}, false);
+
+/**
+ * eventlistener to tell the user to switch to landscape mode
+ */
+window.addEventListener("resize", function () {
+    let orientationInfo = document.getElementById('landscape');
+    if (checkOrientation()  && window.innerWidth < 900 ) {
+        orientationInfo.classList.add('d-none');
+    } else if (!checkOrientation()) {
+        orientationInfo.classList.remove('d-none');
+    }
+}, false);
