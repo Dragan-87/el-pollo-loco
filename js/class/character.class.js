@@ -148,7 +148,6 @@ class Character extends MoveableObject {
     playCharaterAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
-            gameOver();
             if(!this.deadFall){
                 this.deadFall = true;
                 this.jump();

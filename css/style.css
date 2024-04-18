@@ -1,12 +1,24 @@
-* {
+body {
+    font-family: 'Halloween';
+    color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: url(../img/game_background_theme/bg_el_pollo_locco_1.png);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Akatab", sans-serif;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .intro-img {
@@ -22,21 +34,16 @@ body {
 .container {
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(../img/game_background_theme/bg_el_pollo_locco_1.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .canvas-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #FFDA00;
-
+    width: 720px;
+    height: 480px;
 }
 
 canvas {
@@ -69,31 +76,88 @@ canvas {
     border-left: 30px solid black;
 }
 
-.start-container {
-    position: relative;
-}
-
 .start-game-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    height: inherit;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFDA00;
-    padding: 20px;
-    border-radius: 16px;
     z-index: 2;
 }
 
 .game-over {
     position: absolute;
+    z-index: 3;
 }
 
 .game-over-img {
     width: 720px;
     height: 480px;
-
 }
+
+.buttons-mobile {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+}
+
+.buttons-mobile img {
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+}
+
+#full-screen {
+    left: calc(100% - 30px);
+}
+
+#left-button {
+    top: calc(100% - 40px);
+    left: 10px;
+}
+
+#right-button {
+    top: calc(100% - 40px);
+    left: 50px;
+}
+
+#jump-button {
+    top: calc(100% - 40px);
+    left: calc(100% - 100px);
+}
+
+#throw-button {
+    width: 40px;
+    height: 40px;
+    top: calc(100% - 50px);
+    left: calc(100% - 50px);
+}
+
+/* .desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop {
+        display: unset;
+    }
+    .start-game-section
+    .canvas-container,
+    .buttons-mobile,
+    canvas {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1026px) {
+    #full-screen {
+        display: none;
+    }
+} */

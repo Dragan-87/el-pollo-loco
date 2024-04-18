@@ -36,22 +36,35 @@
 </head>
 
 <body>
-    <div class="container dnon screen">
-        <div class="canvas-container">
+    <div class="container">
+        <div class="canvas-container" width="720" height="480" id="screen">
             <canvas class="d-none" id="canvas" width="720" height="480">
             </canvas>
+
             <div class="start-game-section" id="start-game-section">
-                <div class="start-container" id="start-container">
-                    <img class="intro-img" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
-                    <button class="play-button" onclick="startGame()">Start</button>
-                </div>
+                <img class="intro-img" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
+                <button class="play-button" onclick="startGame()">Start</button>
             </div>
+
             <div class="game-over d-none" id="game-over">
                 <div class="game-over-container">
-                    <img class="game-over-img" src="./img/9_intro_outro_screens/game_over/game over!.png" alt="Game Over">
+                    <img class="game-over-img" src="./img/9_intro_outro_screens/game_over/game over!.png"
+                        alt="Game Over">
                     <button class="play-button" onclick="restartGame()">Restart</button>
                 </div>
             </div>
+
+            <div class="buttons-mobile">
+                <div class="controls">
+                    <img class="pointer desktop" id="left-button" src="./img/icons/left.png" alt="">
+                    <img class="pointer desktop" id="right-button" src="./img/icons/right.png" alt="">
+                </div>
+                <div class="controls">
+                    <img class="pointer desktop" id="jump-button" src="./img/icons/jump.png" alt="">
+                    <img class="pointer desktop" id="throw-button" src="./img/icons/attack.png" alt="">
+                </div>
+            </div>
+            
         </div>
     </div>
 </body>

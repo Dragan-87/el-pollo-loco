@@ -9,27 +9,21 @@ function init() {
 
 addEventListener('keydown', (event) => {
     switch (event.key) {
-        case 'd':
         case 'ArrowRight':
-        case "D":
             keyboard.RIGHT = true;
             break;
         case ' ':
-        case 'w':
-        case "W":
         case 'ArrowUp':
             keyboard.JUMP = true;
             break;
         case 'ArrowDown':
             keyboard.DOWN = true;
             break;
-        case 'a':
-        case 'A':
         case 'ArrowLeft':
             keyboard.LEFT = true;
             break;
-        case 'q':
-        case 'Q':
+        case 'd':
+        case 'D':
             keyboard.THROW = true;
             break;
         default:
@@ -39,24 +33,18 @@ addEventListener('keydown', (event) => {
 
 addEventListener('keyup', (event) => {
     switch (event.key) {
-        case 'd':
-        case 'D':
         case 'ArrowRight':
             keyboard.RIGHT = false;
             break;
         case 'ArrowUp':
         case ' ':
-        case 'w':
-        case 'W':
             keyboard.JUMP = false;
             break;
         case 'ArrowLeft':
-        case 'a':
-        case 'A':
             keyboard.LEFT = false;
             break;
-        case 'q':
-        case 'Q':
+        case 'd':
+        case 'D':
             keyboard.THROW = false;
             break;
         default:
@@ -77,6 +65,7 @@ function docID(id) {
 }
 
 function startGame() {
+    console.log(window);
     canves = docID('canvas');
     world = new World(canves, keyboard);
     canves.classList.remove('d-none');
@@ -134,4 +123,48 @@ function showGameOverScreen() {
 
 function restartGame() {
     window.location.reload();
+}
+
+/**
+ * Sets up touch controls for the left hand.
+ */
+function touchControlLeftHand() {
+    document.getElementById('left-button').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('left-button').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('right-button').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('right-button').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+}
+
+/**
+ * Sets up touch controls for the right hand.
+ */
+function touchControlRightHand() {
+    document.getElementById('jump-button').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.JUMP = true;
+    });
+    document.getElementById('jump-button').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.JUMP = false;
+    });
+    document.getElementById('throw-button').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.THROW = true;
+    });
+    document.getElementById('throw-button').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.THROW = false;
+    });
 }

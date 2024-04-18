@@ -62,7 +62,9 @@ class World {
             this.checkCharacterAndBossPosition()
             if (this.character.isDead()) {
                 showGameOverScreen();
-                clearAllIntervals();
+                setTimeout(() => {
+                    clearAllIntervals();
+                }, 1000);
             }
         }, 200);
 
