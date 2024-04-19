@@ -79,7 +79,7 @@ class Level {
     bottleFactory() {
         let x = 700;
         const numBottles = 10;
-        const spacingX = Math.floor(Math.random() * 420) + 100;
+        const spacingX = Math.floor(Math.random() * 320) + 50;
         for (let i = 0; i < numBottles; i++) {
             let bottle = new Bottle(x);
             this.bottles.push(bottle);

@@ -2,6 +2,10 @@ let canves;
 let world = false;
 let keyboard = new Keyboard();
 let startScreen = docID("start-game-section");
+touchControlLeftHand();
+touchControlRightHand();
+
+
 
 addEventListener('keydown', (event) => {
     switch (event.key) {
@@ -48,7 +52,6 @@ addEventListener('keyup', (event) => {
     }
 });
 
-
 function docID(id) {
     return document.getElementById(id);
 }
@@ -91,20 +94,27 @@ function restartGame() {
 /**
  * Sets up touch controls for the left hand.
  */
+/**
+ * Sets up touch controls for the left hand.
+ */
 function touchControlLeftHand() {
-    document.getElementById('left-button').addEventListener('touchstart', (e) => {
+    const leftButton = document.getElementById('left-button');
+    const rightButton = document.getElementById('right-button');
+
+    leftButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.LEFT = true;
     });
-    document.getElementById('left-button').addEventListener('touchend', (e) => {
+    leftButton.addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.LEFT = false;
     });
-    document.getElementById('right-button').addEventListener('touchstart', (e) => {
+
+    rightButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.RIGHT = true;
     });
-    document.getElementById('right-button').addEventListener('touchend', (e) => {
+    rightButton.addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.RIGHT = false;
     });
@@ -114,23 +124,28 @@ function touchControlLeftHand() {
  * Sets up touch controls for the right hand.
  */
 function touchControlRightHand() {
-    document.getElementById('jump-button').addEventListener('touchstart', (e) => {
+    const jumpButton = document.getElementById('jump-button');
+    const throwButton = document.getElementById('throw-button');
+
+    jumpButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.JUMP = true;
     });
-    document.getElementById('jump-button').addEventListener('touchend', (e) => {
+    jumpButton.addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.JUMP = false;
     });
-    document.getElementById('throw-button').addEventListener('touchstart', (e) => {
+
+    throwButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.THROW = true;
     });
-    document.getElementById('throw-button').addEventListener('touchend', (e) => {
+    throwButton.addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.THROW = false;
     });
 }
+
 
 /**
  * checks the orientation
@@ -147,7 +162,7 @@ window.addEventListener("load", function () {
     let orientationInfo = document.getElementById('landscape');
     if (checkOrientation()) {
         orientationInfo.classList.add('d-none');
-    } else if (!checkOrientation() && window.innerWidth < 900) {
+    } else if (!checkOrientation() && window.innerWidth > 900) {
         orientationInfo.classList.remove('d-none');
     }
 }, false);
@@ -157,7 +172,7 @@ window.addEventListener("load", function () {
  */
 window.addEventListener("resize", function () {
     let orientationInfo = document.getElementById('landscape');
-    if (checkOrientation()  && window.innerWidth < 900 ) {
+    if (checkOrientation()) {
         orientationInfo.classList.add('d-none');
     } else if (!checkOrientation()) {
         orientationInfo.classList.remove('d-none');
