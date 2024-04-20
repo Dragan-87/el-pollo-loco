@@ -1,10 +1,8 @@
 body {
-    font-family: 'Halloween';
     color: antiquewhite;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     height: 100vh;
     background: url(../img/game_background_theme/bg_el_pollo_locco_1.png);
     background-position: center;
@@ -28,7 +26,6 @@ canvas {
 }
 
 .intro-img {
-    width: inherit;
     height: inherit;
     z-index: 1;
 }
@@ -52,9 +49,13 @@ canvas {
     background-color: black;
 }
 
+.game-over-img {
+    aspect-ratio: 1/1;
+}
+
 .play-button {
     position: absolute;
-    top: 30px;
+    top: 20%;
     left: 40%;
     width: 100px;
     height: 50px;
@@ -96,11 +97,6 @@ canvas {
     z-index: 3;
 }
 
-.game-over-img {
-    width: 720px;
-    height: 480px;
-}
-
 .buttons-mobile {
     position: absolute;
     display: flex;
@@ -114,39 +110,57 @@ canvas {
     cursor: pointer;
     width: 30px;
     height: 30px;
-    z-index: 2;
+    z-index: 1;
 }
 
 .controls {
     display: flex;
     gap: 24px;
-    padding: 16px;
+    padding: 16px 16px 16px 16px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 932px) {
+    .game-over-container img,
     .canvas-container,
     .buttons-mobile,
-    .game-over-img,
     canvas {
-        width: 100vw;
-        height: 100vh;
+        height: 100%;
+        width: 100%;
 
     }
 
-    .game-over-img {
-        aspect-ratio: 1/2;
+    .play-button {
+        top: 30%;
+        left: 40%;
+    }
+
+}
+
+@media (max-height: 430px) {
+    .buttons-mobile img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .controls {
+        gap: 16px;
+        padding: 8px 8px 8px 8px;
     }
 }
 
 .landscape {
     position: absolute;
-    background-color: #FFDA00;
+    background-color: #FF9247;
     display: flex;
     z-index: 3;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+}
+
+.landscape img {
+    width: 100%;
 }
 
 .d-none {

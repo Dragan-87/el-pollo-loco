@@ -3,7 +3,6 @@ class Level {
     worldBackgroundLayerOne;
     air;
     levelEndX = 470 * 3;
-    gameOverBackground;
     coins;
     coin = [];
     clouds = [];

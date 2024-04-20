@@ -28,7 +28,6 @@ class World {
      * Represents a World object.
      * @constructor
      * @param {HTMLCanvasElement} canves - The canvas element.
-     * @param {Keyboard} keyboard - The keyboard object.
      */
     constructor(canves, keyboard) {
         // this.backgroundMusic.volume = 0.1;
@@ -61,10 +60,7 @@ class World {
             this.checkCollection(this.salsaBottles);
             this.checkCharacterAndBossPosition()
             if (this.character.isDead()) {
-                showGameOverScreen();
-                setTimeout(() => {
-                    clearAllIntervals();
-                }, 1000);
+                this.gameOver();
             }
         }, 200);
 
@@ -303,9 +299,10 @@ class World {
     };
 
     gameOver() {
-        if (this.character.isDead()) {
+        showGameOverScreen();
+        setTimeout(() => {
             clearAllIntervals();
-        }
+        }, 1000);
     }
 
 }
