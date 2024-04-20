@@ -5,6 +5,11 @@ class Character extends MoveableObject {
     waitingTime;
     coins = 0;
     bottles = 0;
+    getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
+    jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
+    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
+    walkingSound = new Audio("./audio/pepe/walking-short.mp3");
+
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -67,11 +72,6 @@ class Character extends MoveableObject {
         "img/2_character_pepe/4_hurt/H-43.png",
     ]
 
-    getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
-    jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
-    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3"); // "./audio/pepe/pepe-sleep.mp3" nervt beim coden
-    walkingSound = new Audio("./audio/pepe/walking-short.mp3");
-
     constructor() {
         super("img/2_character_pepe/1_idle/idle/I-1.png");
         this.objetctPositionY = 480 - this.height - 50;
@@ -97,8 +97,16 @@ class Character extends MoveableObject {
 
     animate() {
         setInterval(() => this.canCharacterMove(), 1000 / 60);
-
         setInterval(() => this.playCharaterAnimation(), 100);
+    }
+
+    isWaitingLong() {
+        return (this.currentTime >= (this.waitingTime + (9 * 1000)))
+    }
+
+
+    isJumping() {
+        return this.isAboveGround() && !this.isDead()
     }
 
     isWaitingShort() {
@@ -115,16 +123,26 @@ class Character extends MoveableObject {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
     }
 
-    isWaitingLong() {
-        return (this.currentTime >= this.waitingTime + 5 * 1000)
+
+    isKeyPushed() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.JUMP || this.world.keyboard.THROW;
     }
 
-    // isJumpingOnHead(obj) {
-    //     return this.objetctPositionY + this.height - this.offSet.top <= obj.objetctPositionY + obj.height &&
-    //         this.objetctPositionY + this.height - this.offSet.bottom < obj.objetctPositionY + obj.height - obj.offSet.bottom &&
-    //         this.objetctPositionX + this.width - this.offSet.left > obj.objetctPositionX + obj.width -obj.offSet.right
-    // }
+    /**
+     * Plays the idle animation for the Short character.
+     */
+    playShortIdleAnimation() {
+        this.playAnimation(this.IDLE_IMAGES);
+        this.currentTime = new Date().getTime();
+        if (!this.waitingTime) {
+            this.waitingTime = this.currentTime;
+        }
+    }
 
+
+    /**
+     * Determines if the character can move based on keyboard input and current position.
+     */
     canCharacterMove() {
         this.walkingSound.pause();
         if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
@@ -145,71 +163,59 @@ class Character extends MoveableObject {
         this.world.camera_x = -this.objetctPositionX
     }
 
+    /**
+     * Plays the character animation based on its current state.
+     */
     playCharaterAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.DEAD_IMAGES)
-            if (!this.deadFall) {
-                this.deadFall = true;
-                this.jump();
-            }
-            clearAllIntervals();
+            this.resetWatingTime();
             return;
-        } else if (this.isHurt()) {
+        }
+
+        if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
             this.getHitSound.play();
+            this.resetWatingTime();
             return;
-        } else if (this.isAboveGround() && !this.isDead()) {
+        }
+
+        if (this.isJumping()) {
             this.playAnimation(this.JUMP_IMAGES);
+            this.resetWatingTime();
+
         } else if (this.isWalking()) {
             this.playAnimation(this.WALK_IMAGES);
-        } else {
-            this.img = this.imageCache[this.WALK_IMAGES[0]];
+            this.resetWatingTime();
+
         }
-        this.playIdleAnimation();
+
+
+        if (this.isWaitingShort()) {
+            this.playShortIdleAnimation();
+        }
+
+        if (this.isWaitingLong()) {
+            this.playAnimation(this.LONG_IDLE_IMAGES);
+            this.sleepSound.play();
+        }
     }
 
-    isKeyPushed() {
-        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.JUMP || this.world.keyboard.THROW;
-    }
-
+    /**
+     * Resets the waiting time and current time of the character.
+     * Also stops the sleeping sound.
+     */
     resetWatingTime() {
         this.waitingTime = null;
         this.currentTime = null;
         this.stopSleepingSound();
     }
 
+    /**
+     * Stops the sleeping sound.
+     */
     stopSleepingSound() {
         this.sleepSound.pause();
-    }
-
-
-    /**
-     * Plays the idle animation for the Short character.
-     */
-    playShortIdleAnimation() {
-        this.playAnimation(this.IDLE_IMAGES);
-        this.currentTime = new Date().getTime();
-        if (!this.waitingTime) {
-            this.waitingTime = this.currentTime;
-        }
-    }
-
-    /**
-     * Plays the idle animation based on the character's waiting time and key push status.
-     */
-    playIdleAnimation() {
-        if (this.isWaitingShort()) {
-            this.playShortIdleAnimation();
-        }
-        if (this.isWaitingLong()) {
-            if (this.isHurt()) {
-                this.playAnimation(this.LONG_IDLE_IMAGES);
-                this.sleepSound.play();
-            }
-            if (this.isKeyPushed()) {
-                this.resetWatingTime();
-            }
-        }
     }
 
 }

@@ -11,6 +11,9 @@ class BackgroundObject extends MoveableObject {
         this.objetctPositionY = 480 - this.height;
     }
 
+    /**
+     * Moves the background object by updating its position.
+     */
     moveAnimation() {
         this.objetctPositionX -= 1;
         if (this.objetctPositionX === -400) {

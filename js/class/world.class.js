@@ -86,6 +86,9 @@ class World {
         });
     }
 
+    /**
+     * Checks if the character is jumping on an enemy's head and performs the necessary actions.
+     */
     checkJumpOnHead() {
         this.enemies.forEach((enemy) => {
             if (this.character.isJumpingOnHead(enemy) && !(enemy instanceof Endboss)) {
@@ -155,6 +158,13 @@ class World {
         });
     }
 
+    /**
+     * Adds the given object to the game map.
+     * If the object has `otherDirection` property set to true, it calls `flippingImage` method.
+     * Otherwise, it calls `normalImage` method.
+     *
+     * @param {Object} mvO - The object to be added to the game map.
+     */
     addToGameMap(mvO) {
         if (mvO.otherDirection) {
             this.flippingImage(mvO);
@@ -281,6 +291,9 @@ class World {
         })
     }
 
+    /**
+     * Checks the position of the character and the boss in the game world.
+     */
     checkCharacterAndBossPosition() {
         this.enemies.forEach(enemy => {
             if (enemy instanceof Endboss) {
@@ -291,13 +304,14 @@ class World {
                         enemy.startBossAttack();
                         this.isBossFightStarting = true;
                     }
-                } else {
-
                 }
             }
         })
     };
 
+    /**
+     * Displays the game over screen and clears all intervals after a delay.
+     */
     gameOver() {
         showGameOverScreen();
         setTimeout(() => {

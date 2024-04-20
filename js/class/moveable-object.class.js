@@ -37,10 +37,77 @@ class MoveableObject extends DrawableObject{
     }
 
     /**
-     * Plays the animation for the movable object.
-     *
-     * @param {string[]} images - An array of image paths for the animation.
+     * Checks if the object is above the ground.
+     * @returns {boolean} Returns true if the object is above the ground, otherwise false.
      */
+    isAboveGround() {
+        if(this instanceof ThrowableObject){
+            return true;
+        } else {
+            return this.objetctPositionY < this.defaultObjetctPositionY;d
+        }
+    }
+
+    isJumpingOnHead(obj) {
+        return this.objetctPositionY + this.height - this.offSet.top > obj.objetctPositionY + obj.offSet.bottom
+    }
+
+    isDead() {
+        return this.energy <= 0;
+    }
+
+    /**
+     * Checks if the current object is colliding with another object.
+     * @param {Object} obj - The object to check collision with.
+     * @returns {boolean} - True if collision occurs, false otherwise.
+     */
+    isColliding(obj) {
+        return (this.objetctPositionX + this.width) > (obj.objetctPositionX + obj.offSet.left) &&
+            (this.objetctPositionY + this.height) > (obj.objetctPositionY + obj.offSet.top) &&
+            (this.objetctPositionX + this.offSet.left) < (obj.objetctPositionX + obj.width - obj.offSet.right) &&
+            (this.objetctPositionY + this.offSet.bottom) < (obj.objetctPositionY + obj.height - obj.offSet.top);
+    }
+
+
+
+    /**
+     * Reduces the energy of the object by the specified amount.
+     * If the energy reaches 0 or below, it is set to 0.
+     * Updates the timestamp of the last hit taken.
+     * @param {number} dmg - The amount of damage to be inflicted.
+     */
+    hit(dmg) {
+        if (!(this instanceof Character)) {
+            this.moveableObjectTakeDamage(dmg);
+        }else if (!this.isHurt() && (this instanceof Character)){
+            this.moveableObjectTakeDamage(dmg);
+        }
+    }
+
+    /**
+     * Checks if the object is currently in a hurt state.
+     * @returns {boolean} True if the object is hurt, false otherwise.
+     */
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHitTaken;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
+    }
+
+    moveableObjectTakeDamage(dmg) {
+        this.energy -= dmg;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHitTaken = new Date().getTime();
+        }
+    }
+
+    /**
+ * Plays the animation for the movable object.
+ *
+ * @param {string[]} images - An array of image paths for the animation.
+ */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -77,67 +144,6 @@ class MoveableObject extends DrawableObject{
         }, 1000 / 15);
     }
 
-    isAboveGround() {
-        if(this instanceof ThrowableObject){
-            return true;
-        } else {
-            return this.objetctPositionY < this.defaultObjetctPositionY;d
-        }
-    }
-
-    /**
-     * Checks if the current object is colliding with another object.
-     * @param {Object} obj - The object to check collision with.
-     * @returns {boolean} - True if collision occurs, false otherwise.
-     */
-    isColliding(obj) {
-        return (this.objetctPositionX + this.width) > (obj.objetctPositionX + obj.offSet.left) &&
-            (this.objetctPositionY + this.height) > (obj.objetctPositionY + obj.offSet.top) &&
-            (this.objetctPositionX + this.offSet.left) < (obj.objetctPositionX + obj.width - obj.offSet.right) &&
-            (this.objetctPositionY + this.offSet.bottom) < (obj.objetctPositionY + obj.height - obj.offSet.top);
-    }
-
-    isJumpingOnHead(obj) {
-        return this.objetctPositionY + this.height - this.offSet.top> obj.objetctPositionY + obj.offSet.bottom
-    }
-
-    isDead() {
-        return this.energy <= 0;
-    }
-
-    /**
-     * Reduces the energy of the object by the specified amount.
-     * If the energy reaches 0 or below, it is set to 0.
-     * Updates the timestamp of the last hit taken.
-     * @param {number} dmg - The amount of damage to be inflicted.
-     */
-    hit(dmg) {
-        if (!(this instanceof Character)) {
-            this.moveableObjectTakeDamage(dmg);
-        }else if (!this.isHurt() && (this instanceof Character)){
-            this.moveableObjectTakeDamage(dmg);
-        }
-    }
-
-    /**
-     * Checks if the object is currently in a hurt state.
-     * @returns {boolean} True if the object is hurt, false otherwise.
-     */
-    isHurt() {
-        let timepassed = new Date().getTime() - this.lastHitTaken;
-        timepassed = timepassed / 1000;
-        return timepassed < 1;
-    }
-
-    moveableObjectTakeDamage(dmg) {
-        this.energy -= dmg;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHitTaken = new Date().getTime();
-        }
-    }
-
     /**
      * Sets the percentage value of a status bar for a given object.
      *
@@ -158,6 +164,9 @@ class MoveableObject extends DrawableObject{
         return this.isColliding(obj) && !obj.isSpliceable && this.isAboveGround()
     }
 
+    /**
+     * Clears all intervals.
+     */
     clearAllIntercals() {
         i = 0;
         while(i > 9999) {

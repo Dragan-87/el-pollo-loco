@@ -52,12 +52,20 @@ addEventListener('keyup', (event) => {
     }
 });
 
+/**
+ * Retrieves an element from the document using its ID.
+ *
+ * @param {string} id - The ID of the element to retrieve.
+ * @returns {HTMLElement|null} The element with the specified ID, or null if no element is found.
+ */
 function docID(id) {
     return document.getElementById(id);
 }
 
+/**
+ * Starts the game.
+ */
 function startGame() {
-    console.log(window);
     canves = docID('canvas');
     world = new World(canves, keyboard);
     canves.classList.remove('d-none');
@@ -66,6 +74,9 @@ function startGame() {
     docID('game-over').classList.add('d-none');
 }
 
+/**
+ * Reloads the current window, effectively showing the end screen.
+ */
 function showEndScreen() {
     window.location.reload();
 }
@@ -78,15 +89,24 @@ function checkOrientation() {
     return (window.innerWidth > window.innerHeight);
 }
 
+/**
+ * Clears all intervals created by the window.setInterval() method.
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 1000; i++) window.clearInterval(i);
 }
 
+/**
+ * Displays the game over screen.
+ */
 function showGameOverScreen() {
     let gameOverScreen = docID('game-over');
     gameOverScreen.classList.remove('d-none');
 }
 
+/**
+ * Restarts the game by reloading the window.
+ */
 function restartGame() {
     window.location.reload();
 }

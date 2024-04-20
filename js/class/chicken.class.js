@@ -29,6 +29,12 @@ class Chicken extends MoveableObject {
         }, 50);
     }
 
+    /**
+     * Kills the chicken.
+     * Stops the movement and animation intervals, plays the dead animation,
+     * and sets the chicken as spliceable. If the chicken is an instance of Endboss,
+     * it also shows the end screen after a delay.
+     */
     die() {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);

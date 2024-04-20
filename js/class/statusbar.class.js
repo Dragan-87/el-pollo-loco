@@ -34,6 +34,12 @@ class Statusbar extends DrawableObject{
         }
     }
 
+    /**
+     * Sets the percentage value of a status bar.
+     *
+     * @param {object} obj - The status bar object.
+     * @param {number} statusbarValue - The percentage value to set.
+     */
     statusBarPercentage(obj, statusbarValue) {
         obj.setPercentage(statusbarValue, obj);
     }

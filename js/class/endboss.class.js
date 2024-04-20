@@ -1,4 +1,6 @@
 class Endboss extends Chicken {
+    isFightable = false;
+    charachterPositionX;
 
     WALK_IMAGES = [
         "./img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -40,8 +42,6 @@ class Endboss extends Chicken {
         "img/4_enemie_boss_chicken/3_attack/G19.png",
         "img/4_enemie_boss_chicken/3_attack/G20.png",
     ]
-    isFightable = false;
-    charachterPositionX;
 
     constructor(img) {
         super(img, 720);
@@ -77,6 +77,10 @@ class Endboss extends Chicken {
         }, 200);
     }
 
+    /**
+     * Determines if the end boss can perform an attack.
+     * @returns {boolean} True if the end boss can attack, false otherwise.
+     */
     attack() {
         if(this.charachterPositionX > this.objetctPositionX - 70) {
             return true;
@@ -85,6 +89,9 @@ class Endboss extends Chicken {
         }
     }
 
+    /**
+     * Starts the boss attack.
+     */
     startBossAttack() {
         this.isFightable = true;
     }

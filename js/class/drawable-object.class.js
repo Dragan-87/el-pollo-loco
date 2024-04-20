@@ -34,6 +34,9 @@ class DrawableObject {
         });
     }
 
+    /**
+     * Draws the object on the canvas.
+     */
     draw() {
         this.ctx.drawImage(this.img, this.objetctPositionX, this.objetctPositionY, this.width, this.height);
     }
