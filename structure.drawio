@@ -8,16 +8,16 @@
                     <mxGeometry x="395" y="320" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="MovableObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="375" y="580" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="170" y="600" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="Character" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-90" y="700" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="-30" y="790" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="Chicken" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="160" y="790" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="BackgroundObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="640" y="780" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="370" y="790" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="17" target="21" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -115,6 +115,42 @@
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="215" y="850" as="sourcePoint"/>
                         <mxPoint x="265" y="800" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" value="CollectableItem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="590" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.448;entryY=-0.007;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="28" target="43">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="580" as="sourcePoint"/>
+                        <mxPoint x="560" y="610" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="45" value="Coin" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="Bottle" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="710" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="43" target="45">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="580" as="sourcePoint"/>
+                        <mxPoint x="360" y="530" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="43" target="46">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="580" as="sourcePoint"/>
+                        <mxPoint x="360" y="530" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="50" value="ThrowableObject" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-200" y="790" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="50">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="230" y="660" as="sourcePoint"/>
+                        <mxPoint x="360" y="530" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
             </root>
