@@ -38,7 +38,7 @@
 <body>
     <div class="container">
         <div class="canvas-container" id="screen">
-            <canvas class="d-none" id="canvas" width="780" height="480">
+            <canvas class="d-none" id="canvas" width="780" height="480" alt="Canvas"></canvas>
             </canvas>
 
             <div class="start-game-section" id="start-game-section">
@@ -55,19 +55,24 @@
             </div>
 
             <div class="buttons-mobile">
-                <div class="controls">
-                    <img class="pointer desktop" id="left-button" src="./img/icons/left.png" alt="">
-                    <img class="pointer desktop" id="right-button" src="./img/icons/right.png" alt="">
+                <div class="sound-button" onclick="toggleSound()">
+                    <img class="" id="mute-sound" src="./img/icons/mute-sound.png" alt="Mute sound">
+                    <img class="d-none" id="play-sound" src="./img/icons/play-sound.png" alt="Play sound">
                 </div>
                 <div class="controls">
-                    <img class="pointer desktop" id="jump-button" src="./img/icons/jump.png" alt="">
-                    <img class="pointer desktop" id="throw-button" src="./img/icons/attack.png" alt="">
+                    <img class="pointer desktop" id="left-button" src="./img/icons/left.png" alt="Left">
+                    <img class="pointer desktop" id="right-button" src="./img/icons/right.png" alt="Right">
+                </div>
+                <div class="controls">
+                    <img class="pointer desktop" id="jump-button" src="./img/icons/jump.png" alt="Jump">
+                    <img class="pointer desktop" id="throw-button" src="./img/icons/attack.png" alt="Throw">
                 </div>
             </div>
-            <div class="landscape d-none" id="landscape" >
-                <img src="./img/icons/device-rotate.png" alt="landscape" srcset="">
+            <div class="landscape d-none" id="landscape">
+                <img src="./img/icons/device-rotate.png" alt="Landscape" srcset="">
             </div>
         </div>
+    </div>
     </div>
 </body>
 

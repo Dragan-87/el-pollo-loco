@@ -5,7 +5,9 @@ let startScreen = docID("start-game-section");
 touchControlLeftHand();
 touchControlRightHand();
 
-
+function toggleSound() {
+    world.toggleSound();
+}
 
 addEventListener('keydown', (event) => {
     switch (event.key) {

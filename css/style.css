@@ -40,6 +40,7 @@ canvas {
 }
 
 .canvas-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +120,16 @@ canvas {
     z-index: 1;
 }
 
+.sound-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+sound-button img {
+    width: 30px;
+    height: 30px;
+}
+
 .controls {
     display: flex;
     gap: 24px;
@@ -180,4 +191,19 @@ canvas {
 
 .d-none {
     display: none;
+}
+
+.muteButton {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 10%;
+    right: 10%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.muteButton img {
+    width: 30px;
+    height: 30px;
 }

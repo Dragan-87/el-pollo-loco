@@ -20,9 +20,12 @@ class World {
     salsaBottles = level1.bottles;
     endbossHealthbar = new EndbossHealthbar();
     isBossFightStarting = false;
+    backgroundAudio = new Audio("./audio/background-music/background-music-2.mp3");
 
-    // backgroundMusic = new Audio("audio/background-music/background-music-2.mp3");
-
+    toggleMuteWorld() {
+        this.backgroundAudio.muted = !this.backgroundAudio.muted;
+        this.character.toggleMute();
+    }
 
     /**
      * Represents a World object.

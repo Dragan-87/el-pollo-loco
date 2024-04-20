@@ -10,6 +10,15 @@ class Character extends MoveableObject {
     sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
     walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
+    toggleMute() {
+        this.getHitSound.muted = !this.getHitSound.muted;
+        this.jumpingSound.muted = !this.jumpingSound.muted;
+        this.sleepSound.muted = !this.sleepSound.muted;
+        this.walkingSound.muted = !this.walkingSound.muted;
+    }
+
+
+
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
         "img/2_character_pepe/1_idle/idle/I-2.png",
