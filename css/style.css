@@ -27,6 +27,7 @@ canvas {
 
 .intro-img {
     height: inherit;
+    width: inherit;
     z-index: 1;
 }
 
@@ -49,13 +50,9 @@ canvas {
     background-color: black;
 }
 
-.game-over-img {
-    aspect-ratio: 1/1;
-}
-
 .play-button {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 40%;
     width: 100px;
     height: 50px;
@@ -94,7 +91,15 @@ canvas {
 
 .game-over {
     position: absolute;
+    height: inherit;
+    width: inherit;
     z-index: 3;
+}
+
+.game-over-container,
+.game-over-img {
+    width: inherit;
+    height: inherit;
 }
 
 .buttons-mobile {
@@ -120,7 +125,6 @@ canvas {
 }
 
 @media (max-width: 932px) {
-    .game-over-container img,
     .canvas-container,
     .buttons-mobile,
     canvas {
@@ -129,9 +133,19 @@ canvas {
 
     }
 
+    .start-game-section,
+    .intro-img {
+        height: 100%;
+        width: unset;
+    }
+
     .play-button {
-        top: 30%;
+        top: 10%;
         left: 40%;
+    }
+
+    .game-over-img {
+        aspect-ratio: 1/1;
     }
 
 }

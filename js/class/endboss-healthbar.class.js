@@ -10,7 +10,7 @@ class EndbossHealthbar extends Statusbar {
     ]
 
     constructor() {
-        super("img/7_statusbars/2_statusbar_endboss/orange/orange100.png", 540, -40);
+        super("img/7_statusbars/2_statusbar_endboss/orange/orange100.png", 600, -40);
         this.loadImages(this.IAMGES);
         this.percentage = 100;
     }
