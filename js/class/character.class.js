@@ -5,10 +5,10 @@ class Character extends MoveableObject {
     waitingTime;
     coins = 0;
     bottles = 0;
-    getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
-    jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
-    sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
-    walkingSound = new Audio("./audio/pepe/walking-short.mp3");
+    // getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
+    // jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
+    // sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
+    // walkingSound = new Audio("./audio/pepe/walking-short.mp3");
 
     toggleMute() {
         this.getHitSound.muted = !this.getHitSound.muted;
@@ -124,7 +124,7 @@ class Character extends MoveableObject {
 
     playWalkingSound() {
         if (!this.isAboveGround()) {
-            this.walkingSound.play();
+            pepeWalkingSound.play();
         }
     }
 
@@ -153,7 +153,7 @@ class Character extends MoveableObject {
      * Determines if the character can move based on keyboard input and current position.
      */
     canCharacterMove() {
-        this.walkingSound.pause();
+        pepeWalkingSound.pause();
         if (this.world.keyboard.RIGHT && this.objetctPositionX < this.world.level.levelEndX) {
             this.playWalkingSound();
             this.moveRight();
@@ -166,7 +166,7 @@ class Character extends MoveableObject {
         }
 
         if (this.world.keyboard.JUMP && !this.isAboveGround()) {
-            this.jumpingSound.play();
+            pepeJumpSound.play();
             this.jump();
         }
         this.world.camera_x = -this.objetctPositionX
@@ -183,8 +183,8 @@ class Character extends MoveableObject {
         }
 
         if (this.isHurt()) {
+            pepeHurtsSound.play();
             this.playAnimation(this.HURT_IMAGES);
-            this.getHitSound.play();
             this.resetWatingTime();
             return;
         }
@@ -206,7 +206,7 @@ class Character extends MoveableObject {
 
         if (this.isWaitingLong()) {
             this.playAnimation(this.LONG_IDLE_IMAGES);
-            this.sleepSound.play();
+            pepeSleepSound.play();
         }
     }
 
@@ -224,7 +224,7 @@ class Character extends MoveableObject {
      * Stops the sleeping sound.
      */
     stopSleepingSound() {
-        this.sleepSound.pause();
+        pepeHurtsSound.pause();
     }
 
 }

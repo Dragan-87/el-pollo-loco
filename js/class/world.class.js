@@ -2,7 +2,7 @@ class World {
     character = new Character("./img/2_character_pepe/2_walk/W-21.png");
     level = level1;
     enemies = level1.enemies
-    coin = level1.coin;
+    coins = level1.coin;
     clouds = level1.clouds;
     worldBackgroundLayerOne = level1.worldBackgroundLayerOne;
     air = level1.air;
@@ -20,12 +20,6 @@ class World {
     salsaBottles = level1.bottles;
     endbossHealthbar = new EndbossHealthbar();
     isBossFightStarting = false;
-    backgroundAudio = new Audio("./audio/background-music/background-music-2.mp3");
-
-    toggleMuteWorld() {
-        this.backgroundAudio.muted = !this.backgroundAudio.muted;
-        this.character.toggleMute();
-    }
 
     /**
      * Represents a World object.
@@ -59,7 +53,7 @@ class World {
         setInterval(() => {
             this.checkJumpOnHead();
             this.checkCollision();
-            this.checkCollection(this.coin);
+            this.checkCollection(this.coins);
             this.checkCollection(this.salsaBottles);
             this.checkCharacterAndBossPosition()
             if (this.character.isDead()) {
@@ -97,7 +91,7 @@ class World {
             if (this.character.isJumpingOnHead(enemy) && !(enemy instanceof Endboss)) {
                 enemy.hit(this.character.dealDamage);
                 this.character.jump();
-                this.character.jumpingSound.play();
+                pepeJumpSound.play();
             }
         });
     }
@@ -111,12 +105,11 @@ class World {
             if (this.character.isColliding(collectable)) {
                 if (collectable instanceof Coin && this.character.coins < 100) {
                     this.colletCoins(collectable);
-                    collectable.coinSound.volume = 0.3;
-                    collectable.coinSound.play();
+                    coinSound.play();
                 } else if (collectable instanceof Bottle && this.character.bottles < 100) {
                     this.character.bottles += 20;
                     this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
-                    this.salsaBottle.getBottleSound.play();
+                    bottleSound.play();
                     this.salsaBottles.splice(this.salsaBottles.indexOf(collectable), 1);
                 }
             }
@@ -142,7 +135,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToGameMap(this.worldBackgroundLayerOne);
-        this.addObjectsToGameMap(this.coin);
+        this.addObjectsToGameMap(this.coins);
         this.addObjectsToGameMap(this.salsaBottles);
         this.addObjectsToGameMap(this.enemies);
         this.addToGameMap(this.character);
@@ -261,7 +254,7 @@ class World {
     colletCoins(obj) {
         this.character.coins += 20;
         this.coinBar.statusBarPercentage(this.coinBar, this.character.coins);
-        this.coin.splice(this.coin.indexOf(obj), 1);
+        this.coins.splice(this.coins.indexOf(obj), 1);
     }
 
     /**

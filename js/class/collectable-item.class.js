@@ -1,6 +1,7 @@
 class CollectableItem extends MoveableObject {
 
     COLLECTED_ITEM = []
+    
 
     constructor(img, objetctPositionX) {
         super(img, objetctPositionX);

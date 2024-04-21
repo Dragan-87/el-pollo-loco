@@ -1,13 +1,34 @@
-let canves;
+let canvas;
 let world = false;
 let keyboard = new Keyboard();
 let startScreen = docID("start-game-section");
+// let bgmusic = new Audio("./audio/background-music/background-music-2.mp3");
+
 touchControlLeftHand();
 touchControlRightHand();
 
-function toggleSound() {
-    world.toggleSound();
-}
+
+/**
+ * Toggles the sound on or off.
+ */
+// function toggleSound() {
+//     let mutedSound = docID('mute-sound');
+//     if (isMuted) {
+//         isMuted = false;
+//         bgmusic.pause();
+//         world.character.toggleMute();
+//         world.coins.forEach(coin => coin.soundOff());
+//         world.salsaBottles.forEach(bottle => bottle.soundOff());
+//         mutedSound.src = './img/icons/mute-sound.png';
+//     } else {
+//         isMuted = true;
+//         bgmusic.play();
+//         world.character.toggleMute();
+//         world.coins.forEach(coin => coin.soundOn());
+//         world.salsaBottles.forEach(bottle => bottle.soundOn());
+//         mutedSound.src = './img/icons/play-sound.png';
+//     }
+// }
 
 addEventListener('keydown', (event) => {
     switch (event.key) {
@@ -68,12 +89,14 @@ function docID(id) {
  * Starts the game.
  */
 function startGame() {
-    canves = docID('canvas');
-    world = new World(canves, keyboard);
-    canves.classList.remove('d-none');
+    canvas = docID('canvas');
+    world = new World(canvas, keyboard);
+    canvas.classList.remove('d-none');
     startScreen.classList.remove('start-game-section');
     startScreen.classList.add('d-none');
     docID('game-over').classList.add('d-none');
+    backgroundMusic.play();
+
 }
 
 /**

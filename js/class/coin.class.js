@@ -2,7 +2,7 @@ class Coin extends CollectableItem {
     heigth = 25;
     width = 100;
     objetctPositionY = 480 - 150 - 60;
-    coinSound = new Audio("./audio/coin/coin-sound.mp3");
+    // coinSound = new Audio("./audio/coin/coin-sound.mp3");
 
     COIN_IMAGES = [
         "img/8_coin/coin_1.png",
@@ -24,5 +24,13 @@ class Coin extends CollectableItem {
         setInterval(() => {
             this.playAnimation(this.COIN_IMAGES);
         }, 200);
+    }
+
+    soundOff() {
+        this.coinSound.volume = 0;
+    }
+
+    soundOn() {
+        this.coinSound.volume = 0.1;
     }
 }
