@@ -17,6 +17,8 @@ function toggleSound() {
     pepeHurtsSound.muted = !pepeHurtsSound.muted;
     bottleSound.muted = !bottleSound.muted;
     backgroundMusic.muted = !backgroundMusic.muted;
+    chickenSound1.muted = !chickenSound1.muted;
+    chickenSound2.muted = !chickenSound2.muted;
     isMuted = !isMuted ? true : false;
     docID("mute-sound").src = !isMuted ? './img/icons/play-sound.png' : './img/icons/mute-sound.png';
 }

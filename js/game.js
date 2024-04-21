@@ -191,6 +191,10 @@ function touchControlRightHand() {
     });
 }
 
+function toggleInfoBox() {
+    let infoBox = docID('info-box');
+    infoBox.classList.toggle('d-none');
+}
 
 /**
  * checks the orientation
