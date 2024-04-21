@@ -63,7 +63,6 @@ class Endboss extends Chicken {
     animate() {
         setInterval(() => {
             if (this.isDead()) {
-                chickenSound2.play();
                 this.dealDamage = 0;
                 this.die();
             } else if (this.isHurt()) {

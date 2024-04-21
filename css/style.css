@@ -163,6 +163,9 @@ sound-button img {
         width: 100%;
 
     }
+    .contol-info-settings {
+        width: 100vw;
+    }
 
     .start-game-section,
     .intro-img {
