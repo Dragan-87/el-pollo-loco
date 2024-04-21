@@ -207,6 +207,19 @@ function checkOrientation() {
 /**
  * eventlistener to tell the user to switch to landscape mode
  */
+window.addEventListener("resize", function () {
+    let orientationInfo = document.getElementById('landscape');
+    if (checkOrientation()) {
+        orientationInfo.classList.add('d-none');
+    } else if (!checkOrientation() && window.innerWidth > 900) {
+        orientationInfo.classList.remove('d-none');
+    }
+}, false);
+
+
+/**
+ * eventlistener to tell the user to switch to landscape mode
+ */
 window.addEventListener("load", function () {
     let orientationInfo = document.getElementById('landscape');
     if (checkOrientation()) {
@@ -217,13 +230,12 @@ window.addEventListener("load", function () {
 }, false);
 
 /**
- * eventlistener to tell the user to switch to landscape mode
+ * Displays the game over screen and clears all intervals after a delay.
  */
-window.addEventListener("resize", function () {
-    let orientationInfo = document.getElementById('landscape');
-    if (checkOrientation()) {
-        orientationInfo.classList.add('d-none');
-    } else if (!checkOrientation()) {
-        orientationInfo.classList.remove('d-none');
-    }
-}, false);
+function gameOver() {
+    showGameOverScreen();
+    setTimeout(() => {
+        clearAllIntervals();
+        
+    }, 500);
+}

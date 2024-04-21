@@ -12,7 +12,7 @@ class World {
     keyboard;
     camera_x = 0;
     gameOverScreen = new EndScreen();
-    salsaBottle = new Bottle(150);
+    salsaBottle = new Bottle(250);
     healthBar = new Healthbar();
     salsabar = new Salsabar();
     coinBar = new Coinbar();
@@ -27,8 +27,6 @@ class World {
      * @param {HTMLCanvasElement} canves - The canvas element.
      */
     constructor(canves, keyboard) {
-        // this.backgroundMusic.volume = 0.1;
-        // this.backgroundMusic.play();
         this.canves = canves;
         this.keyboard = keyboard;
         this.ctx = canves.getContext('2d');
@@ -57,7 +55,7 @@ class World {
             this.checkCollection(this.salsaBottles);
             this.checkCharacterAndBossPosition()
             if (this.character.isDead()) {
-                this.gameOver();
+                gameOver();
             }
         }, 200);
 
@@ -134,13 +132,7 @@ class World {
         this.addToGameMap(this.endbossHealthbar);
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToGameMap(this.worldBackgroundLayerOne);
-        this.addObjectsToGameMap(this.coins);
-        this.addObjectsToGameMap(this.salsaBottles);
-        this.addObjectsToGameMap(this.enemies);
-        this.addToGameMap(this.character);
-        this.addObjectsToGameMap(this.throwableObjects)
-
+        this.addMoveableObjectsToGameMap()
         this.ctx.translate(-this.camera_x, 0);
     }
 
@@ -235,9 +227,20 @@ class World {
      * adds it to the list of throwable objects, updates the status bar, and removes the object after 3 seconds.
      */
     checkThrowObjects() {
-        if (this.keyboard.THROW && this.character.bottles > 0) {
+        if (this.keyboard.THROW && this.keyboard.LEFT && this.character.bottles > 0) {
             this.character.bottles -= 20;
             let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            bottle.throwLeft();
+            this.throwableObjects.push(bottle);
+            this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
+            this.throwingObjectHitEnemy(bottle);
+            setTimeout(() => {
+                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
+            }, 3000);
+        }else if (this.keyboard.THROW && this.character.bottles > 0) {
+            this.character.bottles -= 20;
+            let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            bottle.throw();
             this.throwableObjects.push(bottle);
             this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);
             this.throwingObjectHitEnemy(bottle);
@@ -305,14 +308,14 @@ class World {
         })
     };
 
-    /**
-     * Displays the game over screen and clears all intervals after a delay.
-     */
-    gameOver() {
-        showGameOverScreen();
-        setTimeout(() => {
-            clearAllIntervals();
-        }, 1000);
+    addMoveableObjectsToGameMap() {
+        this.addObjectsToGameMap(this.worldBackgroundLayerOne);
+        this.addObjectsToGameMap(this.coins);
+        this.addObjectsToGameMap(this.salsaBottles);
+        this.addObjectsToGameMap(this.enemies);
+        this.addToGameMap(this.character);
+        this.addObjectsToGameMap(this.throwableObjects)
     }
+
 
 }

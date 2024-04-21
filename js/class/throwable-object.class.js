@@ -1,7 +1,10 @@
 class ThrowableObject extends MoveableObject {
     spiningBottle;
     brokenBottle;
+    throwTimer;
+    lastThrow;
     hitIndicator = false;
+
 
     THROW_BOTTLE_IMAGES = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -19,11 +22,11 @@ class ThrowableObject extends MoveableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
-    constructor(img, objetctPositionX, objecktPositionY) {
+    constructor(img, objetctPositionX, objecktPositionY, throwDirection) {
         super(img, (objetctPositionX + 50));
         this.loadImages(this.THROW_BOTTLE_IMAGES)
         this.loadImages(this.BROKEN_BOTTLE_IMAGES)
-        this.speed = 30;
+        this.speed = 50;
         this.objetctPositionY = objecktPositionY + 50;
         this.height = 50;
         this.width = 50;
@@ -32,7 +35,6 @@ class ThrowableObject extends MoveableObject {
         this.offSet.top = 10;
         this.offSet.bottom = 10;
         this.dealDamage = 20;
-        this.throw()
         this.animate();
     }
 
@@ -40,10 +42,20 @@ class ThrowableObject extends MoveableObject {
      * Throws the object.
      */
     throw() {
-        this.speedY = 10;
+        this.speedY = 15;
         this.applyGravity();
         this.spiningBottle = setInterval(() => {
-            this.objetctPositionX += 5;
+            this.objetctPositionX += 10;
+            this.playAnimation(this.THROW_BOTTLE_IMAGES);
+        }, 50);
+    }
+
+    throwLeft() {
+        this.speedY = 15;
+        this.objetctPositionY -= 100;
+        this.applyGravity();
+        this.spiningBottle = setInterval(() => {
+            this.objetctPositionX -= 10;
             this.playAnimation(this.THROW_BOTTLE_IMAGES);
         }, 50);
     }

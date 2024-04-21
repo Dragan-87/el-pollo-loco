@@ -43,7 +43,7 @@ class Chicken extends MoveableObject {
             setTimeout(() => {
                 this.isSpliceable = true;
                 setTimeout(() => {
-                    showEndScreen();
+                    gameOver()
                 }, 500);
             }, 1000);
         } else {

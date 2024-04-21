@@ -11,7 +11,7 @@ class NormalChicken extends Chicken {
     ]
 
     constructor() {
-        super('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png', 200 + Math.random() * (500*3));
+        super('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png', 400 + Math.random() * (300*3));
         this.speed = 1;
         this.health = 1;
         this.height = 50;

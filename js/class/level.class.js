@@ -26,7 +26,7 @@ class Level {
         let x = 50;
         let y = 280;
         const numSets = 3;
-        const coinsPerSet = 5;
+        const coinsPerSet = 3;
         const spacingX = 50;
         const spacingY = 30;
         for (let set = 0; set < numSets; set++) {
@@ -60,7 +60,7 @@ class Level {
      * Generates NormalChicken enemies and adds them to the enemies array.
      */
     chickenFactory() {
-        const numChickens = 3;
+        const numChickens = 2;
         for (let i = 0; i < numChickens; i++) {
             let chicken = new NormalChicken();
             let smallChicken = new SmallChicken();
@@ -76,13 +76,13 @@ class Level {
      * Creates multiple bottles and adds them to the `bottles` array.
      */
     bottleFactory() {
-        let x = 700;
-        const numBottles = 10;
-        const spacingX = Math.floor(Math.random() * 320) + 50;
+        let x = 600;
+        const numBottles = 15;
+        const spacingX = Math.floor(Math.random() * 350);
         for (let i = 0; i < numBottles; i++) {
             let bottle = new Bottle(x);
             this.bottles.push(bottle);
-            x = spacingX * i;
+            x = spacingX * (i - (0.5*1));
         }
     }
 }

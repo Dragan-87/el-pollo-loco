@@ -5,19 +5,6 @@ class Character extends MoveableObject {
     waitingTime;
     coins = 0;
     bottles = 0;
-    // getHitSound = new Audio("./audio/pepe/pepe-get-dmg.mp3");
-    // jumpingSound = new Audio("./audio/pepe/pepe-jump.mp3");
-    // sleepSound = new Audio("./audio/pepe/pepe-sleep.mp3");
-    // walkingSound = new Audio("./audio/pepe/walking-short.mp3");
-
-    toggleMute() {
-        this.getHitSound.muted = !this.getHitSound.muted;
-        this.jumpingSound.muted = !this.jumpingSound.muted;
-        this.sleepSound.muted = !this.sleepSound.muted;
-        this.walkingSound.muted = !this.walkingSound.muted;
-    }
-
-
 
     IDLE_IMAGES = [
         "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -86,7 +73,6 @@ class Character extends MoveableObject {
         this.objetctPositionY = 480 - this.height - 50;
         this.objetctPositionX = 10;
         this.speed = 5;
-        this.speedY = 20;
         this.energy = 100;
         this.offSet.left = 10;
         this.offSet.right = 15;
