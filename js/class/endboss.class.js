@@ -72,7 +72,7 @@ class Endboss extends Chicken {
             } else if (this.attack()) {
                 this.playAnimation(this.ATTACK_IMAGES);
             } else if (this.isFightable) {
-                this.speed = 15;
+                this.speed = 20;
                 this.moveLeft();
                 this.playAnimation(this.WALK_IMAGES);
             }
