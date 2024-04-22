@@ -197,22 +197,17 @@ function toggleInfoBox() {
 }
 
 /**
- * checks the orientation
- * @returns true if orientation is in landscape, false if not
- */
-function checkOrientation() {
-    return (window.innerWidth > window.innerHeight);
-}
-
-/**
  * eventlistener to tell the user to switch to landscape mode
  */
 window.addEventListener("resize", function () {
-    let orientationInfo = document.getElementById('landscape');
+    let orientationInfo = docID('landscape');
+    let container = docID('container');
     if (checkOrientation()) {
         orientationInfo.classList.add('d-none');
-    } else if (!checkOrientation() && window.innerWidth > 900) {
+        container.classList.remove('d-none');
+    } else if (!checkOrientation()) {
         orientationInfo.classList.remove('d-none');
+        container.classList.add('d-none');
     }
 }, false);
 
@@ -221,11 +216,14 @@ window.addEventListener("resize", function () {
  * eventlistener to tell the user to switch to landscape mode
  */
 window.addEventListener("load", function () {
-    let orientationInfo = document.getElementById('landscape');
+    let orientationInfo = docID('landscape');
+    let container = docID('container');
     if (checkOrientation()) {
         orientationInfo.classList.add('d-none');
-    } else if (!checkOrientation() && window.innerWidth > 900) {
+        container.classList.remove('d-none');
+    } else if (!checkOrientation()) {
         orientationInfo.classList.remove('d-none');
+        container.classList.add('d-none');
     }
 }, false);
 
@@ -236,6 +234,6 @@ function gameOver() {
     showGameOverScreen();
     setTimeout(() => {
         clearAllIntervals();
-        
+
     }, 500);
 }
