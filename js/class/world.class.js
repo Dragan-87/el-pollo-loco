@@ -229,7 +229,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.THROW && this.keyboard.LEFT && this.character.bottles > 0) {
             this.character.bottles -= 20;
-            let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX, this.character.objetctPositionY);
+            let bottle = new ThrowableObject("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png", this.character.objetctPositionX -100, this.character.objetctPositionY);
             bottle.throwLeft();
             this.throwableObjects.push(bottle);
             this.salsabar.statusBarPercentage(this.salsabar, this.character.bottles);

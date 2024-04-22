@@ -45,7 +45,7 @@ class Endboss extends Chicken {
 
     constructor(img) {
         super(img, 720);
-        this.objetctPositionX = 720*2 - this.width;
+        this.objetctPositionX = 720*2.5 - this.width;
         this.objetctPositionY = this.height
         this.height = 300;
         this.width = 150;

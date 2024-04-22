@@ -107,14 +107,6 @@ function showEndScreen() {
 }
 
 /**
- * checks the orientation
- * @returns true if orientation is in landscape, false if not
- */
-function checkOrientation() {
-    return (window.innerWidth > window.innerHeight);
-}
-
-/**
  * Clears all intervals created by the window.setInterval() method.
  */
 function clearAllIntervals() {
@@ -197,35 +189,28 @@ function toggleInfoBox() {
 }
 
 /**
- * eventlistener to tell the user to switch to landscape mode
+ * checks the orientation
+ * @returns true if orientation is in landscape, false if not
  */
-window.addEventListener("resize", function () {
-    let orientationInfo = docID('landscape');
-    let container = docID('container');
-    if (checkOrientation()) {
-        orientationInfo.classList.add('d-none');
-        container.classList.remove('d-none');
-    } else if (!checkOrientation()) {
-        orientationInfo.classList.remove('d-none');
-        container.classList.add('d-none');
-    }
-}, false);
+function checkOrientation() {
+    return (window.innerWidth < window.innerHeight);
+}
 
-
-/**
- * eventlistener to tell the user to switch to landscape mode
- */
-window.addEventListener("load", function () {
-    let orientationInfo = docID('landscape');
-    let container = docID('container');
+window.addEventListener('resize', () => {
+    const landscapeElement = docID('landscape');
+    const container = docID('container');
     if (checkOrientation()) {
-        orientationInfo.classList.add('d-none');
-        container.classList.remove('d-none');
-    } else if (!checkOrientation()) {
-        orientationInfo.classList.remove('d-none');
-        container.classList.add('d-none');
+        landscapeElement.classList.remove('d-none');
+        if (!container.classList.contains('d-none')) {
+            container.classList.add('d-none');
+        }
+    } else {
+        landscapeElement.classList.add('d-none');
+        if (container.classList.contains('d-none')) {
+            container.classList.remove('d-none');
+        }
     }
-}, false);
+});
 
 /**
  * Displays the game over screen and clears all intervals after a delay.

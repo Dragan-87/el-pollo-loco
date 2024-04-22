@@ -204,9 +204,6 @@ sound-button img {
     height: 300px;
 }
 
-.d-none {
-    display: none;
-}
 
 @media (max-height: 430px) {
 
@@ -246,4 +243,8 @@ sound-button img {
         gap: 16px;
         padding: 8px 8px 8px 8px;
     }
+}
+
+.d-none {
+    display: none;
 }
