@@ -317,5 +317,4 @@ class World {
         this.addObjectsToGameMap(this.throwableObjects)
     }
 
-
 }

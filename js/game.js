@@ -6,6 +6,7 @@ let startScreen = docID("start-game-section");
 
 touchControlLeftHand();
 touchControlRightHand();
+checkIfMobileAndSetFullscreen();
 
 
 /**
@@ -221,4 +222,17 @@ function gameOver() {
         clearAllIntervals();
 
     }, 500);
+}
+
+/**
+ * Checks if the device is a mobile device.
+ * If it is, sets the canvas to fullscreen.
+ */
+function checkIfMobileAndSetFullscreen() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        this.canves.width = window.innerWidth;
+        this.canves.height = window.innerHeight;
+        document.body.style.margin = 0;
+        document.body.style.overflow = 'hidden';
+    }
 }
